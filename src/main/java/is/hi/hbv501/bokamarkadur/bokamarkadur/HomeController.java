@@ -36,7 +36,7 @@ public class HomeController {
         }
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
-        return "Home";
+        return "Success";
     }
 
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
