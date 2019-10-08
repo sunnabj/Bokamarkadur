@@ -9,12 +9,18 @@
     <label for="title">Title</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Title">
     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
-    <label for="description">Description</label>
-    <input type="text" th:field="*{description}" id="description" placeholder="Description">
-    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
-    <label for="rating">Rating</label>
-    <input type="text" th:field="*{rating}" id="rating" placeholder="Rating">
-    <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
+    <label for="author">Author</label>
+    <input type="text" th:field="*{author}" id="author" placeholder="Author">
+    <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+    <label for="edition">Edition</label>
+    <input type="text" th:field="*{edition}" id="edition" placeholder="Edition">
+    <span th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
+    <label for="condition">Condition</label>
+    <input type="text" th:field="*{condition}" id="condition" placeholder="Condition">
+    <span th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"></span>
+    <label for="price">Price</label>
+    <input type="text" th:field="*{price}" id="price" placeholder="Price">
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
     <input type="submit" value="Submit">
 </form>
 

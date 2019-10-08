@@ -13,16 +13,20 @@
             <thead>
             <tr>
                 <th>Title</th>
-                <th>Description</th>
-                <th>Rating</th>
+                <th>Author</th>
+                <th>Edition</th>
+                <th>Condition</th>
+                <th>Price</th>
                 <th>Delete</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="book : ${books}">
                 <td th:text="${book.title}"></td>
-                <td th:text="${book.description}"></td>
-                <td th:text="${book.rating}"></td>
+                <td th:text="${book.author}"></td>
+                <td th:text="${book.edition}"></td>
+                <td th:text="${book.condition}"></td>
+                <td th:text="${book.price}"></td>
                 <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
             </tr>
             </tbody>

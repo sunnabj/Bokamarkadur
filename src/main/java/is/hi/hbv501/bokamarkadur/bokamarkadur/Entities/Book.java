@@ -8,10 +8,8 @@ import javax.persistence.Id;
 @Entity
 public class Book {
 
-    //ID, titill, description og  ratings
-
-    //Bókamarkaður þarf m.a.:
-    //ID, title, author, description, price
+    //ID, title, author, edition, condition og price
+    // Ekki fullbúið, vantar enn gildi fyrir book. Sjá Verkefnisplan
 
     @Id
     //Býr sjálfkrafa til ID gildi
@@ -19,8 +17,10 @@ public class Book {
     private long id;
 
     private String title;
-    private String description;
-    private Double rating;
+    private String author;
+    private Integer edition; //Eða strengur?
+    private String condition;
+    private Integer price;
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
     // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
@@ -38,12 +38,20 @@ public class Book {
         return title;
     }
 
-    public String getDescription() {
-        return description;
+    public String getAuthor() {
+        return author;
     }
 
-    public Double getRating() {
-        return rating;
+    public Integer getEdition() {
+        return edition;
+    }
+
+    public String getCondition() {
+        return condition;
+    }
+
+    public Integer getPrice() {
+        return price;
     }
 
     public void setId(long id) {
@@ -54,18 +62,28 @@ public class Book {
         this.title = title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public void setRating(Double rating) {
-        this.rating = rating;
+    public void setEdition(Integer edition) {
+        this.edition = edition;
     }
 
-    public Book(long id, String title, String description, Double rating) {
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public Book(long id, String title, String author, Integer edition, String condition, Integer price) {
         this.id = id;
         this.title = title;
-        this.description = description;
-        this.rating = rating;
+        this.author = author;
+        this.edition = edition;
+        this.condition = condition;
+        this.price = price;
     }
 }
