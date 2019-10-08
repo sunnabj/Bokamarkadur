@@ -1,17 +1,17 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Movie;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface MovieService {
+public interface BookService {
 
-    Movie save(Movie movie);
-    void delete(Movie movie);
-    List<Movie> findAll();
-    Optional<Movie> findById(long id);
-    List<Movie> findByTitle(String title);
+    Book save(Book book);
+    void delete(Book book);
+    List<Book> findAll();
+    Optional<Book> findById(long id);
+    List<Book> findByTitle(String title);
 
     //Repository er með föll sem eru með útfærslu í höndum JPA. Kannski viljum við gera eitthvað aðeins
     // öðruvísi, það er stjórna meiru sjálf.

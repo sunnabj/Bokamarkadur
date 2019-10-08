@@ -1,7 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Movie;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.MovieService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,48 +11,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import javax.xml.ws.RequestWrapper;
 
 @Controller
 public class HomeController {
 
-    private MovieService movieService;
+    private BookService bookService;
     @Autowired
-    public HomeController(MovieService movieService){this.movieService = movieService;}
+    public HomeController(BookService bookService){this.bookService = bookService;}
 
 
     //Skilar home síðunni.
     //Model geymir gögnin okkar sem eiga að birtast.
     @RequestMapping("/")
     public String Home(Model model) {
-        model.addAttribute("movies", movieService.findAll()); //Binda listann af myndum við movies taggið í módelinu
-        return "Velkomin";
+        model.addAttribute("books", bookService.findAll()); //Binda listann af myndum við books taggið í módelinu
+        return "Home";
     }
 
-    @RequestMapping(value ="/addmovie", method = RequestMethod.POST)
-    public String addMovie(@Valid Movie movie, BindingResult result, Model model) {
+    @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
+    public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
-            return "add-movie"; //Inni í gæsalöppum: HTML skrá.
+            return "add-book-sale"; //Inni í gæsalöppum: HTML skrá.
         }
-        movieService.save(movie);
-        model.addAttribute("movies", movieService.findAll());
-        return "Velkomin";
+        bookService.save(book);
+        model.addAttribute("books", bookService.findAll());
+        return "Home";
     }
 
-    @RequestMapping(value="/addmovie", method = RequestMethod.GET)
-    public String addMovieForm(Movie movie) {
-        return "add-movie";
+    @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
+    public String addBookForSaleForm(Book book) {
+        return "add-book-sale";
     }
+
     // id inni í {} - þýðir að þetta er variable.
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
-    public String deleteMovie(@PathVariable("id") long id, Model model) {
-        //Reynir að sækja movie með þetta id í gagnagrunninn - ef ekki til - kastar villu
-        Movie movie = movieService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid movie ID"));
-        //Sækja mynd, eyða - sækja listann eftir það.
-        movieService.delete(movie);
-        model.addAttribute("movies", movieService.findAll());
-        return "Velkomin";
+    public String deleteBook(@PathVariable("id") long id, Model model) {
+        //Reynir að sækja book með þetta id í gagnagrunninn - ef ekki til - kastar villu
+        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
+        //Sækja bók, eyða - sækja listann eftir það.
+        bookService.delete(book);
+        model.addAttribute("books", bookService.findAll());
+        return "Home";
     }
 
 }

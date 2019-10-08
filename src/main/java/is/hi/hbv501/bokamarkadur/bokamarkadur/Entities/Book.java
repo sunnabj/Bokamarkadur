@@ -6,9 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Movie {
+public class Book {
 
     //ID, titill, description og  ratings
+
+    //Bókamarkaður þarf m.a.:
+    //ID, title, author, description, price
 
     @Id
     //Býr sjálfkrafa til ID gildi
@@ -21,7 +24,7 @@ public class Movie {
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
     // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
-    public Movie() {
+    public Book() {
 
     }
 
@@ -59,7 +62,7 @@ public class Movie {
         this.rating = rating;
     }
 
-    public Movie(long id, String title, String description, Double rating) {
+    public Book(long id, String title, String description, Double rating) {
         this.id = id;
         this.title = title;
         this.description = description;

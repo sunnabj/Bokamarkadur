@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form action="#" th:action="@{/addmovie}" th:object="${movie}" method="post">
+<form action="#" th:action="@{/addbookforsale}" th:object="${book}" method="post">
     <label for="title">Title</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Title">
     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
@@ -15,7 +15,7 @@
     <label for="rating">Rating</label>
     <input type="text" th:field="*{rating}" id="rating" placeholder="Rating">
     <span th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></span>
-    <input type="submit" value="Add Movie">
+    <input type="submit" value="Submit">
 </form>
 
 </body>
