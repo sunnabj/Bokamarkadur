@@ -1,7 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRespository;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.Optional;
 @Service
 public class BookServiceImplementation implements BookService {
 
-    BookRespository repository;
+    BookRepository repository;
 
     @Autowired
-    public BookServiceImplementation(BookRespository movieRepository){this.repository = movieRepository;}
+    public BookServiceImplementation(BookRepository bookRepository){this.repository = bookRepository;}
 
     @Override
     public Book save(Book book) {

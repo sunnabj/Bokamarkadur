@@ -55,4 +55,11 @@ public class HomeController {
         return "Home";
     }
 
+    @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.GET)
+    public String viewBook(@PathVariable("id") long id, Model model) {
+       Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
+       model.addAttribute("book", bookService.findById(id));
+       return "book-info";
+    }
+
 }
