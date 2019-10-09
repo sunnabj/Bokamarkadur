@@ -5,19 +5,29 @@
     <title>Title</title>
 </head>
 <body>
+    <h2>Book Information</h2>
+    <div>
+        <label><b>Title</b></label>
+        <label><td th:text="${book.title}"></td></label>
+    </div>
+    <div>
+        <label><b>Author</b></label>
+        <label><td th:text="${book.author}"></td></label>
+    </div>
+    <div>
+        <label><b>Edition</b></label>
+        <label><td th:text="${book.edition}"></td></label>
+    </div>
+    <div>
+        <label><b>Condition</b></label>
+        <label><td th:text="${book.condition}"></td></label>
+    </div>
+    <div>
+        <label><b>Price</b></label>
+        <label><td th:text="${book.price}"></td></label>
+    </div>
 
-<form action="#" th:action="@{/book-info}" th:object="${book}" method="get">
-    <label>Title</label>
-    <label><td th:text="${book.title}"></td></label>
-    <label>Author</label>
-    <label><td th:text="${book.author}"></td></label>
-    <label>Edition</label>
-    <label><td th:text="${book.edition}"></td></label>
-    <label>Condition</label>
-    <label><td th:text="${book.condition}"></td></label>
-    <label>Price</label>
-    <label><td th:text="${book.price}"></td></label>
-</form>
+    <p><a href="/">Return to Bókamarkaður</a></p>
 
 </body>
 </html>
