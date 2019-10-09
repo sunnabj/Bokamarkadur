@@ -18,7 +18,7 @@ public class Book {
 
     private String title;
     private String author;
-    private Integer edition; //Eða strengur?
+    private Integer edition; //Eða strengur? //SB: Gæti verið sniðugt, þá er hægt að skrifa 5th t.d.
     private String condition;
     private Integer price;
 

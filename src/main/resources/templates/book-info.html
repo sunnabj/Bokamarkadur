@@ -5,17 +5,18 @@
     <title>Title</title>
 </head>
 <body>
+
 <form action="#" th:action="@{/book-info}" th:object="${book}" method="get">
     <label>Title</label>
-    <label>Titill?</label>
+    <label><td th:text="${book.title}"></td></label>
     <label>Author</label>
-    <label>Höfundur?</label>
+    <label><td th:text="${book.author}"></td></label>
     <label>Edition</label>
-    <label>Edition?</label>
+    <label><td th:text="${book.edition}"></td></label>
     <label>Condition</label>
-    <label>Condition?</label>
+    <label><td th:text="${book.condition}"></td></label>
     <label>Price</label>
-    <label>Price?</label>
+    <label><td th:text="${book.price}"></td></label>
 </form>
 
 </body>
