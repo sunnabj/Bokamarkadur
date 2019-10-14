@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

@@ -62,4 +62,17 @@ public class HomeController {
        return "book-info";
     }
 
+
+    //Gera samskonar og addbook fyrir create new user - þ.e. POST aðferð
+
+    @RequestMapping(value="/loginform", method = RequestMethod.GET)
+    public String loginForm() {
+        return "login";
+    }
+
+    @RequestMapping(value="/newAccount", method = RequestMethod.GET)
+    public String newuserForm() {
+        return "new-account";
+    }
+
 }
