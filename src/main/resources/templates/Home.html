@@ -2,10 +2,189 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Bókamarkaður</title>
 </head>
 <body>
 <div th:switch="${books}">
+    <h1>Bókamarkaður - Skiptibók fyrir háskólanemi eins og þú</h1>
+    <div class="logo">
+        <a href="Home.html" title="">
+        <img width="252" height="33" src="logo.png"/>
+        </a>
+    </div>
+
+    <label for="site-search">Leita bok</label>
+    <input type="search" id="site-search" name="q"
+           placeholder="Sla' bokin...">
+    <button>Leit</button>
+
+    <div class="cart-items"> <p class="center">Karfa er tomt</p> </div>
+
+    <form>
+    <a>Innskrar</a>
+
+        <div class="container">
+            <label>><b>Notendanafn</b></label>
+            <input type="text" placeholder="Sla' Notendanafn" name="uname" required>
+
+            <label><b>Lykilord</b></label>
+            <input type="password" placeholder="Sla' Lykilord" name="psw" required>
+
+            <button type="submit">Innskrar</button>
+            <label>
+                <input type="checkbox" uncheck="uncheck" name="remember"> Munna eftir mig
+            </label>
+        </div>
+
+        <div class="container">
+            <button type="button" class="cancelbtn">Haetta vid</button>
+            <span class="psw">Gleyma <a href="#">lykilord?</a></span>
+        </div>
+    </form>
+    <a href="/newAccount">Nyr Adgang</a>
+
+
+    <span>Allar flokkar</span>
+    <a class="dropdown-toggle" ></a>
+    <li class="level-0">
+        <a  title="Háskóla Ísland" class="strong" href="Flokka 1">Háskóla Ísland </a>
+    <ul>
+            <li><a href="Flokka 2">Akademísk enska </a></li>
+            <li><a href="Flokka 2">Almenn bókmenntafræði </a></li>
+            <li><a href="Flokka 2">Almenn málvísindi </a></li>
+            <li><a href="Flokka 2">Alþjóðlegt nám í menntunarfræði </a></li>
+            <li><a href="Flokka 2">Alþjóðlegt nám í menntunarfræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Austur-Asíufræði </a></li>
+            <li><a href="Flokka 2">Danska </a></li>
+            <li><a href="Flokka 2">Danska - diplóma </a></li>
+            <li><a href="Flokka 2">Djáknanám </a></li>
+            <li><a href="Flokka 2">Djáknanám, viðbótardiplóma </a></li>
+            <li><a href="Flokka 2">Eðlisfræði </a></li>
+            <li><a href="Flokka 2">Efnafræði </a></li>
+            <li><a href="Flokka 2">Efnaverkfræði </a></li>
+            <li><a href="Flokka 2">Enska </a></li>
+            <li><a href="Flokka 2">Ferðamálafræði </a></li>
+            <li><a href="Flokka 2">Félagsfræði </a></li>
+            <li><a href="Flokka 2">Félagsráðgjöf </a></li>
+            <li><a href="Flokka 2">Fjölmiðlafræði </a></li>
+            <li><a href="Flokka 2">Fornleifafræði </a></li>
+            <li><a href="Flokka 2">Franska - diplóma </a></li>
+            <li><a href="Flokka 2">Frönsk fræði </a></li>
+            <li><a href="Flokka 2">Geislafræði </a></li>
+            <li><a href="Flokka 2">Gríska </a></li>
+            <li><a href="Flokka 2">Grunnskólakennarafræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á erlend tungumál </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á íslensku </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á list- og verkgreinar </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á náttúrugreinar </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á samfélagsgreinar </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á stærðfræði </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á upplýsingatækni og miðlun </a></li>
+            <li><a href="Flokka 2">Grunnskólakennsla yngri barna </a></li>
+            <li><a href="Flokka 2">Guðfræði </a></li>
+            <li><a href="Flokka 2">Hagfræði </a></li>
+            <li><a href="Flokka 2">Hagnýtt stærðfræði </a></li>
+            <li><a href="Flokka 2">Heilbrigðisgagnafræði </a></li>
+            <li><a href="Flokka 2">Heilsuefling og heimilisfræði </a></li>
+            <li><a href="Flokka 2">Heimspeki </a></li>
+            <li><a href="Flokka 2">Hjúkrunarfræði </a></li>
+            <li><a href="Flokka 2">Hugbúnaðarverkfræði </a></li>
+            <li><a href="Flokka 2">Iðnaðarverkfræði </a></li>
+            <li><a href="Flokka 2">Íslenska </a></li>
+            <li><a href="Flokka 2">Íslenska sem annað mál </a></li>
+            <li><a href="Flokka 2">Ítalska </a></li>
+            <li><a href="Flokka 2">Ítalska - diplóma </a></li>
+            <li><a href="Flokka 2">Íþrótta- og heilsufræði </a></li>
+            <li><a href="Flokka 2">Japanska - diplóma </a></li>
+            <li><a href="Flokka 2">Japanskt mál og menning </a></li>
+            <li><a href="Flokka 2">Jarðeðlisfræði </a></li>
+            <li><a href="Flokka 2">Jarðfræði </a></li>
+            <li><a href="Flokka 2">Kennslufræði iðnmeistara </a></li>
+            <li><a href="Flokka 2">Kennslufræði verk- og starfsmenntunar </a></li>
+            <li><a href="Flokka 2">Kínversk fræði </a></li>
+            <li><a href="Flokka 2">Kínverska - diplóma </a></li>
+            <li><a href="Flokka 2">Klassísk fræði </a></li>
+            <li><a href="Flokka 2">Klassísk mál - diplóma </a></li>
+            <li><a href="Flokka 2">Kvikmyndafræði </a></li>
+            <li><a href="Flokka 2">Kynjafræði, aukagrein </a></li>
+            <li><a href="Flokka 2">Landfræði </a></li>
+            <li><a href="Flokka 2">Latína </a></li>
+            <li><a href="Flokka 2">Leikskólafræði </a></li>
+            <li><a href="Flokka 2">Leikskólakennarafræði </a></li>
+            <li><a href="Flokka 2">Leikskólakennarafræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Listfræði </a></li>
+            <li><a href="Flokka 2">Lífefna- og sameindalíffræði </a></li>
+            <li><a href="Flokka 2">Lífeindafræði </a></li>
+            <li><a href="Flokka 2">Líffræði </a></li>
+            <li><a href="Flokka 2">Líffræðileg mannfræði </a></li>
+            <li><a href="Flokka 2">Lyfjafræði </a></li>
+            <li><a href="Flokka 2">Læknisfræði </a></li>
+            <li><a href="Flokka 2">Lögfræði </a></li>
+            <li><a href="Flokka 2">Mannfræði </a></li>
+            <li><a href="Flokka 2">Matvælafræði </a></li>
+            <li><a href="Flokka 2">Málþroski og læsi, viðbótardiplóma </a></li>
+            <li><a href="Flokka 2">Mið-Austurlandafræði </a></li>
+            <li><a href="Flokka 2">Mið-Austurlandafræði og arabíska - diplóma </a></li>
+            <li><a href="Flokka 2">Miðaldafræði </a></li>
+            <li><a href="Flokka 2">Næringarfræði </a></li>
+            <li><a href="Flokka 2">Rafmagns- og tölvuverkfræði </a></li>
+            <li><a href="Flokka 2">Ritlist, aukagrein </a></li>
+            <li><a href="Flokka 2">Rússneska </a></li>
+            <li><a href="Flokka 2">Rússneska - diplóma </a></li>
+            <li><a href="Flokka 2">Safnafræði </a></li>
+            <li><a href="Flokka 2">Sagnfræði </a></li>
+            <li><a href="Flokka 2">Samfélagstúlkun </a></li>
+            <li><a href="Flokka 2">Sálfræði </a></li>
+            <li><a href="Flokka 2">Sjúkraþjálfunarfræði </a></li>
+            <li><a href="Flokka 2">Skjalfræði </a></li>
+            <li><a href="Flokka 2">Spænska </a></li>
+            <li><a href="Flokka 2">Spænska - diplóma </a></li>
+            <li><a href="Flokka 2">Starfstengt diplómanám fyrir fólk með þroskahömlun </a></li>
+            <li><a href="Flokka 2">Stjórnmálafræði </a></li>
+            <li><a href="Flokka 2">Stærðfræði </a></li>
+            <li><a href="Flokka 2">Stærðfræði og stærðfræðimenntun </a></li>
+            <li><a href="Flokka 2">Sænska - diplóma </a></li>
+            <li><a href="Flokka 2">Talmeinafræði (undirbúningsnám) </a></li>
+            <li><a href="Flokka 2">Tannlæknisfræði </a></li>
+            <li><a href="Flokka 2">Tannsmíði </a></li>
+            <li><a href="Flokka 2">Táknmálsfræði og táknmálstúlkun </a></li>
+            <li><a href="Flokka 2">Tómstunda- og félagsmálafræði </a></li>
+            <li><a href="Flokka 2">Tómstunda- og félagsmálafræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Tæknifræði </a></li>
+            <li><a href="Flokka 2">Tölvunarfræði </a></li>
+            <li><a href="Flokka 2">Umhverfis- og byggingarverkfræði </a></li>
+            <li><a href="Flokka 2">Uppeldis- og menntunarfræði </a></li>
+            <li><a href="Flokka 2">Uppeldis- og menntunarfræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Verkfræðileg eðlisfræði </a></li>
+            <li><a href="Flokka 2">Vélaverkfræði </a></li>
+            <li><a href="Flokka 2">Viðskiptafræði </a></li>
+            <li><a href="Flokka 2">Þjóðfræði </a></li>
+            <li><a href="Flokka 2">Þroskaþjálfafræði </a></li>
+            <li><a href="Flokka 2">Þroskaþjálfafræði - aukagrein </a></li>
+            <li><a href="Flokka 2">Þýðingafræði, aukagrein </a></li>
+            <li><a href="Flokka 2">Þýska </a></li>
+            <li><a href="Flokka 2">Þýska - diplóma </a></li>
+    </ul>
+    </li>
+    <li>
+        <a  title="Háskóla Reykjavík" class="strong" href="Flokka 1">Háskóla Reykjavík </a>
+    <ul>
+            <li><a href="Flokka 2">Byggingafræði </a></li>
+            <li><a href="Flokka 2">Haftengd nýsköpun </a></li>
+            <li><a href="Flokka 2">Hagfræði </a></li>
+            <li><a href="Flokka 2">Iðnfræði </a></li>
+            <li><a href="Flokka 2">Íþróttafræði </a></li>
+            <li><a href="Flokka 2">Lögfræði </a></li>
+            <li><a href="Flokka 2">Sálfræði </a></li>
+            <li><a href="Flokka 2">Tæknifræði </a></li>
+            <li><a href="Flokka 2">Tölvunarfræði </a></li>
+            <li><a href="Flokka 2">Tölvunarstærðfræði </a></li>
+            <li><a href="Flokka 2">Verkfræði </a></li>
+            <li><a href="Flokka 2">Viðskiptafræði </a></li>
+    </ul>
+    </li>
+
+        <!--
     <h2 th:case="null">No books yet!</h2>
     <div th:case="*">
         <h2>Books</h2>
@@ -35,7 +214,7 @@
             </tr>
             </tbody>
         </table>
-    </div>
+    </div> -->
     <p><a href="/addbookforsale">Add a new book</a></p>
     <p><a href="/loginform">Login</a></p>
     <p><a href="/newAccount">Create a new account</a></p>
@@ -43,4 +222,20 @@
     <p><a href="/rentals">Check out rentals or something</a></p>
 </div>
 </body>
+
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Hafa samband</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Senda skilaboð</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
+
+
 </html>
