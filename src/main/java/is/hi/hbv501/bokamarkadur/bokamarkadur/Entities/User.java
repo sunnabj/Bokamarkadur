@@ -1,12 +1,12 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@Table(name = "USER")
 public class User {
 
     @Id
@@ -14,10 +14,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String name;
-    private String username;
-    private String password;
-    private String info;
+    public String name;
+    public String username;
+    public String password;
+    public String info;
+
+    @OneToMany(mappedBy = "user")
+    private List<RentalLog> rentals = new ArrayList<>();
 
     public User() {
 

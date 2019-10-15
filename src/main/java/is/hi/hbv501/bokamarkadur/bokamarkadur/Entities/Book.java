@@ -1,9 +1,10 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Book {
@@ -21,6 +22,14 @@ public class Book {
     private Integer edition; //Eða strengur? //SB: Gæti verið sniðugt, þá er hægt að skrifa 5th t.d.
     private String condition;
     private Integer price;
+
+    @ElementCollection(targetClass=Genres.class)
+    @Column(name="genre", nullable=false)
+    @CollectionTable(name="book_genres", joinColumns= {@JoinColumn(name="book_id")})
+    public Set<Genres> genres;
+
+    @OneToMany(mappedBy = "book")
+    private List<RentalLog> rentals = new ArrayList<>();
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
     // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
@@ -78,12 +87,18 @@ public class Book {
         this.price = price;
     }
 
-    public Book(long id, String title, String author, Integer edition, String condition, Integer price) {
+    public Book(long id, String title, String author, Integer edition, String condition, Integer price, HashSet<Genres> genres) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.edition = edition;
         this.condition = condition;
         this.price = price;
+        this.genres = genres;
+    }
+
+    @Override
+    public String toString() {
+        return this.title;
     }
 }

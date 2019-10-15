@@ -16,6 +16,7 @@
                 <th>Author</th>
                 <th>Edition</th>
                 <th>Condition</th>
+                <th>Genre</th>
                 <th>Price</th>
                 <th>Delete</th>
                 <th>Information</th>
@@ -27,6 +28,7 @@
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.edition}"></td>
                 <td th:text="${book.condition}"></td>
+                <td th:text="${book.genres}"></td>
                 <td th:text="${book.price}"></td>
                 <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                 <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
@@ -37,6 +39,8 @@
     <p><a href="/addbookforsale">Add a new book</a></p>
     <p><a href="/loginform">Login</a></p>
     <p><a href="/newAccount">Create a new account</a></p>
+    <p><a href="/search">Search for a book</a></p>
+    <p><a href="/rentals">Check out rentals or something</a></p>
 </div>
 </body>
 </html>
