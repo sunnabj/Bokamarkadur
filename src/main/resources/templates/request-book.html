@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Request a Book</title>
+</head>
+<body>
+<h2>Request a book:</h2>
+<form action="#" th:action="@{/addrequestbook}" th:object="${book}" method="post">
+
+    <!-- Einhvern veginn bæta við genres hérna - einhvern byrjun sem virkar ekki:
+    <tr th:each="genre : ${genres}">
+        <td><input type="checkbox"></td>
+    </tr>
+    -->
+
+    <label for="title">Title</label>
+    <input type="text" th:field="*{title}" id="title" placeholder="Title">
+    <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+    <label for="author">Author</label>
+    <input type="text" th:field="*{author}" id="author" placeholder="Author">
+    <span th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+    <label for="edition">Edition</label>
+    <input type="text" th:field="*{edition}" id="edition" placeholder="Edition">
+    <span th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
+    <label for="condition">Condition</label>
+    <input type="text" th:field="*{condition}" id="condition" placeholder="Condition">
+    <span th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"></span>
+    <label for="price">Price</label>
+    <input type="text" th:field="*{price}" id="price" placeholder="Price">
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>

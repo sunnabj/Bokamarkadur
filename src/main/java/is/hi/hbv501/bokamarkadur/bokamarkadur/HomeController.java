@@ -41,11 +41,27 @@ public class HomeController {
     }
 
 
+    @RequestMapping(value="/newbook", method = RequestMethod.GET)
+    public String addBook() {
+        return "add-book";
+    }
+
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
-            return "add-book-sale"; //Inni í gæsalöppum: HTML skrá.
+            return "sell-book"; //Inni í gæsalöppum: HTML skrá.
+        }
+        bookService.save(book);
+        model.addAttribute("books", bookService.findAll());
+        return "Success";
+    }
+
+    @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
+    public String addRequestBook(@Valid Book book, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
+            return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
@@ -67,7 +83,12 @@ public class HomeController {
 
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
     public String addBookForSaleForm(Book book) {
-        return "add-book-sale";
+        return "sell-book";
+    }
+
+    @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
+    public String addRequestBook(Book book) {
+        return "request-book";
     }
 
     // id inni í {} - þýðir að þetta er variable.
