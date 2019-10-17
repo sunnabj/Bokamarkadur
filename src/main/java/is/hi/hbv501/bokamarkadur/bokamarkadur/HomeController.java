@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Genres;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.RentalLogService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -21,13 +24,11 @@ public class HomeController {
 
     private BookService bookService;
     // Ættum að setja þetta í spes rentalLogController og userController.
-    private RentalLogService rentalLogService;
     private UserService userService;
     @Autowired
-    public HomeController(BookService bookService, RentalLogService rentalLogService, UserService userService){
+    public HomeController(BookService bookService, UserService userService){
         this.bookService = bookService;
         this.userService = userService;
-        this.rentalLogService = rentalLogService;
     }
 
 
@@ -40,7 +41,6 @@ public class HomeController {
     }
 
 
-
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
@@ -49,6 +49,16 @@ public class HomeController {
         }
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
+/*
+        HashSet<Genres> genres = new HashSet<>();
+
+        Iterator<Genres> it = genres.iterator();
+        while (it.hasNext()) {
+            model.addAttribute("genres", it.next());
+        }
+
+        //model.addAttribute("genres", Genres);
+*/
         return "Success";
     }
 
@@ -94,17 +104,6 @@ public class HomeController {
 
     // H2 gagnagrunnur - gögnin eyðast alltaf út þegar serverinn er endurræstur.
     //
-
-    @RequestMapping("/rentals")
-    public String allRentals(Model model) {
-        model.addAttribute("rentalLog", rentalLogService.findAll());
-        return "rentals";
-    }
-
-    @RequestMapping("/search")
-    public String search() {
-        return "search";
-    }
 
     @RequestMapping(value= "/bookSearch", method = RequestMethod.POST)
     public String searchBook(@RequestParam(value = "search", required = false) String search, Model model){

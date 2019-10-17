@@ -6,13 +6,6 @@
 </head>
 <body>
 <form action="#" th:action="@{/addbookforsale}" th:object="${book}" method="post">
-
-    <!-- Einhvern veginn bæta við genres hérna - einhvern byrjun sem virkar ekki:
-    <tr th:each="genre : ${genres}">
-        <td><input type="checkbox"></td>
-    </tr>
-    -->
-
     <label for="title">Title</label>
     <input type="text" th:field="*{title}" id="title" placeholder="Title">
     <span th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
@@ -29,6 +22,11 @@
     <input type="text" th:field="*{price}" id="price" placeholder="Price">
     <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
     <input type="submit" value="Submit">
+    <!-- Hér er farið í gegnum öll genres og þau birt, ásamt checkboxi. Endilega finna góða leið
+     til að birta og vinna með þetta! -->
+    <tr th:each="elem: ${T(is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Genres).values()}">
+        <td><input type="checkbox" th:text="${elem.name()}"></td>
+    </tr>
 </form>
 
 </body>
