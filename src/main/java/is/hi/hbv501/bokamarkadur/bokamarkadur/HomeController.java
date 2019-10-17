@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Genres;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.RentalLogService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
@@ -23,7 +24,6 @@ import java.util.List;
 public class HomeController {
 
     private BookService bookService;
-    // Ættum að setja þetta í spes rentalLogController og userController.
     private UserService userService;
     @Autowired
     public HomeController(BookService bookService, UserService userService){
@@ -65,21 +65,8 @@ public class HomeController {
         }
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
-/*
-        HashSet<Genres> genres = new HashSet<>();
-
-        Iterator<Genres> it = genres.iterator();
-        while (it.hasNext()) {
-            model.addAttribute("genres", it.next());
-        }
-
-        //model.addAttribute("genres", Genres);
-*/
         return "Success";
     }
-
-    //Setja inn í addbookforsale eitthvað varðandi genres
-    // Tengja Genres við model.addAttributes
 
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
     public String addBookForSaleForm(Book book) {
@@ -110,31 +97,37 @@ public class HomeController {
     }
 
 
-    //Gera samskonar og addbook fyrir create new user - þ.e. POST aðferð
-
     @RequestMapping(value="/loginform", method = RequestMethod.GET)
     public String loginForm() {
         return "login";
     }
 
+    /*
+     * Skilar formi þar sem maður getur búið til nýtt account.
+     */
     @RequestMapping(value="/newAccount", method = RequestMethod.GET)
-    public String newuserForm() {
+    public String newuserForm(User user) {
         return "new-account";
     }
+
+    /*
+     * Býr til nýjan notanda út frá því sem skrifað er inn í new account formið.
+     * Birtir welcome síðu þar sem notandi er ávarpaður.
+     */
+    @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
+    public String addNewUser(@Valid User user, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
+            return "new-account"; //Inni í gæsalöppum: HTML skrá.
+        }
+        userService.save(user);
+        model.addAttribute("user", user);
+        return "welcome-user";
+    }
+
 
 
     // H2 gagnagrunnur - gögnin eyðast alltaf út þegar serverinn er endurræstur.
     //
-
-    @RequestMapping(value= "/bookSearch", method = RequestMethod.POST)
-    public String searchBook(@RequestParam(value = "search", required = false) String search, Model model){
-        System.out.println("The Search object"+search);
-        // Að hafa search inni í findByTitle þarf titillinn að vera nákvæmlega réttur.
-        // Við myndum vilja hafa einhvers konar regex eða eitthvað.
-        // Breytum inni í BookServiceImplementation - inni í findByTitle.
-        List<Book> book = bookService.findByTitle(search);
-        model.addAttribute("books", book);
-        return "Home";
-    }
 
 }

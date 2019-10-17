@@ -7,6 +7,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,13 @@ public class UserServiceImplementation implements UserService {
     public Optional<User> findById(long id) {
         return repository.findById(id);
     }
+
+
+    @Override
+    public List<User> findAll() {
+        return repository.findAll();
+    }
+
 
 
 }

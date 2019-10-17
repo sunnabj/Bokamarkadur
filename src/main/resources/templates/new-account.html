@@ -1,39 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
     <fieldset>
-        <legend>Create a user account</legend>
-        <div>
-            <label>
-                Name: <input type="text" required>
-            </label>
-        </div>
-        <div>
-            <label>
-                email: <input type="email" required>
-            </label>
-        </div>
-        <div>
-            <label>
-                Username: <input type="text" required>
-            </label>
-        </div>
-        <div>
-            <label>
-                Password: <input type="password" required>
-            </label>
-        </div>
-        <div>
-            <label>
-                Reenter password: <input type="password" required>
-            </label>
-        </div>
+        <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post">
+            <legend>Create a user account</legend>
+            <div>
+                <label for="name">Name</label>
+                <input type="text" th:field="*{name}" id="name" placeholder="Name" required>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="text" th:field="*{email}" id="email" placeholder="Email" required>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <div>
+                <label for="username">Username</label>
+                <input type="username" th:field="*{username}" id="username" placeholder="Username" required>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input type="password" th:field="*{password}" id="password" placeholder="Password" required>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div>
+                <label>
+                    Reenter password: <input type="password" required>
+                </label>
+            </div>
+            <input type="submit" value="Confirm">
+        </form>
     </fieldset>
-    <input type="submit" value="Confirm">
 
     <p><a href="/">Return to Bókamarkaður</a></p>
 </body>
