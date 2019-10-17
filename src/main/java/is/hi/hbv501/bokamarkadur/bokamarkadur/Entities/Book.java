@@ -22,6 +22,7 @@ public class Book {
     private Integer edition; //Eða strengur? //SB: Gæti verið sniðugt, þá er hægt að skrifa 5th t.d.
     private String condition;
     private Integer price;
+    private String status;
 
     @ElementCollection(targetClass=Genres.class)
     @Column(name="genre", nullable=false)
@@ -63,6 +64,8 @@ public class Book {
         return price;
     }
 
+    public String getStatus() { return status; }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -87,13 +90,17 @@ public class Book {
         this.price = price;
     }
 
-    public Book(long id, String title, String author, Integer edition, String condition, Integer price, HashSet<Genres> genres) {
+    public void setStatus(String status) { this.status = status; }
+
+    public Book(long id, String title, String author, Integer edition, String condition,
+                Integer price, String status, HashSet<Genres> genres) {
         this.id = id;
         this.title = title;
         this.author = author;
         this.edition = edition;
         this.condition = condition;
         this.price = price;
+        this.status = status;
         this.genres = genres;
     }
 

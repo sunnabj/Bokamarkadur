@@ -52,6 +52,7 @@ public class HomeController {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
             return "sell-book"; //Inni í gæsalöppum: HTML skrá.
         }
+        book.setStatus("For sale");
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";
@@ -63,6 +64,7 @@ public class HomeController {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
             return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
+        book.setStatus("Requested");
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";
