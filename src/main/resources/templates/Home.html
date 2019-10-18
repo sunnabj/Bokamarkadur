@@ -25,8 +25,7 @@
                 <th>Condition</th>
                 <th>Subject</th>
                 <th>Price</th>
-                <th>(testing) For sale</th>
-                <th>(testing) Requested</th>
+                <th>Status</th>
                 <th>Delete</th>
                 <th>Information</th>
             </tr>
@@ -39,8 +38,7 @@
                 <td th:text="${book.condition}"></td>
                 <td th:text="${book.subjects}"></td>
                 <td th:text="${book.price}"></td>
-                <td th:text="${book.forSale}"></td>
-                <td th:text="${book.requested}"></td>
+                <td th:text="${book.status}"></td>
                 <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                 <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
             </tr>

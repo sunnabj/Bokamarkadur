@@ -29,9 +29,12 @@
         <td><input type="checkbox" th:text="${elem.name()}"></td>
     </tr>
     -->
-    <label for="author">Subject</label>
-    <select>
-        <option th:each="elem: ${T(is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects).values()}" th:text="${elem.name()}" />
+    <label for="subjects">Subject</label>
+    <select th:field="*{subjects}">
+        <option th:each="elem: ${T(is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects).values()}"
+                th:value="${elem}"
+                th:text="${elem.name()}"
+                id="subjects" />
     </select>
     <input type="submit" value="Submit">
 </form>
