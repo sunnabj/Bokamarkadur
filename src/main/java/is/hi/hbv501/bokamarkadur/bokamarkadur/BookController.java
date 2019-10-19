@@ -4,9 +4,12 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.validation.Valid;
 
 public class BookController {
 
@@ -37,5 +40,41 @@ public class BookController {
         model.addAttribute("book", book);
         return "book-info";
     }
+
+    @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
+    public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
+            return "sell-book"; //Inni í gæsalöppum: HTML skrá.
+        }
+        book.setStatus("For sale");
+        bookService.save(book);
+        model.addAttribute("books", bookService.findAll());
+        return "Success";
+    }
+
+
+    @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
+    public String addBookForSaleForm(Book book) {
+        return "sell-book";
+    }
+
+    @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
+    public String addRequestBook(@Valid Book book, BindingResult result, Model model) {
+        if(result.hasErrors()) {
+            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
+            return "request-book"; //Inni í gæsalöppum: HTML skrá.
+        }
+        book.setStatus("Requested");
+        bookService.save(book);
+        model.addAttribute("books", bookService.findAll());
+        return "Success";
+    }
+
+    @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
+    public String addRequestBook(Book book) {
+        return "request-book";
+    }
+
 */
 }

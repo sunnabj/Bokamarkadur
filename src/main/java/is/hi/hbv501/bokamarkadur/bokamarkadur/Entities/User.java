@@ -19,6 +19,7 @@ public class User {
     public String email;
     public String password;
     public String info;
+    //logged in boolean?
 
     @OneToMany(mappedBy = "user")
     private List<RentalLog> rentals = new ArrayList<>();

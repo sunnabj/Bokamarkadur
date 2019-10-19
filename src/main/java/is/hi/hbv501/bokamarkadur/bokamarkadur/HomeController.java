@@ -31,12 +31,11 @@ public class HomeController {
         this.userService = userService;
     }
 
-
     //Skilar home síðunni.
     //Model geymir gögnin okkar sem eiga að birtast.
     @RequestMapping("/")
     public String Home(Model model) {
-        model.addAttribute("books", bookService.findAll()); //Binda listann af myndum við books taggið í módelinu
+        model.addAttribute("books", bookService.findAll()); //Binda listann af bókum við books taggið í módelinu
         return "Home";
     }
 
@@ -46,6 +45,9 @@ public class HomeController {
         return "add-book";
     }
 
+    /*
+     * Vistar bók sem notandi setur inn til sölu
+     */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
@@ -58,6 +60,17 @@ public class HomeController {
         return "Success";
     }
 
+    /*
+     * Nær í form til að setja inn bók til sölu
+     */
+    @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
+    public String addBookForSaleForm(Book book) {
+        return "sell-book";
+    }
+
+    /*
+     * Vistar bók sem notandi óskar eftir
+     */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
     public String addRequestBook(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
@@ -70,17 +83,18 @@ public class HomeController {
         return "Success";
     }
 
-    @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
-    public String addBookForSaleForm(Book book) {
-        return "sell-book";
-    }
-
+    /*
+     * Nær í form til að óska eftir bók
+     */
     @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
     public String addRequestBook(Book book) {
         return "request-book";
     }
 
     // id inni í {} - þýðir að þetta er variable.
+    /*
+     * Eyðir bók úr gagnagrunninum og birtir uppfærðan lista.
+     */
     @RequestMapping(value="/delete/{id}", method = RequestMethod.GET)
     public String deleteBook(@PathVariable("id") long id, Model model) {
         //Reynir að sækja book með þetta id í gagnagrunninn - ef ekki til - kastar villu
@@ -91,6 +105,9 @@ public class HomeController {
         return "Home";
     }
 
+    /*
+     * Skoðar ákveðna bók
+     */
     @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.GET)
     public String viewBook(@PathVariable("id") long id, Model model) {
        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
@@ -98,6 +115,11 @@ public class HomeController {
        return "book-info";
     }
 
+    /*
+     * TODO: Gera fyrir login þannig að náð sé í user-inn sem er skrifaður inn og
+     * TODO: hann birtist.
+     * TODO: Má geyma þar til eftir næsta stoðtíma (fer eitthvað í login þar).
+     */
 
     @RequestMapping(value="/loginform", method = RequestMethod.GET)
     public String loginForm() {
