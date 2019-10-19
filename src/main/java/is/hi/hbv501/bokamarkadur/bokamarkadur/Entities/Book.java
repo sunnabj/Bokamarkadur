@@ -1,6 +1,9 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
+import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,10 +27,10 @@ public class Book {
     private Integer price;
     private String status;
 
-    @ElementCollection(targetClass=Genres.class)
-    @Column(name="genre", nullable=false)
-    @CollectionTable(name="book_genres", joinColumns= {@JoinColumn(name="book_id")})
-    public Set<Genres> genres;
+    @ElementCollection(targetClass= Subjects.class)
+    @Column(name="subject", nullable=false)
+    @CollectionTable(name="book_subjects", joinColumns= {@JoinColumn(name="book_id")})
+    public Set<Subjects> subjects;
 
     @OneToMany(mappedBy = "book")
     private List<RentalLog> rentals = new ArrayList<>();
@@ -60,6 +63,8 @@ public class Book {
         return condition;
     }
 
+    public Set<Subjects> getSubjects() { return subjects; }
+
     public Integer getPrice() {
         return price;
     }
@@ -86,6 +91,8 @@ public class Book {
         this.condition = condition;
     }
 
+    public void setSubjects(Set<Subjects> subjects) { this.subjects = subjects; }
+
     public void setPrice(Integer price) {
         this.price = price;
     }
@@ -93,15 +100,16 @@ public class Book {
     public void setStatus(String status) { this.status = status; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Integer price, String status, HashSet<Genres> genres) {
+                Set<Subjects> subjects, Integer price, String status) {
+
         this.id = id;
         this.title = title;
         this.author = author;
         this.edition = edition;
         this.condition = condition;
+        this.subjects = subjects;
         this.price = price;
         this.status = status;
-        this.genres = genres;
     }
 
     @Override

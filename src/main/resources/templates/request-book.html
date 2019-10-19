@@ -23,14 +23,23 @@
     <label for="edition">Edition</label>
     <input type="text" th:field="*{edition}" id="edition" placeholder="Edition">
     <span th:if="${#fields.hasErrors('edition')}" th:errors="*{edition}"></span>
-    <label for="condition">Condition</label>
-    <input type="text" th:field="*{condition}" id="condition" placeholder="Condition">
-    <span th:if="${#fields.hasErrors('condition')}" th:errors="*{condition}"></span>
-    <label for="price">Price</label>
-    <input type="text" th:field="*{price}" id="price" placeholder="Price">
-    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+    <!-- Hér er farið í gegnum öll subject og þau birt, ásamt checkboxi. Endilega finna góða leið
+     til að birta og vinna með þetta! -->
+    <!-- <tr th:each="elem: ${T(is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects).values()}">
+        <td><input type="checkbox" th:text="${elem.name()}"></td>
+    </tr>
+    -->
+    <label for="subjects">Subject</label>
+    <select th:field="*{subjects}">
+        <option th:each="elem: ${T(is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects).values()}"
+                th:value="${elem}"
+                th:text="${elem.name()}"
+                id="subjects" />
+    </select>
     <input type="submit" value="Submit">
 </form>
+
+<p><a href="/">Return to Bókamarkaður</a></p>
 
 </body>
 </html>

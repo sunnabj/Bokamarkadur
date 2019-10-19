@@ -1,10 +1,8 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Genres;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.RentalLogService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
