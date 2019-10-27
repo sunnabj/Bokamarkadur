@@ -27,13 +27,16 @@ public class Book {
     private Integer price;
     private String status;
 
+    @ManyToOne
+    private User user;
+
     @ElementCollection(targetClass= Subjects.class)
     @Column(name="subject", nullable=false)
     @CollectionTable(name="book_subjects", joinColumns= {@JoinColumn(name="book_id")})
     public Set<Subjects> subjects;
 
-    @OneToMany(mappedBy = "book")
-    private List<RentalLog> rentals = new ArrayList<>();
+    //@OneToMany(mappedBy = "book")
+    //private List<RentalLog> rentals = new ArrayList<>();
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
     // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
@@ -71,6 +74,8 @@ public class Book {
 
     public String getStatus() { return status; }
 
+    public User getUser() { return user; }
+
     public void setId(long id) {
         this.id = id;
     }
@@ -99,8 +104,10 @@ public class Book {
 
     public void setStatus(String status) { this.status = status; }
 
+    public void setUser(User user) { this.user = user; }
+
     public Book(long id, String title, String author, Integer edition, String condition,
-                Set<Subjects> subjects, Integer price, String status) {
+                Set<Subjects> subjects, Integer price, String status, User user) {
 
         this.id = id;
         this.title = title;
@@ -110,6 +117,7 @@ public class Book {
         this.subjects = subjects;
         this.price = price;
         this.status = status;
+        this.user = user;
     }
 
     @Override

@@ -24,5 +24,5 @@ public enum Subjects {
     PHYSICS,
     PSYCHOLOGY,
     SOFTWAREENGINEERING,
-    SPANISH
+    SPANISH,
 }
