@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,9 @@ public class BookServiceImplementation implements BookService {
     public List<Book> findByTitle(String title) {
         return repository.findByTitle(title);
     }
+
+    //Prófa
+    @Override
+    public List<Book> findByUser(User user) { return repository.findByUser(user); };
+
 }

@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,8 @@ public interface BookService {
     List<Book> findAll();
     Optional<Book> findById(long id);
     List<Book> findByTitle(String title);
+    //Prófa
+    List<Book> findByUser(User user);
 
     //Repository er með föll sem eru með útfærslu í höndum JPA. Kannski viljum við gera eitthvað aðeins
     // öðruvísi, það er stjórna meiru sjálf.

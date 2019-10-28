@@ -29,12 +29,13 @@ public class UserServiceImplementation implements UserService {
         return repository.findById(id);
     }
 
-
     @Override
     public List<User> findAll() {
         return repository.findAll();
     }
 
+    @Override
+    public List<User> findByUsername(String username) { return repository.findByUsername(username); }
 
 
 }

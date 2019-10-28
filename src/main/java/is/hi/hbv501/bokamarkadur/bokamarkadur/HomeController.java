@@ -83,7 +83,7 @@ public class HomeController {
      * Nær í form til að óska eftir bók
      */
     @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
-    public String addRequestBook(Book book) {
+    public String addRequestBookForm(Book book) {
         return "request-book";
     }
 

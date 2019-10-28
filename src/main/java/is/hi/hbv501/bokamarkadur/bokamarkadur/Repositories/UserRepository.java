@@ -1,5 +1,6 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories;
 
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,4 +14,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findById(long id);
 
     List<User> findAll();
+
+    //boolean checkIfExists(String userName, String password);
+
+    List<User> findByUsername(String username);
+
+    //checkPassword(String username, String password)
+
 }
