@@ -27,6 +27,9 @@ public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificat
     //Skilar lista af öllum bókum sem uppfylla þennan titil.
     List<Book> findByTitle(String title);
 
+    // Skilar lista af öllum bókum eftir þennan rithöfund.
+    List<Book> findByAuthor(String author);
+
     Optional<Book> findById(long id);
 
     //Prófa

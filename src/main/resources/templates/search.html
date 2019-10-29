@@ -7,7 +7,16 @@
 <body>
 <h2>Search for books</h2>
 <!--Passa að action-ið sé rétt-->
-<form action="#" th:action="@{/bookSearch}" th:object="${book}"  method="post">
+<form action="#" th:action="@{/search}" th:object="${book}"  method="post">
+<div>
+    <select name="status">
+        <option value="For sale">For sale</option>
+        <option value="Requested">Requested</option>
+    </select>
+    <select name="searchBy">
+        <option value="0">Title</option>
+        <option value="1">Author</option>
+    </select>
     <input type="text" name="search" id="search" th:value="${search}"/>
     <input type="submit" value="Search"/>
 </form>

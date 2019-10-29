@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.persistence.criteria.Predicate;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +18,26 @@ public class BookServiceImplementation implements BookService {
 
     BookRepository repository;
 
-    static Specification<Book> titleContains(String title) {
-        return (book, cq, cb) -> cb.like(book.get("title"), "%" + title + "%");
+    static Specification<Book> containsTitleAndStatus(String title, String status) {
+        return (book, cq, cb) -> {
+            return cb.and(
+                    cb.like(cb.lower(book.get("title")), "%" + title.toLowerCase() + "%"),
+                    cb.equal(book.get("status"), status)
+            );
+        };
+    }
+
+    static Specification<Book> hasAuthorAndStatus(String author, String status) {
+        return (book, cq, cb) -> {
+            return cb.and(
+                    cb.like(cb.lower(book.get("author")), "%" + author.toLowerCase() + "%"),
+                    cb.equal(book.get("status"), status)
+            );
+        };
+    }
+
+    static Specification<Book> getStatus(String status) {
+        return (book, cq, cb) -> cb.equal(book.get("status"), status);
     }
 
     @Autowired
@@ -45,8 +64,18 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
-    public List<Book> findByTitle(String title) {
-        return repository.findAll(titleContains(title));
+    public List<Book> findByTitle(String title, String status) {
+        return repository.findAll(containsTitleAndStatus(title, status));
+    }
+
+    @Override
+    public List<Book> findByAuthor(String author, String status) {
+        return repository.findAll(hasAuthorAndStatus(author, status));
+    }
+
+    @Override
+    public List<Book> findByStatus(String status) {
+        return repository.findAll(getStatus(status));
     }
 
     //Prófa

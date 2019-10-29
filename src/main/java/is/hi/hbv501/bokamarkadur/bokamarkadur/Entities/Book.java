@@ -1,12 +1,6 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import javax.persistence.*;
-import javax.security.auth.Subject;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
