@@ -91,8 +91,6 @@ public class BokamarkadurApplication {
 			Book VEL501M = new Book();  VEL501M.setTitle("Principles and Prevention of Corrosion");  VEL501M.setAuthor("Jones, Denny A.");  VEL501M.setEdition(2);  VEL501M.setCondition("New");  VEL501M.setSubjects(Collections.singleton(Subjects.Industrial_and_Mechanical_Engineering));  VEL501M.setPrice(12995);  VEL501M.setStatus("Óseld");bookRepository.save(VEL501M);
 			Book VEL502G = new Book();  VEL502G.setTitle("FLUID MECHANICS");  VEL502G.setAuthor("WHITE, FRANK M.");  VEL502G.setEdition(8);  VEL502G.setSubjects(Collections.singleton(Subjects.Industrial_and_Mechanical_Engineering));  VEL502G.setPrice(11495);  VEL502G.setStatus("Óseld");bookRepository.save(VEL502G);
 
-
-
 		}
 	}
 }
