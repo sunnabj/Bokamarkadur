@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,12 @@ public interface BookService {
     List<Book> findByTitle(String title);
     //Prófa
     List<Book> findByUser(User user);
+    // Nýtt
+    List<Book> findBySubjects(Subjects subject);
+
+    //Virkaði ekki
+    //List<Subjects> findAvailableSubjects(List<Book> books);
+
 
     //Repository er með föll sem eru með útfærslu í höndum JPA. Kannski viljum við gera eitthvað aðeins
     // öðruvísi, það er stjórna meiru sjálf.

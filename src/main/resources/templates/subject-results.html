@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div th:switch="${Books}">
+        <h2 th:case="null">No books yet!</h2>
+        <div th:case="*">
+            <h2>Books by subject</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Edition</th>
+                    <th>Condition</th>
+                    <th>Subject</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                    <th>Information</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${Books}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.edition}"></td>
+                    <td th:text="${book.condition}"></td>
+                    <td th:text="${book.subjects}"></td>
+                    <td th:text="${book.price}"></td>
+                    <td th:text="${book.status}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+                    <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p><a href="../all-books">Return to all books</a></p>
+</body>
+</html>

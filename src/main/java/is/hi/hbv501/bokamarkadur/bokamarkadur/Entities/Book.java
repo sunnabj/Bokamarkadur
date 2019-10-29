@@ -30,13 +30,13 @@ public class Book {
     @ManyToOne
     private User user;
 
-    @ElementCollection(targetClass= Subjects.class)
-    @Column(name="subject", nullable=false)
-    @CollectionTable(name="book_subjects", joinColumns= {@JoinColumn(name="book_id")})
-    public Set<Subjects> subjects;
+    // Pæling: Þarf Subjects að vera svona Set? Nope!
+    //@ElementCollection(targetClass= Subjects.class)
+    //@Column(name="subject", nullable=false)
+    //@CollectionTable(name="book_subjects", joinColumns= {@JoinColumn(name="book_id")})
+    //public Set<Subjects> subjects;
 
-    //@OneToMany(mappedBy = "book")
-    //private List<RentalLog> rentals = new ArrayList<>();
+    public Subjects subjects;
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
     // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
@@ -66,7 +66,9 @@ public class Book {
         return condition;
     }
 
-    public Set<Subjects> getSubjects() { return subjects; }
+    //public Set<Subjects> getSubjects() { return subjects; }
+
+    public Subjects getSubjects() {return subjects; }
 
     public Integer getPrice() {
         return price;
@@ -96,7 +98,9 @@ public class Book {
         this.condition = condition;
     }
 
-    public void setSubjects(Set<Subjects> subjects) { this.subjects = subjects; }
+    //public void setSubjects(Set<Subjects> subjects) { this.subjects = subjects; }
+
+    public void setSubjects(Subjects subjects) { this.subjects = subjects; }
 
     public void setPrice(Integer price) {
         this.price = price;
@@ -107,7 +111,7 @@ public class Book {
     public void setUser(User user) { this.user = user; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Set<Subjects> subjects, Integer price, String status, User user) {
+                Subjects subjects, Integer price, String status, User user) {
 
         this.id = id;
         this.title = title;

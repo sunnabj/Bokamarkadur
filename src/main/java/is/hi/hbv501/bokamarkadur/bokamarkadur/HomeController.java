@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
@@ -31,8 +32,13 @@ public class HomeController {
     //Model geymir gögnin okkar sem eiga að birtast.
     @RequestMapping("/")
     public String Home(Model model) {
-        model.addAttribute("books", bookService.findAll()); //Binda listann af bókum við books taggið í módelinu
         return "Home";
+    }
+
+    @RequestMapping(value="/all-books", method = RequestMethod.GET)
+    public String allBooks(Model model) {
+        model.addAttribute("books", bookService.findAll());
+        return "all-books";
     }
 
 
@@ -110,6 +116,17 @@ public class HomeController {
        model.addAttribute("book", book);
        return "book-info";
     }
+
+    /*
+    * Þessi aðferð nær í bækur eftir subject og birtir bækur sem til eru í því subject sem maður klikkar á.
+     */
+    @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
+    public String viewsubjectbooks(@PathVariable("subjects") Subjects subject, Model model) {
+       List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
+       model.addAttribute("Books", subjectbooks);
+       return "subject-results";
+    }
+
 
     /*
      * TODO: Gera fyrir login þannig að náð sé í user-inn sem er skrifaður inn og
