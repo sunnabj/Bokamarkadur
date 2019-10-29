@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
@@ -46,5 +47,17 @@ public class BookServiceImplementation implements BookService {
     //Prófa
     @Override
     public List<Book> findByUser(User user) { return repository.findByUser(user); };
+
+    // Nýtt
+    @Override
+    public List<Book> findBySubjects(Subjects subject) { return repository.findBySubjects(subject); }
+
+    // Virkaði ekki
+    /*
+    @Override
+    public List<Subjects> findAvailableSubjects(List<Book> books) {
+        return repository.findAvailableSubjects(books);
+    }
+*/
 
 }

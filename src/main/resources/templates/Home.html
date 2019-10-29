@@ -5,51 +5,18 @@
     <title>Bókamarkaður</title>
 </head>
 <body>
-<div th:switch="${books}">
     <h1>Bókamarkaður - Skiptibók fyrir háskólanemi eins og þú</h1>
     <div class="logo">
-        <a href="Home.html" title="">
-        <img width="252" height="33" src="logo.png"/>
-        </a>
+        <!--<a href="Home.html" title="">-->
+        <img src="../images/logo.png" alt="Logo" width="252" height="33"/>
+        <!--</a>-->
     </div>
 
-    <h2 th:case="null">No books yet!</h2>
-    <div th:case="*">
-        <h2>Books</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Edition</th>
-                <th>Condition</th>
-                <th>Subject</th>
-                <th>Price</th>
-                <th>Status</th>
-                <th>Delete</th>
-                <th>Information</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book : ${books}">
-                <td th:text="${book.title}"></td>
-                <td th:text="${book.author}"></td>
-                <td th:text="${book.edition}"></td>
-                <td th:text="${book.condition}"></td>
-                <td th:text="${book.subjects}"></td>
-                <td th:text="${book.price}"></td>
-                <td th:text="${book.status}"></td>
-                <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
-                <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+    <p><a href="/all-books">View all books</a></p>
     <p><a href="/newbook">Add a new book</a></p>
     <p><a href="/loginform">Login</a></p>
     <p><a href="/newAccount">Create a new account</a></p>
     <p><a href="/search">Search for a book</a></p>
-    <p><a href="/rentals">Check out rentals or something</a></p>
 
     <!-- Search dæmi er komið annars staðar
     <label for="site-search">Leita bok</label>
@@ -57,8 +24,10 @@
            placeholder="Sla' bokin...">
     <button>Leit</button>
 
-    -->
+
     <div class="cart-items"> <p class="center">Karfa er tomt</p> </div>
+    -->
+
 
     <!-- Login og new account er líka komið annars staðar
     <form>
@@ -85,7 +54,7 @@
     <a href="/newAccount">Nyr Adgang</a>
 
     -->
-
+<!--
     <span>Allar flokkar</span>
     <a class="dropdown-toggle" ></a>
     <li class="level-0">
@@ -229,7 +198,7 @@
 </div>
 </body>
 
-
+-->
 <footer>
     <div class="footer-col col-md-3 col-sm-12 contact">
         <div class="footer-col-inner">
