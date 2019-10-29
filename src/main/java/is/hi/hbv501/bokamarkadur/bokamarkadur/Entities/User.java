@@ -26,7 +26,7 @@ public class User {
     private List<Book> books = new ArrayList<>();
 
     public User() {
-
+        super();
     }
 
     public long getId() {
@@ -89,6 +89,10 @@ public class User {
         this.email = email;
         this.books = books;
         this.loggedIn = loggedIn;
+    }
+    @Override
+    public String toString(){
+        return username;
     }
 
 }

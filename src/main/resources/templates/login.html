@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Login</title>
 </head>
 <body>
-    <fieldset>
-        <legend>Login information</legend>
-        <div>
-            <label>
-                Username: <input type="text" required>
-            </label>
-        </div>
-        <div>
-            <label>
-                Password: <input type="password" required>
-            </label>
-        </div>
-    </fieldset>
-    <input type="submit" value="Login">
+
+    <h1>Login information</h1>
+    <!--/*@thymesVar id="loginform" type=""*/-->
+    <form action="#" th:action="@{/loginform}" th:object="${loginform}" method="post">
+        <!--/*@thymesVar id="invalidCredentials" type="a"*/-->
+        <p th:if="${invalidCredentials}" class="error">Username or Password is wrong</p>
+        <label type="username">Username</label>
+        <input type="username" id="username" name="username" autofocus="autofocus"/>
+
+
+        <label type="password">Password</label>
+        <input type="password" id="password" name="password">
+        <br/>
+        <input type="submit" value="Login">
+    </form>
 
     <p><a href="/">Return to Bókamarkaður</a></p>
 
