@@ -5,11 +5,11 @@
     <title>Bókamarkaður</title>
 </head>
 <body>
-<h1>Bókamarkaður - Skiptibók fyrir háskólanemi eins og þú</h1>
+<h1>Bókamarkaður - Book exchange market for students</h1>
 <div class="logo">
-    <!--<a href="Home.html" title="">-->
-    <img src="../images/logo.png" alt="Logo" width="252" height="33"/>
-    <!--</a>-->
+    <a href="/" title="">
+        <img src="../images/logo.png" alt="Logo" width="252" height="33"/>
+    </a>
 </div>
 <div th:switch="${books}">
     <h2 th:case="null">No books yet!</h2>
@@ -38,6 +38,7 @@
                 <td><a th:href="@{/viewsubjectbooks/{id}(id=${book.subjects})}" th:text="${book.subjects}"></a></td>
                 <td th:text="${book.price}"></td>
                 <td th:text="${book.status}"></td>
+                <!--/* TODO: Fjarlægja delete virkni */-->
                 <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                 <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
             </tr>
@@ -51,15 +52,13 @@
 <p><a href="/newAccount">Create a new account</a></p>
 <p><a href="/search">Search for a book</a></p>
 
-<div class="cart-items"> <p class="center">Karfa er tomt</p> </div>
-
 <footer>
     <div class="footer-col col-md-3 col-sm-12 contact">
         <div class="footer-col-inner">
-            <h3 class="title">Hafa samband</h3>
+            <h3 class="title">Contact</h3>
             <div class="row">
                 <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
-                <p></i><a href="hafasamband">Senda skilaboð</a></p>
+                <p></i><a href="hafasamband">Contact us</a></p>
             </div>
         </div>
     </div>
