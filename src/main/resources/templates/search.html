@@ -2,7 +2,7 @@
 <html xmlns:th="https://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Search</title>
 </head>
 <body>
     <h2>Search for books</h2>
@@ -47,6 +47,7 @@
                     <td th:text="${book.subjects}"></td>
                     <td th:text="${book.price}"></td>
                     <td th:text="${book.status}"></td>
+                    <!--/* TODO: Fjarlægja delete virkni */-->
                     <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
                     <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
                 </tr>
@@ -54,6 +55,6 @@
             </table>
         </div>
     </div>
-    <p><a href="/">Return to Bókamarkaður</a></p>
+    <p><a href="/">Return to frontpage</a></p>
 </body>
 </html>
