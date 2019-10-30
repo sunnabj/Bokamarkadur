@@ -5,11 +5,55 @@
     <title>Title</title>
 </head>
 <body>
-<h2>Search for books</h2>
-<!--Passa að action-ið sé rétt-->
-<form action="#" th:action="@{/bookSearch}" th:object="${book}"  method="post">
-    <input type="text" name="search" id="search" th:value="${search}"/>
-    <input type="submit" value="Search"/>
-</form>
+    <h2>Search for books</h2>
+    <form action="#" th:action="@{/search}" th:object="${book}"  method="post">
+        <select name="status">
+            <option value="For sale">For sale</option>
+            <option value="Requested">Requested</option>
+        </select>
+        <select name="searchBy">
+            <option value="0">Title</option>
+            <option value="1">Author</option>
+        </select>
+        <input type="text" name="search" id="search" th:value="${search}"/>
+        <input type="submit" value="Search"/>
+    </form>
+    <div th:if="${search != null}">
+        <div th:if="${#arrays.length(books) == 0}">
+            <h2>No results for <span th:text="${search}"/></h2>
+        </div>
+        <div th:if="${#arrays.length(books) > 0}">
+            <h2>Results</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Edition</th>
+                    <th>Condition</th>
+                    <th>Subject</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                    <th>Information</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.edition}"></td>
+                    <td th:text="${book.condition}"></td>
+                    <td th:text="${book.subjects}"></td>
+                    <td th:text="${book.price}"></td>
+                    <td th:text="${book.status}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+                    <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p><a href="/">Return to Bókamarkaður</a></p>
 </body>
 </html>
