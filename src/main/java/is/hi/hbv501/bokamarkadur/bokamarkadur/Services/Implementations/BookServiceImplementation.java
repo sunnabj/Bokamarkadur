@@ -8,8 +8,6 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.domain.Specification;
-
-import javax.persistence.criteria.Predicate;
 import java.util.List;
 import java.util.Optional;
 

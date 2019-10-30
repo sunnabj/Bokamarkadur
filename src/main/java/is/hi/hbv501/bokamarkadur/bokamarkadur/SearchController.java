@@ -38,8 +38,6 @@ public class SearchController {
             @RequestParam(value = "status", required = true) String status,
             Model model
     ){
-        // Todo: eyda system.out.println.
-        System.out.println("The Search object " + search + " searching by " + searchBy);
         List<Book> book = new ArrayList<>();
         switch (searchBy) {
             case 0:
@@ -48,16 +46,13 @@ public class SearchController {
             case 1:
                 book = bookService.findByAuthor(search, status);
                 break;
-//            case 2:
-//                // TODO: Breyta search streng i user
-//                User user = null;
-//                book = bookService.findByUser(user);
-//                break;
             default:
                 break;
         }
+        model.addAttribute("search", search);
         model.addAttribute("books", book);
-        return "Home";
+
+        return "search";
     }
 
 }
