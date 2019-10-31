@@ -35,7 +35,21 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public List<User> findByUsername(String username) { return repository.findByUsername(username); }
+    public User findByUsername(String username) { return repository.findByUsername(username); }
 
+    //Ef ekki til JPA skipun fyrir ákveðna query þá er hægt að skrifa sína eigin.
+    // Nota fyrir subjects á forsíðu?
+
+    // Fall úr stoðtíma - opið fyrir breytingum (Hieu!)
+    @Override
+    public User login(User user) {
+        User exists = findByUsername(user.username);
+        if (exists != null) {
+            if (exists.password.equals(user.password)) {
+                return user; //má logga sig inn - username og password rétt
+            }
+        }
+        return null;
+    }
 
 }

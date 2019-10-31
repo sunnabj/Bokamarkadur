@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     //boolean checkIfExists(String userName, String password);
 
-    List<User> findByUsername(String username);
+    User findByUsername(String username);
 
     //checkPassword(String username, String password)
 

@@ -10,7 +10,11 @@ public interface UserService {
     User save(User user);
     Optional<User> findById(long id);
     List<User> findAll();
-    List<User> findByUsername(String username);
+    User findByUsername(String username);
     //Boolean checkIfLoggedIn(String username, String password)
     //checkPassword(String username, String password)
+
+    // Controller á ekki að sjá um login. Business logic
+    // Fall úr stoðtíma
+    User login(User user);
 }

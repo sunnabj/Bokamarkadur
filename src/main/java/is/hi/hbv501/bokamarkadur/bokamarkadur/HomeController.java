@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -157,14 +158,50 @@ public class HomeController {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
             return "new-account"; //Inni í gæsalöppum: HTML skrá.
         }
-        userService.save(user);
-        model.addAttribute("user", user);
+        // Tjekka hvort notandi er til - ef ekki til -> Vistum nýjan. Annars ekki.
+        User exists = userService.findByUsername(user.username);
+        if (exists == null) {
+            userService.save(user);
+        }
+
+        model.addAttribute("user", user); //Ekki?
+        //model.addAttribute("books", bookService.findAll()); // Siggi - kannski því hann birtir forsíðuna aftur.
         return "welcome-user";
     }
 
+    // Fall úr stoðtíma
+    /*
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+        if(result.hasErrors()){
+            return "login";
+        }
+        model.addAttribute("books",bookService.findAll());
+        User exists = userService.login(user);
+        //Session virkar yfir allt forritið!
+        if(exists != null){
+            session.setAttribute("LoggedInUser", user);
+            return "redirect:/";
+        }
+        return "redirect:/";
+    }
+    */
 
-
-    // H2 gagnagrunnur - gögnin eyðast alltaf út þegar serverinn er endurræstur.
-    //
+    //Hægt að hafa eitthvað svona fall ef við erum með mypage - þá nær hann í núverandi logged in notanda.
+    // Fall úr stoðtíma
+    /*
+    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
+    public String loggedinGET(HttpSession session, Model model){
+        model.addAttribute("books",bookService.findAll());
+        //getAttribute skilar annað hvort attribute-inu fyrir þennan lykil eða null.
+        // ef enginn loggaður inn => Skilar null.
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser  != null){
+            model.addAttribute("loggedinuser", sessionUser);
+            return "loggedInUser";
+        }
+        return "redirect:/";
+    }
+    */
 
 }
