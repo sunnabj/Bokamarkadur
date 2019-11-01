@@ -12,7 +12,9 @@
         <img width="252" height="33" src="logo.png"/>
         </a>
     </div>
-
+    <a style="color: blue" th:href="@{/user}">User Page</a>
+    <br />
+    <a style="color: blue" th:href="@{/admin}">Admin Page</a>
     <h2 th:case="null">No books yet!</h2>
     <div th:case="*">
         <h2>Books</h2>

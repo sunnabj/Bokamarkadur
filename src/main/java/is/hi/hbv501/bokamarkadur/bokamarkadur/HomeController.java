@@ -11,10 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -117,11 +115,22 @@ public class HomeController {
      * TODO: Má geyma þar til eftir næsta stoðtíma (fer eitthvað í login þar).
      */
 
-    @RequestMapping(value="/loginform", method = RequestMethod.GET)
-    public String loginForm() {
+    @RequestMapping(value="/login")
+    public String login() {
         return "login";
     }
-
+    @RequestMapping(value="/admin")
+    public String admin(){
+        return "admin";
+    }
+    @RequestMapping(value="/user")
+    public String users(){
+        return "users";
+    }
+    @RequestMapping(value="/403")
+    public String Error403(){
+        return "403";
+    }
     /*
      * Skilar formi þar sem maður getur búið til nýtt account.
      */
