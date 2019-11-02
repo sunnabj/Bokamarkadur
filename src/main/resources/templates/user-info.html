@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Information</title>
+</head>
+<body>
+<h2><td th:text="${user.username}"></td></h2>
+<div>
+    <label><b>Name</b></label>
+    <label><td th:text="${user.name}"></td></label>
+</div>
+<div>
+    <label><b>Email</b></label>
+    <label><td th:text="${user.email}"></td></label>
+</div>
+<div>
+    <label><b>Information</b></label>
+    <label><td th:text="${user.info}"></td></label>
+</div>
+<div>
+    <label><b>Books</b></label>
+    <tr th:each="book : ${user.books}">
+        <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
+    </tr>
+</div>
+
+<p><a href="/">Return to frontpage</a></p>
+
+</body>
+</html>

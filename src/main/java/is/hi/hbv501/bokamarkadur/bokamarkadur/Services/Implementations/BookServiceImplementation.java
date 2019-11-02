@@ -91,5 +91,11 @@ public class BookServiceImplementation implements BookService {
         return repository.findAvailableSubjects(books);
     }
 */
+    /*
+    @Override
+    List<Subjects> findAvailableSubjects(List<Book> books) {
+        SELECT subjects FROM Book;
+    }
+    */
 
 }

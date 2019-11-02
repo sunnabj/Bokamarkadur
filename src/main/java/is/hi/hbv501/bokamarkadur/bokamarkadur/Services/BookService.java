@@ -25,6 +25,9 @@ public interface BookService {
     //Virkaði ekki
     //List<Subjects> findAvailableSubjects(List<Book> books);
 
+    //SELECT subjects FROM Book;
+
+
 
     //Repository er með föll sem eru með útfærslu í höndum JPA. Kannski viljum við gera eitthvað aðeins
     // öðruvísi, það er stjórna meiru sjálf.

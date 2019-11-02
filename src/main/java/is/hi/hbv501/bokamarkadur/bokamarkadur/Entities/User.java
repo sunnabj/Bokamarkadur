@@ -19,7 +19,6 @@ public class User {
     public String email;
     public String password;
     public String info;
-    public Boolean loggedIn;
 
     //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)
     @OneToMany(mappedBy="user")
@@ -77,10 +76,9 @@ public class User {
 
     public void setBooks(List<Book> books) { this.books = books; }
 
-    public Boolean getLoggedIn() { return loggedIn; }
 
     public User(long id, String name, String username, String password, String info,
-                String email, List<Book> books, Boolean loggedIn) {
+                String email, List<Book> books) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -88,7 +86,6 @@ public class User {
         this.info = info;
         this.email = email;
         this.books = books;
-        this.loggedIn = loggedIn;
     }
 
 }
