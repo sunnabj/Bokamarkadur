@@ -24,12 +24,6 @@ public class Book {
     @ManyToOne
     private User user;
 
-    // Pæling: Þarf Subjects að vera svona Set? Nope!
-    //@ElementCollection(targetClass= Subjects.class)
-    //@Column(name="subject", nullable=false)
-    //@CollectionTable(name="book_subjects", joinColumns= {@JoinColumn(name="book_id")})
-    //public Set<Subjects> subjects;
-
     public Subjects subjects;
 
     //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
@@ -60,8 +54,6 @@ public class Book {
         return condition;
     }
 
-    //public Set<Subjects> getSubjects() { return subjects; }
-
     public Subjects getSubjects() {return subjects; }
 
     public Integer getPrice() {
@@ -91,8 +83,6 @@ public class Book {
     public void setCondition(String condition) {
         this.condition = condition;
     }
-
-    //public void setSubjects(Set<Subjects> subjects) { this.subjects = subjects; }
 
     public void setSubjects(Subjects subjects) { this.subjects = subjects; }
 

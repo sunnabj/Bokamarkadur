@@ -36,8 +36,8 @@
 <body>
 <h2>Login to your account</h2>
 <form action="#" th:action="@{/loginform}" th:object="${user}"  method="post">
-    <input type="text" name="username" id="username" th:field="*{user}"/>
-    <input type="text" name="password" id="password" th:value="*{user}"/>
+    <input type="text" name="username" id="username" th:field="*{username}"/>
+    <input type="text" name="password" id="password" th:field="*{password}"/>
     <input type="submit" value="Login"/>
 </form>
 <p><a href="/">Return to frontpage</a></p>

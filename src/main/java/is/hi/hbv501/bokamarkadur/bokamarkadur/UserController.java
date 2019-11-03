@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -16,6 +18,7 @@ public class UserController {
 
 
     private UserService userService;
+
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
@@ -64,5 +67,7 @@ public class UserController {
         //model.addAttribute("books", bookService.findAll()); // Siggi - kannski því hann birtir forsíðuna aftur.
         return "welcome-user";
     }
+
+
 
 }

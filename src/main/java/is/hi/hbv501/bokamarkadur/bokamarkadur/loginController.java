@@ -22,8 +22,10 @@ public class loginController {
     private BookService bookService;
 
     @Autowired
-    public loginController(LoginService loginservice) {
+    public loginController(LoginService loginservice, UserService userService, BookService bookService) {
         this.loginservice = loginservice;
+        this.userService = userService;
+        this.bookService = bookService;
     }
 
     /*
