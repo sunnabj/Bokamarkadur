@@ -39,6 +39,10 @@ public class loginController {
         return "login";
     }
 
+    /*
+    Check if user exist or not, return homepage if loggin success.
+    Return same page if not.
+     */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
