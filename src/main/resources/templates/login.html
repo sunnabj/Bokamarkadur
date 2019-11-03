@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,3 +25,52 @@
 
 </body>
 </html>
+-->
+
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h2>Login to your account</h2>
+<form action="#" th:action="@{/loginform}" th:object="${user}"  method="post">
+    <input type="text" name="username" id="username" th:field="*{user}"/>
+    <input type="text" name="password" id="password" th:value="*{user}"/>
+    <input type="submit" value="Login"/>
+</form>
+<p><a href="/">Return to frontpage</a></p>
+</body>
+</html>
+
+
+<!--
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<fieldset>
+    <form action="#" th:action="@{/loginform}" th:object="${user}" method="post">
+        <legend>Log in</legend>
+        <div>
+            <label for="username">Username</label>
+            <input type="text" th:field="*{username}" id="username" placeholder="Username" required>
+            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+        </div>
+        <div>
+            <label for="password">Password</label>
+            <input type="password" th:field="*{password}" id="password" placeholder="Password" required>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+        </div>
+        <input type="submit" value="Login">
+    </form>
+</fieldset>
+
+<p><a href="/">Return to frontpage</a></p>
+</body>
+</html>
+-->

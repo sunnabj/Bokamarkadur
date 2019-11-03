@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -38,8 +39,8 @@ public class loginController {
     }
 
     // Fall úr stoðtíma
-    /*
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+
+    @RequestMapping(value = "/loginform", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";
@@ -53,11 +54,11 @@ public class loginController {
         }
         return "redirect:/";
     }
-    */
+
 
     //Hægt að hafa eitthvað svona fall ef við erum með mypage - þá nær hann í núverandi logged in notanda.
     // Fall úr stoðtíma
-    /*
+
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGET(HttpSession session, Model model){
         model.addAttribute("books",bookService.findAll());
@@ -70,7 +71,7 @@ public class loginController {
         }
         return "redirect:/";
     }
-    */
+
 
 
 }
