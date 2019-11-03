@@ -11,18 +11,21 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
 public class loginController {
 
-    private LoginService loginservice;
+    private LoginService loginService;
     private UserService userService;
     private BookService bookService;
 
     @Autowired
-    public loginController(LoginService loginservice) {
-        this.loginservice = loginservice;
+    public loginController(LoginService loginService, UserService userService, BookService bookService) {
+        this.loginService = loginService;
+        this.bookService = bookService;
+        this.userService = userService;
     }
 
     /*
@@ -31,29 +34,24 @@ public class loginController {
      * TODO: Má geyma þar til eftir næsta stoðtíma (fer eitthvað í login þar).
      */
 
-
-    @RequestMapping(value="/loginform", method = RequestMethod.GET)
-    public String loginForm() {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGET(User user){
         return "login";
     }
 
-    // Fall úr stoðtíma
-    /*
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";
         }
-        model.addAttribute("books",bookService.findAll());
+        model.addAttribute("books", bookService.findAll());
         User exists = userService.login(user);
-        //Session virkar yfir allt forritið!
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
         }
         return "redirect:/";
     }
-    */
 
     //Hægt að hafa eitthvað svona fall ef við erum með mypage - þá nær hann í núverandi logged in notanda.
     // Fall úr stoðtíma

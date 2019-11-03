@@ -20,7 +20,7 @@
             </div>
             <div>
                 <label for="username">Username</label>
-                <input type="username" th:field="*{username}" id="username" placeholder="Username" required>
+                <input type="text" th:field="*{username}" id="username" placeholder="Username" required>
                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
             </div>
             <div>
