@@ -30,7 +30,9 @@ public class BokamarkadurApplication {
 
 		@Override
 		public void run(String... args) throws Exception {
-
+			/*
+			Dummi database for books when run application.
+			 */
 			Book REI502M = new Book();
 			REI502M.setTitle("Introduction to Data Mining");
 			REI502M.setAuthor("Tan, Pang-Ning");

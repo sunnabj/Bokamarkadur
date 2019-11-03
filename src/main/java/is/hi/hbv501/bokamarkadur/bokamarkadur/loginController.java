@@ -17,15 +17,15 @@ import javax.validation.Valid;
 @Controller
 public class loginController {
 
-    private LoginService loginservice;
+    private LoginService loginService;
     private UserService userService;
     private BookService bookService;
 
     @Autowired
-    public loginController(LoginService loginservice, UserService userService, BookService bookService) {
-        this.loginservice = loginservice;
-        this.userService = userService;
+    public loginController(LoginService loginService, UserService userService, BookService bookService) {
+        this.loginService = loginService;
         this.bookService = bookService;
+        this.userService = userService;
     }
 
     /*
@@ -34,29 +34,28 @@ public class loginController {
      * TODO: Má geyma þar til eftir næsta stoðtíma (fer eitthvað í login þar).
      */
 
-
-    @RequestMapping(value="/loginform", method = RequestMethod.GET)
-    public String loginForm() {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGET(User user){
         return "login";
     }
 
-    // Fall úr stoðtíma
-
-    @RequestMapping(value = "/loginform", method = RequestMethod.POST)
+    /*
+    Check if user exist or not, return homepage if loggin success.
+    Return same page if not.
+     */
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
             return "login";
         }
-        model.addAttribute("books",bookService.findAll());
+        model.addAttribute("books", bookService.findAll());
         User exists = userService.login(user);
-        //Session virkar yfir allt forritið!
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
         }
         return "redirect:/";
     }
-
 
     //Hægt að hafa eitthvað svona fall ef við erum með mypage - þá nær hann í núverandi logged in notanda.
     // Fall úr stoðtíma

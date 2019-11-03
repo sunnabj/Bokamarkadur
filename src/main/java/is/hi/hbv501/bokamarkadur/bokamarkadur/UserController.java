@@ -56,7 +56,7 @@ public class UserController {
             //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
             return "new-account"; //Inni í gæsalöppum: HTML skrá.
         }
-        System.out.println("Notandanafnið: " + user.username);
+        System.out.println("Notandanafnið: " + user.username + ", lykilordid: " + user.password);
         // Checks if this username already exists. If not -> A new user is created, else not.
         User exists = userService.findByUsername(user.username);
         if (exists == null) {
