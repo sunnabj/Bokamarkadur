@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 import java.util.List;
+import javax.servlet.http.HttpSession;
+
 
 @Controller
 public class BookController {
@@ -73,8 +76,7 @@ public class BookController {
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
-            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
-            return "sell-book"; //Inni í gæsalöppum: HTML skrá.
+            return "sell-book";
         }
         book.setStatus("For sale");
         bookService.save(book);
@@ -97,7 +99,6 @@ public class BookController {
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
     public String addRequestBook(@Valid Book book, BindingResult result, Model model) {
         if(result.hasErrors()) {
-            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
             return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
         book.setStatus("Requested");

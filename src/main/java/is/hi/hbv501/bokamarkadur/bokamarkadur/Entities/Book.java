@@ -6,33 +6,34 @@ import java.util.Set;
 @Entity
 public class Book {
 
-    //ID, title, author, edition, condition og price
-    // Ekki fullbúið, vantar enn gildi fyrir book. Sjá Verkefnisplan
+    /*
+     * Each entity class represents a table in the database.
+     * This one describes the books available in the exchange market.
+     * Each one has a few attributes, such as title and price.
+     */
 
     @Id
-    //Býr sjálfkrafa til ID gildi
+    //Automatic generation of ID values.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String title;
     private String author;
-    private Integer edition; //Eða strengur? //SB: Gæti verið sniðugt, þá er hægt að skrifa 5th t.d.
+    private Integer edition;
     private String condition;
     private Integer price;
     private String status;
 
+    // Many books can belong to each user.
     @ManyToOne
     private User user;
 
     public Subjects subjects;
 
-    //Mikilvægt að hafa tóman smið fyrir entity-ið okkar.
-    // Þarf alltaf að vera svo, til að JPA geti búið til tilvik af þessum klösum.
+    // Entity constructors must be empty.
     public Book() {
 
     }
-
-    //Allt hér fyrir neðan búið til með alt-insert
 
     public long getId() {
         return id;

@@ -1,14 +1,11 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
 
-    private UserRepository userRepository;
-
-    //public checkIfLoggedIn(String username, String password)
-
+    // As of now, the UserService takes care of the server functions in loginController.
+    // This will be optimized in the future.
 
 }

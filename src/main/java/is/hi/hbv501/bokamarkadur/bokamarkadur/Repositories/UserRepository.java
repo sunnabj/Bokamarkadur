@@ -9,16 +9,17 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    /*
+     * These functions interact with the User table in the database.
+     * JPA creates queries that return certain users, based on
+     * conditions.
+     */
     User save(User user);
 
     Optional<User> findById(long id);
 
     List<User> findAll();
 
-    //boolean checkIfExists(String userName, String password);
-
     User findByUsername(String username);
-
-    //checkPassword(String username, String password)
 
 }
