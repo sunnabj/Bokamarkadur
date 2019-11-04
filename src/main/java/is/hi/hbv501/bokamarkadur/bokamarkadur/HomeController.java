@@ -19,8 +19,8 @@ public class HomeController {
     }
 
     /*
-     * Return home page.
-     * Model that storage database should show up.
+     * Returns the home (front) page.
+     * Will probably be deleted in the future.
      */
     @RequestMapping("/")
     public String Home(Model model) {

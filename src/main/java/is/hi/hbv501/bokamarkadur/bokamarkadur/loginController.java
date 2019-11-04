@@ -17,6 +17,13 @@ import javax.validation.Valid;
 @Controller
 public class loginController {
 
+    /*
+     * The login functionality is still in progress. The basic login functions have just been
+     * implemented, all connected functions, such as only letting logged in users add books,
+     * showing which user added a particular book, and letting users update their information
+     * for others to view.
+     */
+
     private LoginService loginService;
     private UserService userService;
     private BookService bookService;
@@ -29,19 +36,20 @@ public class loginController {
     }
 
     /*
-     * TODO: Gera fyrir login þannig að náð sé í user-inn sem er skrifaður inn og
-     * TODO: hann birtist.
-     * TODO: Má geyma þar til eftir næsta stoðtíma (fer eitthvað í login þar).
+     * Returns the page with the login form, where a user can sign in.
      */
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginGET(User user){
         return "login";
     }
 
     /*
-    Check if user exist or not, return homepage if loggin success.
-    Return same page if not.
+     * Logs the user in. Activates when the user presses the login button
+     * after having inserted his username and password.
+     * Checks if the username exists and if the password fits, and if so,
+     * the user is logged in and redirected to the frontpage.
+     * If not, the login page is reloaded.
+     * The logged in user is stored in the current session.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
@@ -54,17 +62,15 @@ public class loginController {
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
         }
-        return "redirect:/";
+        return "login";
     }
 
-    //Hægt að hafa eitthvað svona fall ef við erum með mypage - þá nær hann í núverandi logged in notanda.
-    // Fall úr stoðtíma
     /*
+     * Retrieves the current logged in user from the current session.
+     */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public String loggedinGET(HttpSession session, Model model){
         model.addAttribute("books",bookService.findAll());
-        //getAttribute skilar annað hvort attribute-inu fyrir þennan lykil eða null.
-        // ef enginn loggaður inn => Skilar null.
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
             model.addAttribute("loggedinuser", sessionUser);
@@ -72,7 +78,7 @@ public class loginController {
         }
         return "redirect:/";
     }
-    */
+
 
 
 }

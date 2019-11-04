@@ -14,8 +14,18 @@ import java.util.Optional;
 @Service
 public class BookServiceImplementation implements BookService {
 
+    /*
+     * Implements the functions from BookService.
+     */
+
     BookRepository repository;
 
+    /*
+     * Title: Search string
+     * Status: Declares whether a book is for sale or requested
+     * Looks through all book titles in the DB and returns all books where the search string matches
+     * a part of the title.
+     */
     static Specification<Book> containsTitleAndStatus(String title, String status) {
         return (book, cq, cb) -> {
             return cb.and(
@@ -25,6 +35,12 @@ public class BookServiceImplementation implements BookService {
         };
     }
 
+    /*
+     * Author: Search string
+     * Status: Declares whether a book is for sale or requested
+     * Looks through all book authors in the DB and returns all books where the search string matches
+     * a part of the author name.
+     */
     static Specification<Book> hasAuthorAndStatus(String author, String status) {
         return (book, cq, cb) -> {
             return cb.and(
@@ -36,10 +52,11 @@ public class BookServiceImplementation implements BookService {
 
     /*
      * Currently not being used.
+     * Retrieves a status of a book, that is whether it is for sale or requested.
+     */
     static Specification<Book> getStatus(String status) {
         return (book, cq, cb) -> cb.equal(book.get("status"), status);
     }
-     */
 
     @Autowired
     public BookServiceImplementation(BookRepository bookRepository){this.repository = bookRepository;}
@@ -74,23 +91,19 @@ public class BookServiceImplementation implements BookService {
         return repository.findAll(hasAuthorAndStatus(author, status));
     }
 
-    /*
-     * Currently not being used.
+    // Currently not being used.
     @Override
     public List<Book> findByStatus(String status) {
         return repository.findAll(getStatus(status));
     }
-     */
 
-    //Prófa
     @Override
     public List<Book> findByUser(User user) { return repository.findByUser(user); };
 
-    // Nýtt
     @Override
     public List<Book> findBySubjects(Subjects subject) { return repository.findBySubjects(subject); }
 
-    // Virkaði ekki
+    // Something that didn't work.
     /*
     @Override
     public List<Subjects> findAvailableSubjects(List<Book> books) {

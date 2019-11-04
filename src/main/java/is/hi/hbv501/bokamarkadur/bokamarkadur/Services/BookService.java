@@ -10,6 +10,10 @@ import java.util.Optional;
 
 public interface BookService {
 
+    /*
+     * These functions represent the queries explained in the UserRepository,
+     * and serve as a layer between the controller and the database.
+     */
     Book save(Book book);
     void delete(Book book);
     List<Book> findAll();
@@ -17,22 +21,8 @@ public interface BookService {
     List<Book> findByTitle(String title, String status);
     List<Book> findByAuthor(String author, String status);
     List<Book> findByStatus(String status);
-    //Prófa
     List<Book> findByUser(User user);
-    // Nýtt
     List<Book> findBySubjects(Subjects subject);
 
-    //Virkaði ekki
-    //List<Subjects> findAvailableSubjects(List<Book> books);
-
-    //SELECT subjects FROM Book;
-
-
-
-    //Repository er með föll sem eru með útfærslu í höndum JPA. Kannski viljum við gera eitthvað aðeins
-    // öðruvísi, það er stjórna meiru sjálf.
-    // Service er þá millilag milli repository og gagnagrunnsins. Service getur unnið með gögnin aukalega.
-    // Filterað þau öðruvísi, raðað í ákveðna röð eða eitthvað.
-    // Getum bætt við aukaföllum hér sem geta gert meira en repository getur gert.
 
 }

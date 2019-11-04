@@ -13,31 +13,24 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificationExecutor<Book> {
 
-    //Fallið fyrir gagnagrunninn! Setur nýja bók inn.
+    //Inserts a new book into the database
     Book save(Book book);
-    //Þessi eyðir úr gagnagrunninum.
-    // Þetta er allt gert í gegnum JPA repository. save og delete búin til þar.
+    //Deletes a book from the database
     void delete(Book book);
 
-    //Hægt að gera @Query("SELECT o.s.frv. - okkar eigin SQL kóði")
-
-    //Leið til að sækja gögnin okkar - skilar öllum bókum í gagnagrunninum.
+    //Retrieves all the books in the database
     List<Book> findAll();
 
-    //Skilar lista af öllum bókum sem uppfylla þennan titil.
+    // These functions query books by some particular condition.
+
     List<Book> findByTitle(String title);
 
-    // Skilar lista af öllum bókum eftir þennan rithöfund.
     List<Book> findByAuthor(String author);
 
     Optional<Book> findById(long id);
 
-    //Prófa
     List<Book> findByUser(User user);
 
-    //Nýtt
     List<Book> findBySubjects(Subjects subject);
 
-    //Virkaði ekki
-    //List<Subjects> findAvailableSubjects(List<Book> books);
 }

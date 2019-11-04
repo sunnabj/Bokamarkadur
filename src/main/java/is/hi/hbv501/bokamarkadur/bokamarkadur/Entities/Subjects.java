@@ -1,7 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 
-//Hægt að nota fyrir litakóða á vefsíðu
+// A list of available subjects users can categorize their uploaded books to.
 public enum Subjects {
     BIOLOGY,
     BUSINESSADMINISTRATION,

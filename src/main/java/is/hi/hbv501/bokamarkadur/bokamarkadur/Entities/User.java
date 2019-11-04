@@ -5,12 +5,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Each entity class represents a table in the database.
+ * This one describes the users of the book exchange market.
+ * Each one has a name, username, password, email and will
+ * be able to insert information about himself, as well as
+ * put books up for sale or request books through the site.
+ */
+
 @Entity
 @Table(name = "USERS")
 public class User {
 
     @Id
-    //Býr sjálfkrafa til ID gildi
+    // Automatic generation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -20,7 +28,7 @@ public class User {
     public String password;
     public String info;
 
-    //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)
+    // One user can have many books in the database
     @OneToMany(mappedBy="user")
     private List<Book> books = new ArrayList<>();
 
@@ -86,6 +94,11 @@ public class User {
         this.info = info;
         this.email = email;
         this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return this.username;
     }
 
 }

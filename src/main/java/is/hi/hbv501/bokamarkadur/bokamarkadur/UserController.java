@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -16,17 +18,24 @@ public class UserController {
 
 
     private UserService userService;
+
     @Autowired
     public UserController(UserService userService){
         this.userService = userService;
     }
 
     /*
+    // Some functions to be added later on.
     + viewProfilePage(id : long, model : Model) : String
     + addUserInfo(user : User, result : BindingResult, model : Model)
     + deleteUser(id : long, model : Model) : String
      */
 
+    /*
+     * Returns all users in the database, that is those who have created
+     * an account through the site.
+     * Used in development. Won't be in the final product (probably).
+     */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String usersGET(Model model){
         model.addAttribute("users", userService.findAll());
@@ -50,8 +59,7 @@ public class UserController {
     @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
     public String addNewUser(@Valid User user, BindingResult result, Model model) {
         if(result.hasErrors()) {
-            //Gætum haft villuskilaboð hér - ens og model.addAttribute("error") - eitthvað svona.
-            return "new-account"; //Inni í gæsalöppum: HTML skrá.
+            return "new-account";
         }
         System.out.println("Notandanafnið: " + user.username + ", lykilordid: " + user.password);
         // Checks if this username already exists. If not -> A new user is created, else not.
@@ -61,8 +69,10 @@ public class UserController {
         }
 
         model.addAttribute("user", user); //Ekki?
-        //model.addAttribute("books", bookService.findAll()); // Siggi - kannski því hann birtir forsíðuna aftur.
+        //model.addAttribute("books", bookService.findAll()); // Maybe?
         return "welcome-user";
     }
+
+
 
 }
