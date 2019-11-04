@@ -34,9 +34,12 @@ public class BookServiceImplementation implements BookService {
         };
     }
 
+    /*
+     * Currently not being used.
     static Specification<Book> getStatus(String status) {
         return (book, cq, cb) -> cb.equal(book.get("status"), status);
     }
+     */
 
     @Autowired
     public BookServiceImplementation(BookRepository bookRepository){this.repository = bookRepository;}
@@ -71,10 +74,13 @@ public class BookServiceImplementation implements BookService {
         return repository.findAll(hasAuthorAndStatus(author, status));
     }
 
+    /*
+     * Currently not being used.
     @Override
     public List<Book> findByStatus(String status) {
         return repository.findAll(getStatus(status));
     }
+     */
 
     //Prófa
     @Override
