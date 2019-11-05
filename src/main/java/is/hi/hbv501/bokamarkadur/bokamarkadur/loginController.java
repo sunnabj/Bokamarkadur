@@ -72,6 +72,7 @@ public class loginController {
     public String loggedinGET(HttpSession session, Model model){
         model.addAttribute("books",bookService.findAll());
         User sessionUser = (User) session.getAttribute("LoggedInUser");
+        System.out.println("Loggaður inn info: " + sessionUser.info);
         if(sessionUser  != null){
             model.addAttribute("loggedinuser", sessionUser);
             return "loggedInUser";

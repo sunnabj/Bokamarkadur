@@ -65,7 +65,10 @@ public class BookController {
      * Returns a page where the user can choose to either put up a book for sale or request a book.
      */
     @RequestMapping(value="/newbook", method = RequestMethod.GET)
-    public String addBook() {
+    public String addBook(HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         return "add-book";
     }
 
@@ -74,11 +77,14 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
-    public String addBookForSale(@Valid Book book, BindingResult result, Model model) {
+    public String addBookForSale(@Valid Book book, BindingResult result, Model model, HttpSession session) {
         if(result.hasErrors()) {
             return "sell-book";
         }
         book.setStatus("For sale");
+        User currentUser = (User) session.getAttribute("LoggedInUser");
+        book.setUser(currentUser);
+        //book.setUser((User) session.getAttribute("LoggedInUser"));
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";
@@ -97,11 +103,13 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public String addRequestBook(@Valid Book book, BindingResult result, Model model) {
+    public String addRequestBook(@Valid Book book, BindingResult result, Model model, HttpSession session) {
         if(result.hasErrors()) {
             return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
         book.setStatus("Requested");
+        User currentUser = (User) session.getAttribute("LoggedInUser");
+        book.setUser(currentUser);
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";

@@ -29,7 +29,7 @@ public class User {
     public String info;
 
     // One user can have many books in the database
-    @OneToMany(mappedBy="user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     private List<Book> books = new ArrayList<>();
 
     public User() {

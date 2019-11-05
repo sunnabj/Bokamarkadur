@@ -25,7 +25,8 @@ public class Book {
     private String status;
 
     // Many books can belong to each user.
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.PERSIST)
+    @JoinColumn(name="user_id")
     private User user;
 
     public Subjects subjects;

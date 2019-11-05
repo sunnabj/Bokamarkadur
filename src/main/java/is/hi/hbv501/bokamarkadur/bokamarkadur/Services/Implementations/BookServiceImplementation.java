@@ -5,6 +5,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.domain.Specification;
