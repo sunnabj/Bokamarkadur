@@ -87,7 +87,10 @@ public class UserController {
 
 
     @RequestMapping(value="/updateUserInfo", method = RequestMethod.GET)
-    public String userInfoForm(User user) {
+    public String userInfoForm(User user, HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         return "update-userinfo";
     }
 
