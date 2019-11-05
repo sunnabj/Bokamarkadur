@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sell Book</title>
+</head>
+<body>
+<h2>Update your profile information:</h2>
+<form action="#" th:action="@{/updateUserInfo}" th:object="${user}" method="post">
+    <label for="info">Tell us a little bit about yourself</label>
+    <div>
+        <textarea rows="4", cols="50" th:field="*{info}" id="info" placeholder="Information"></textarea>
+        <span th:if="${#fields.hasErrors('info')}" th:errors="*{info}"></span>
+    </div>
+    <div>
+        <input type="submit" value="Submit">
+    </div>
+</form>
+
+<p><a href="/">Return to the frontpage</a></p>
+
+</body>
+</html>
