@@ -104,6 +104,7 @@ public class UserController {
         }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         System.out.println("INFOO: " + user.info);
+        System.out.println("Session user: " + sessionUser.getEmail());
         model.addAttribute("user", sessionUser);
         sessionUser.setInfo(user.info);
         return "users";

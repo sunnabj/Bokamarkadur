@@ -2,7 +2,9 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.UserRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations.BookServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class BokamarkadurApplication {
 
 		@Autowired
 		BookRepository bookRepository;
+
+		@Autowired
+		UserRepository userRepository;
 
 		@Override
 		public void run(String... args) throws Exception {
@@ -325,6 +330,15 @@ public class BokamarkadurApplication {
 			VEL502G.setPrice(11495);
 			VEL502G.setStatus("For sale");
 			bookRepository.save(VEL502G);
+
+			User Tester = new User();
+			Tester.setId(1);
+			Tester.setEmail("tester@testing.com");
+			Tester.setInfo("I'm the best Tester ever!");
+			Tester.setName("Tester");
+			Tester.setPassword("123");
+			Tester.setUsername("Tester");
+			userRepository.save(Tester);
 
 		}
 	}
