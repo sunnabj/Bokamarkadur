@@ -65,6 +65,19 @@ public class loginController {
         return "login";
     }
 
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logoutPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+        if(result.hasErrors()){
+            return "redirect:/";
+        }
+        model.addAttribute("books", bookService.findAll());
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        sessionUser = null;
+        return "redirect:/";
+    }
+
+
     /*
      * Retrieves the current logged in user from the current session.
      */

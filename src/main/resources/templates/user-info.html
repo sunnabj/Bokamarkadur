@@ -21,7 +21,7 @@
 <div>
     <label><b>Books</b></label>
     <tr th:each="book : ${user.books}">
-        <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
+        <td><a th:href="@{/viewbook/{id}(id=${book.id})}" th:text="${book.title}">View book</a></td>
     </tr>
 </div>
 
