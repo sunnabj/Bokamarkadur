@@ -41,7 +41,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User findByUsername(String username) { return repository.findByUsername(username); }
 
-    /*Handles the login af a user.
+    /*Handles the login of a user.
      * Checks if the user trying to log in exists, that is the username he is typing,
      * and if so, checks if the typed-in password matches this username.
      * If everything is ok, this user is returned and login will be successful.

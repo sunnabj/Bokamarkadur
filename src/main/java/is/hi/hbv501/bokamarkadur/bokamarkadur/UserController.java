@@ -103,10 +103,10 @@ public class UserController {
             return "update-userinfo";
         }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        System.out.println("INFOO: " + user.info);
-        System.out.println("Session user: " + sessionUser.getEmail());
-        model.addAttribute("user", sessionUser);
-        sessionUser.setInfo(user.info);
+        User current = userService.findByUsername(sessionUser.getUsername());
+        current.setInfo(user.info);
+        userService.save(current);
+        model.addAttribute("user", current);
         return "users";
     }
 

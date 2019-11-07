@@ -4,6 +4,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,10 +22,12 @@ import javax.servlet.http.HttpSession;
 public class BookController {
 
     private BookService bookService;
+    private UserService userService;
 
     @Autowired
-    public BookController(BookService bookService){
+    public BookController(BookService bookService, UserService userService){
         this.bookService = bookService;
+        this.userService = userService;
     }
 
 
@@ -82,9 +85,9 @@ public class BookController {
             return "sell-book";
         }
         book.setStatus("For sale");
-        User currentUser = (User) session.getAttribute("LoggedInUser");
-        book.setUser(currentUser);
-        //book.setUser((User) session.getAttribute("LoggedInUser"));
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(sessionUser.getUsername());
+        book.setUser(current);
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";
@@ -108,8 +111,9 @@ public class BookController {
             return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
         book.setStatus("Requested");
-        User currentUser = (User) session.getAttribute("LoggedInUser");
-        book.setUser(currentUser);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(sessionUser.getUsername());
+        book.setUser(current);
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
         return "Success";
