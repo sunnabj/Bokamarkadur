@@ -66,6 +66,9 @@ public class loginController {
     }
 
 
+    /*
+     * Virkar ekki enn!
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
         if(result.hasErrors()){
