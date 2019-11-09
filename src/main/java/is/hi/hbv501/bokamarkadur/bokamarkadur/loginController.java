@@ -18,10 +18,7 @@ import javax.validation.Valid;
 public class loginController {
 
     /*
-     * The login functionality is still in progress. The basic login functions have just been
-     * implemented, all connected functions, such as only letting logged in users add books,
-     * showing which user added a particular book, and letting users update their information
-     * for others to view.
+     * Handles the login and logout functions of the system.
      */
 
     private LoginService loginService;
