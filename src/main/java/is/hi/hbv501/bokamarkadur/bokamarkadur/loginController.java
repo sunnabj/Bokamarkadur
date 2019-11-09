@@ -67,7 +67,7 @@ public class loginController {
 
 
     /*
-     * Virkar ekki enn!
+     * Logs the current user out.
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
@@ -75,8 +75,7 @@ public class loginController {
             return "redirect:/";
         }
         model.addAttribute("books", bookService.findAll());
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        sessionUser = null;
+        session.setAttribute("LoggedInUser", null);
         return "redirect:/";
     }
 
