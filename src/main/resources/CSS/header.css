@@ -1,0 +1,29 @@
+header {
+    background-color: #afb281;
+}
+
+.header__title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-family: "Oswald", Verdana, Serif;
+}
+
+.header__content {
+    display: flex;
+    max-width: 1200px;
+    padding-bottom: 20px;
+    margin: 0 auto;
+    font-family: "Open Sans", Helvetica, Arial, Sans-serif;
+    justify-content: center;
+    flex-direction: column;
+    background-color: black;
+}
+
+.header__pages {
+    display: flex;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    justify-content: space-around;
+}
+
