@@ -3,20 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Bókamarkaður</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+    <link href="../CSS/header.css" th:href="@{/css/header.css}" rel="stylesheet" />
 </head>
 <body>
-    <h1>Bókamarkaður - Book exchange market for students</h1>
-    <div class="logo">
-        <a href="/" title="">
-            <img src="https://notendur.hi.is/hvp5/72917091_543975626431144_2524971519101108224_n.png" alt="Logo" width="296" height="141.5"/>
-        </a>
-    </div>
+    <header>
+        <h1>Bókamarkaður - Book exchange market for students</h1>
+        <div class="header__content">
+            <div class="logo">
+                <a href="/" title="">
+                    <img src="https://notendur.hi.is/hvp5/72917091_543975626431144_2524971519101108224_n.png" alt="Logo" width="296" height="141.5"/>
+                </a>
+            </div>
+            <div class="header__pages">
+                <p><a href="/newbook">Add a new book</a></p>
+                <p><a href="/login">Login</a></p>
+                <p><a href="/search">Search for a book</a></p>
+            </div>
+        </div>
+    </header>
+
 
     <p><a href="/all-books">View all books</a></p>
-    <p><a href="/newbook">Add a new book</a></p>
-    <p><a href="/login">Login</a></p>
     <p><a href="/newAccount">Create a new account</a></p>
-    <p><a href="/search">Search for a book</a></p>
     <p><a href="/users">View all users</a></p>
     <p><a href="/updateUserInfo">Update your profile information</a></p>
     <p><a href="/logout">Logout</a></p>

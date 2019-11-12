@@ -139,4 +139,47 @@ public class BookController {
     }
 
 
+    @RequestMapping(value ="/requestbook", method = RequestMethod.POST)
+    public String requestBook(@Valid Book book, BindingResult result, Model model, HttpSession session) {
+        if(result.hasErrors()) {
+            System.out.println("Halló halló");
+            return "book-info"; //Inni í gæsalöppum: HTML skrá.
+        }
+        model.addAttribute("book", book);
+        return "book-message";
+    }
+
+    @RequestMapping(value="/requestbook", method = RequestMethod.GET)
+    public String requestBook(Book book) {
+        return "book-message";
+    }
+
+
+
+    @RequestMapping(value ="/sendMessage", method = RequestMethod.POST)
+    public String sendMessage(@Valid Book book, BindingResult result, Model model, HttpSession session) {
+        if(result.hasErrors()) {
+            return "book-message";
+        }
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User buyer = userService.findByUsername(sessionUser.getUsername());
+        System.out.println(book.getUser());
+        //Message message = new Message();
+        //message.setUser(current);
+        //message.setBook(book);
+        //message.setBody(???)
+        //message.setReceiver(book.getUser());
+        //bookService.save(book);
+        //model.addAttribute("books", bookService.findAll());
+        model.addAttribute("book", book);
+        return "book-message";
+    }
+
+    @RequestMapping(value="/sendMessage", method = RequestMethod.GET)
+    public String sendMessage(Book book, User user) {
+        return "book-message";
+    }
+
+
+
 }

@@ -39,6 +39,8 @@
         <label><td th:text="${book.user}"></td></label>
     </div>
 
+    <input action="#" th:action="@{/requestbook}" th:object="${book}" method="post" type="submit" value="Submit">
+
     <p><a href="/">Return to frontpage</a></p>
 
 </body>
