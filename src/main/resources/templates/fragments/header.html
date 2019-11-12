@@ -1,0 +1,48 @@
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+    <!-- Static navbar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="../">
+                    <img src="https://notendur.hi.is/hvp5/logo.png" alt="Logo" width="90.25" height="36"/>
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="/all-books">View all books</a></li>
+                    <!--<li><a href="/search">Search for a book</a></li>-->
+
+
+                    <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post">
+                        <select name="status">
+                            <option value="For sale">For sale</option>
+                            <option value="Requested">Requested</option>
+                        </select>
+                        <select name="searchBy">
+                            <option value="0">Title</option>
+                            <option value="1">Author</option>
+                        </select>
+                        <input type="text" name="search" id="search" th:value="${search}"/>
+                        <input type="submit" value="Search"/>
+                    </form></li>
+
+
+
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/newAccount">Sign Up</a></li>
+                    <li><a href="/users">All Users</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+</header>

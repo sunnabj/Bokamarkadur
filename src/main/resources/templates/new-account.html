@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>New Account</title>
+    <title>Book exchange market for students</title>
 </head>
+
+
 <body>
-    <fieldset>
+<div layout:fragment="content" class="container">
+
+<fieldset>
         <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post">
             <legend>Create a user account</legend>
             <div>
@@ -38,5 +42,19 @@
     </fieldset>
 
     <p><a href="/">Return to frontpage</a></p>
+    </div>
 </body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
 </html>
