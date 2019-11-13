@@ -1,11 +1,14 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -24,6 +27,8 @@ public class HomeController {
      */
     @RequestMapping("/")
     public String Home(Model model) {
+        List<Book> books = bookService.findAll();
+
         return "Home";
     }
 

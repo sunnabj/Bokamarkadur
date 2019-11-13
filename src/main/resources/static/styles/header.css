@@ -17,7 +17,6 @@ header {
     font-family: "Open Sans", Helvetica, Arial, Sans-serif;
     justify-content: center;
     flex-direction: column;
-    background-color: black;
 }
 
 .header__pages {
