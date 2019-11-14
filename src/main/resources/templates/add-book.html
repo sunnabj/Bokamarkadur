@@ -1,13 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add Book</title>
+    <title>Add book</title>
 </head>
+
+
 <body>
+<div layout:fragment="content" class="container">
+
     <h3>I would like to</h3>
     <p><a href="/addbookforsale">Sell a book</a></p>
     <p><a href="/addrequestbook">Request a book</a></p>
     <p><a href="/">Return to frontpage</a></p>
+</div>
 </body>
+
 </html>

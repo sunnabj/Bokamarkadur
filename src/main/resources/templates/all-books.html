@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Bókamarkaður</title>
+    <title>Book exchange market for students</title>
 </head>
+
+
 <body>
-<h1>Bókamarkaður - Book exchange market for students</h1>
-<div class="logo">
-    <a href="/" title="">
-        <img src="../images/logo.png" alt="Logo" width="252" height="33"/>
-    </a>
-</div>
+<div layout:fragment="content" class="container">
+
+
 <div th:switch="${books}">
     <h2 th:case="null">No books yet!</h2>
     <div th:case="*">
         <h2>Books</h2>
-        <table>
+        <table class="table  table-hover">
             <thead>
             <tr>
                 <th>Image</th>
@@ -57,18 +56,6 @@
 <p><a href="/newAccount">Create a new account</a></p>
 <p><a href="/search">Search for a book</a></p>
 
-<footer>
-    <div class="footer-col col-md-3 col-sm-12 contact">
-        <div class="footer-col-inner">
-            <h3 class="title">Contact</h3>
-            <div class="row">
-                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
-                <p></i><a href="hafasamband">Contact us</a></p>
-            </div>
-        </div>
-    </div>
-    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
-</footer>
-
-
+</div>
+</body>
 </html>

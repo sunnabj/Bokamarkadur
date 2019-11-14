@@ -1,22 +1,26 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Search</title>
+    <title>Book exchange market for students</title>
 </head>
+
+
 <body>
+<div layout:fragment="content" class="container">
+
     <h2>Search for books</h2>
     <form action="#" th:action="@{/search}" th:object="${book}"  method="post">
-        <select name="status">
+        <select name="status" class="form-control">
             <option value="For sale">For sale</option>
             <option value="Requested">Requested</option>
         </select>
-        <select name="searchBy">
+        <select name="searchBy" class="form-control">
             <option value="0">Title</option>
             <option value="1">Author</option>
         </select>
-        <input type="text" name="search" id="search" th:value="${search}"/>
-        <input type="submit" value="Search"/>
+            <input type="text" name="search" id="search" th:value="${search}" class="form-control" placeholder="Search"/>
+            <button type="submit" value="Search" class="btn btn-default">Submit</button>
     </form>
     <div th:if="${search != null}">
         <div th:if="${#arrays.length(books) == 0}">
@@ -56,5 +60,19 @@
         </div>
     </div>
     <p><a href="/">Return to frontpage</a></p>
+</div>
 </body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
 </html>

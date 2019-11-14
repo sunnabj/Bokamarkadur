@@ -1,12 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Please log in</title>
+    <title>Need to logged in</title>
 </head>
+
+
 <body>
-<h1>You need to be logged in for this activity!</h1>
+<div layout:fragment="content" class="container">
+    <h1>You need to be logged in for this activity!</h1>
 <p><a href="/login">Log in</a></p>
 <p><a href="/">Return to frontpage</a></p>
+</div>
 </body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
+
 </html>
