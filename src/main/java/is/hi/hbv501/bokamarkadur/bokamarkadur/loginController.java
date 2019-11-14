@@ -18,10 +18,7 @@ import javax.validation.Valid;
 public class loginController {
 
     /*
-     * The login functionality is still in progress. The basic login functions have just been
-     * implemented, all connected functions, such as only letting logged in users add books,
-     * showing which user added a particular book, and letting users update their information
-     * for others to view.
+     * Handles the login and logout functions of the system.
      */
 
     private LoginService loginService;
@@ -87,7 +84,6 @@ public class loginController {
     public String loggedinGET(HttpSession session, Model model){
         model.addAttribute("books",bookService.findAll());
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        System.out.println("Loggaður inn info: " + sessionUser.info);
         if(sessionUser  != null){
             model.addAttribute("loggedinuser", sessionUser);
             return "loggedInUser";

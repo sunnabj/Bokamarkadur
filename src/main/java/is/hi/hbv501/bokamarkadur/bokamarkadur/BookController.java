@@ -173,6 +173,4 @@ public class BookController {
         model.addAttribute("Books", subjectbooks);
         return "subject-results";
     }
-
-
 }

@@ -23,6 +23,4 @@ public interface BookService {
     List<Book> findByStatus(String status);
     List<Book> findByUser(User user);
     List<Book> findBySubjects(Subjects subject);
-
-
 }

@@ -21,6 +21,7 @@ public class Book {
     private Integer edition;
     private String condition;
     private Integer price;
+    private String image;
     private String status;
     private String image;
 
@@ -63,6 +64,7 @@ public class Book {
     }
 
     public String getImage() { return image; }
+
     public String getStatus() { return status; }
 
     public User getUser() { return user; }
@@ -92,6 +94,8 @@ public class Book {
     public void setPrice(Integer price) {
         this.price = price;
     }
+    public void setImage(String image) { this.image = image; }
+
     public void setImage(String image) { this.image = image; }
 
     public void setStatus(String status) { this.status = status; }

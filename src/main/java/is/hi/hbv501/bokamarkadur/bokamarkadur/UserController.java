@@ -28,8 +28,6 @@ public class UserController {
 
     /*
     // Some functions to be added later on.
-    + viewProfilePage(id : long, model : Model) : String
-    + addUserInfo(user : User, result : BindingResult, model : Model)
     + deleteUser(id : long, model : Model) : String
      */
 
@@ -84,8 +82,10 @@ public class UserController {
         return "user-info";
     }
 
-
-
+    /*
+     * Returns a form where the logged in user can update his profile
+     * information.
+     */
     @RequestMapping(value="/updateUserInfo", method = RequestMethod.GET)
     public String userInfoForm(User user, HttpSession session) {
         if ((User) session.getAttribute("LoggedInUser") == null) {
@@ -95,7 +95,7 @@ public class UserController {
     }
 
     /*
-     * Hvernig á að græja þetta???
+     * Updates information about the current logged in user.
      */
     @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
     public String updateUserInfo(@Valid User user, BindingResult result, Model model, HttpSession session) {
