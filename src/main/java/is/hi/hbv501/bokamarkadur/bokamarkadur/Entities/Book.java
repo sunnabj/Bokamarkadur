@@ -1,7 +1,6 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
-import java.util.Set;
 
 @Entity
 public class Book {

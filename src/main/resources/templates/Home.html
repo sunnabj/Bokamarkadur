@@ -1,23 +1,214 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}">
 <head>
-    <meta charset="UTF-8">
     <title>Bókamarkaður</title>
-</head>
-<body>
-    <h1>Bókamarkaður - Book exchange market for students</h1>
-    <div class="logo">
-        <a href="/" title="">
-            <img src="https://notendur.hi.is/hvp5/72917091_543975626431144_2524971519101108224_n.png" alt="Logo" width="296" height="141.5"/>
-        </a>
-    </div>
+    <style>
+        div {box-sizing: border-box;}
 
-    <p><a href="/all-books">View all books</a></p>
+        .image {
+            width: 100%;
+            height: auto;
+        }
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            background: rgb(0, 0, 0);
+            background: rgba(0, 0, 0, 0.5); /* Black see-through */
+            color: #f1f1f1;
+            width: 100%;
+            transition: .5s ease;
+            opacity:0;
+            color: white;
+            font-size: 20px;
+            padding: 20px;
+            text-align: center;
+        }
+        .container:hover .overlay {
+            opacity: 1;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+        }
+
+        .flip__cards__front {
+            position: relative;
+            transition: transform 0.3s;
+            transform-style: preserve-3d;
+            margin-left: 20px;
+        }
+
+        .fronts {
+            backface-visibility: hidden;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .fronts.back {
+            position: absolute;
+            top: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            flex-direction: column;
+            transform: scale3d(-1, 1, -1);
+            text-align: center;
+        }
+
+
+        .staff-container {
+            margin-left: -20px;
+        }
+
+        .image {
+            max-width: 100%;
+        }
+
+        .gridstaff__col:hover .flip__cards__front {
+            transform: scale3d(-1, 1, -1);
+        }
+
+        .person-name {
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        .person-description {
+            font-size: 21px;
+            margin-left: 36px;
+            margin-right: 36px;
+        }
+    </style>
+</head>
+
+
+<body>
+<div layout:fragment="content" class="container">
+    <h1>Bókamarkaður - Book exchange market for students</h1>
+
+    <div class="jumbotron">
+    <!--<p><a href="/all-books">View all books</a></p>
     <p><a href="/newbook">Add a new book</a></p>
     <p><a href="/login">Login</a></p>
     <p><a href="/newAccount">Create a new account</a></p>
     <p><a href="/search">Search for a book</a></p>
-    <p><a href="/users">View all users</a></p>
+    <p><a href="/users">View all users</a></p>-->
+
+
+        <!-- Container (About Section) -->
+        <div id="about" class="container-fluid">
+            <div class="row">
+                <div class="col-sm-8">
+                    <h2>About Project</h2><br>
+                    <h4>Yes ... here is all about us ... but i will let our teacher Sunna and miss university Þórdís to write something here, because am not good !</h4><br>
+                    <p>About this project is all about something else so please write something in here :D</p>
+                    <br><button class="btn btn-default btn-lg">Yes this button will redirect to something else but im dont know where it will go</button>
+                </div>
+                <div class="col-sm-4">
+                    <span><img src="https://notendur.hi.is/hvp5/72917091_543975626431144_2524971519101108224_n.png" alt="Logo" width="306" height="151.5"/></span>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+        <div class="container-fluid bg-grey">
+            <div class="row">
+                <div class="col-sm-4">
+                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="Logo" width="250" height="250" class="image"/></span>
+                    <div class="overlay">My Name is Sunna</div>
+                </div>
+                <div class="col-sm-8">
+                    <h2>Our Team Member - Ladies first -,-</h2><br>
+                    <h4><strong>Sunna sensei:</strong> Yes it her info so just let she write about it.</h4><br>
+                    <p><strong>VISION:</strong>To become fyrst Elon musk version in icelandic women. Don't forget to help person write this xD, cause he poor. </p>
+                </div>
+                <br>
+                <div class="col-sm-8">
+                    <h4><strong>Ungfrú Þórdís</strong> Yes it her info so just let she write about it.</h4><br>
+                    <p><strong>VISION:</strong>To able control ADA. Don't forget to help person write this xD, cause he poor. </p>
+                </div>
+                <div class="col-sm-4">
+                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/10655432_10152293863361105_1854029716845306074_o.jpg?_nc_cat=101&_nc_oc=AQn5HOEewPd-rWNACf6NHBVuZwYzTQqQumRHMppDcOEauSeXPdHA221cn4Hi4GjL7Ig&_nc_ht=scontent.frkv3-1.fna&oh=83481d5711b71f30a8519ecc7a124951&oe=5E4B504C" alt="Logo" width="250" height="250" class="image"/></span>
+                    <div class="overlay">My Name is Þórdís</div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <div class="col-sm-4">
+                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/737455_4559758749621_1229454040_o.jpg?_nc_cat=110&_nc_oc=AQlQfFRZrLTYY9i3GdsdDtyDV3Gb_bf9UW8w9ujRgcmK0e7xbQ1pvScOEncJz_lxtZE&_nc_ht=scontent.frkv3-1.fna&oh=5a1218fd91afe99b8f5d90e9c87e5d7c&oe=5E4E4452" alt="Logo" width="250" height="250" class="image"/></span>
+                    <div class="overlay">My Name is Baldvin</div>
+                </div>
+                <div class="col-sm-8">
+                    <h2>Why menn alway second ? -,-</h2><br>
+                    <h4><strong>Baldvin:</strong> Yes it his info so just let him write about it.</h4><br>
+                    <p><strong>VISION:</strong>To become billionaire. Don't forget to help person write this xD, cause he poor. </p>
+                </div>
+                <br>
+                <div class="col-sm-8">
+                    <h4><strong>Hieu:</strong> Well im just normal person like you who read this.</h4><br>
+                    <p><strong>VISION:</strong>Do something simple to help YOU who read this.</p>
+                </div>
+                <div class="col-sm-4">
+                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/12311049_10153215981705849_7761966582152182792_n.jpg?_nc_cat=107&_nc_oc=AQnsVvTyOe-4I7DEL8vcWHNgD_Kpqx86Sup051vwK4pM4LWmKyq10H8FYAkopqAiZB8&_nc_ht=scontent.frkv3-1.fna&oh=9f313d2a783b578b5f3a8322de6b292f&oe=5E546F17" alt="Logo" width="250" height="250" class="image"/></span>
+                    <div class="overlay">My Name is Hieu</div>
+                </div>
+            </div>
+        </div>
+
+        <main class="main">
+            <div class="gridstaff">
+                <div class="staff-container">
+                    <div class="gridstaff__row">
+                        <div class="gridstaff__col">
+                            <div class="flip__cards__front">
+                                <div class="fronts"><img class="image" src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="Avatar"></div>
+                                <div class="back fronts">
+                                    <h2 class="person-name">Karólína Pálsdóttir</h2>
+                                    <p class="person-description">Karólína er forstjóri Vöruhússins.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gridstaff__col">
+                            <div class="flip__cards__front">
+                                <div class="fronts"><img class="image" src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/10655432_10152293863361105_1854029716845306074_o.jpg?_nc_cat=101&_nc_oc=AQn5HOEewPd-rWNACf6NHBVuZwYzTQqQumRHMppDcOEauSeXPdHA221cn4Hi4GjL7Ig&_nc_ht=scontent.frkv3-1.fna&oh=83481d5711b71f30a8519ecc7a124951&oe=5E4B504C" alt="Avatar"></div>
+                                <div class="back fronts">
+                                    <h2 class="person-name">Tómas Jónsson</h2>
+                                    <p class="person-description">Tómas sér um að koma vörunum til þín. Hratt og örugglega.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="gridstaff__row">
+                        <div class="gridstaff__col">
+                            <div class="flip__cards__front">
+                                <div class="fronts"><img class="image" src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/737455_4559758749621_1229454040_o.jpg?_nc_cat=110&_nc_oc=AQlQfFRZrLTYY9i3GdsdDtyDV3Gb_bf9UW8w9ujRgcmK0e7xbQ1pvScOEncJz_lxtZE&_nc_ht=scontent.frkv3-1.fna&oh=5a1218fd91afe99b8f5d90e9c87e5d7c&oe=5E4E4452" alt="Avatar"></div>
+                                <div class="back fronts">
+                                    <h2 class="person-name">Anna Atladóttir</h2>
+                                    <p class="person-description">Anna er forritari hjá Vöruhúsinu. Ef eitthvað er að, lagar Anna það.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gridstaff__col">
+                            <div class="flip__cards__front">
+                                <div class="fronts"><img class="image" src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/12311049_10153215981705849_7761966582152182792_n.jpg?_nc_cat=107&_nc_oc=AQnsVvTyOe-4I7DEL8vcWHNgD_Kpqx86Sup051vwK4pM4LWmKyq10H8FYAkopqAiZB8&_nc_ht=scontent.frkv3-1.fna&oh=9f313d2a783b578b5f3a8322de6b292f&oe=5E546F17" alt="Avatar"></div>
+                                <div class="back fronts center">
+                                    <h2 class="person-name">Jón Guðmundsson</h2>
+                                    <p class="person-description">Jón sér um peningana. Gefðu Jóni peninga með því að kaupa eitthvað
+                                        klikkað hjá Vöruhúsinu.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
     <p><a href="/updateUserInfo">Update your profile information</a></p>
     <p><a href="/logout">Logout</a></p>
 
@@ -198,22 +389,10 @@
     </ul>
     </li>
 
+-->
+
+    </div>
 </div>
 </body>
-
--->
-<footer>
-    <div class="footer-col col-md-3 col-sm-12 contact">
-        <div class="footer-col-inner">
-            <h3 class="title">Contact</h3>
-            <div class="row">
-                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
-                <p></i><a href="hafasamband">Contact Us</a></p>
-            </div>
-        </div>
-    </div>
-    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
-</footer>
-
 
 </html>

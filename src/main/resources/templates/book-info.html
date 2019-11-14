@@ -1,11 +1,14 @@
-<!DOCTYPE html>
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Book Information</title>
 </head>
+
+
 <body>
-    <h2>Book Information</h2>
+<div layout:fragment="content" class="container">
+<h2>Book Information</h2>
     <div>
         <label><b>Title</b></label>
         <label><td th:text="${book.title}"></td></label>
@@ -41,5 +44,7 @@
 
     <p><a href="/">Return to frontpage</a></p>
 
+    </div>
 </body>
+
 </html>

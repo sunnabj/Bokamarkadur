@@ -1,13 +1,30 @@
-<!DOCTYPE html>
-<!--Skoðar núveranda notanda í http-inu-->
-<!--Hægt að nota - var í stoðtíma-->
-<html xmlns:th="https://thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Logged In User</title>
 </head>
+
+
 <body>
+<div layout:fragment="content" class="container">
+
 <p th:text="${loggedinuser.username}"></p>
 
+</div>
 </body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
+
 </html>
