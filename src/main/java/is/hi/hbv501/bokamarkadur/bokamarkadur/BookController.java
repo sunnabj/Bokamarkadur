@@ -12,14 +12,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.Valid;
-import java.util.List;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 
 @Controller
 public class BookController {
+
+    private static String UPLOADED_FOLDER = "/src/main/resources/static/";
 
     private BookService bookService;
     private UserService userService;
@@ -80,10 +89,37 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
-    public String addBookForSale(@Valid Book book, BindingResult result, Model model, HttpSession session) {
+    public String addBookForSale(@Valid Book book, BindingResult result, Model model, HttpSession session,
+                                 @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         if(result.hasErrors()) {
             return "sell-book";
         }
+        String currentDirectory = System.getProperty("user.dir");
+
+        try {
+
+            System.out.println("The current working directory is " + currentDirectory);
+            String current = new java.io.File( "." ).getCanonicalPath();
+            System.out.println("The current working directory is " + current);
+        } catch (IOException iex) {}
+
+        if (file.isEmpty()) {
+            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+            return "redirect:uploadStatus";
+        } try {
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(currentDirectory + UPLOADED_FOLDER + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+            redirectAttributes.addFlashAttribute("message",
+                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("UPLOADED_FOLDLER: " + UPLOADED_FOLDER + ", file: " + file.getOriginalFilename());
+        book.setImage(file.getOriginalFilename());
         book.setStatus("For sale");
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());

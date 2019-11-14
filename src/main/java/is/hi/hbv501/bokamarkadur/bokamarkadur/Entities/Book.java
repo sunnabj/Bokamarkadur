@@ -22,6 +22,7 @@ public class Book {
     private String condition;
     private Integer price;
     private String status;
+    private String image;
 
     // Many books can belong to each user.
     @ManyToOne(targetEntity=User.class)//(cascade=CascadeType.PERSIST)
@@ -61,6 +62,7 @@ public class Book {
         return price;
     }
 
+    public String getImage() { return image; }
     public String getStatus() { return status; }
 
     public User getUser() { return user; }
@@ -90,13 +92,14 @@ public class Book {
     public void setPrice(Integer price) {
         this.price = price;
     }
+    public void setImage(String image) { this.image = image; }
 
     public void setStatus(String status) { this.status = status; }
 
     public void setUser(User user) { this.user = user; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Subjects subjects, Integer price, String status, User user) {
+                Subjects subjects, Integer price, String image, String status, User user) {
 
         this.id = id;
         this.title = title;
@@ -105,6 +108,7 @@ public class Book {
         this.condition = condition;
         this.subjects = subjects;
         this.price = price;
+        this.image = image;
         this.status = status;
         this.user = user;
     }
