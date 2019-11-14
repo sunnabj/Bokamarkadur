@@ -13,6 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
+import sun.reflect.generics.visitor.Reifier;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -45,6 +46,7 @@ public class BokamarkadurApplication {
 			REI502M.setSubjects(Subjects.COMPUTERSCIENCE);
 			REI502M.setPrice(12995);
 			REI502M.setStatus("For sale");
+			REI502M.setImage("2016-data-mining.jpg");
 			bookRepository.save(REI502M);
 
 			Book REI502M_2 = new Book();
@@ -54,6 +56,7 @@ public class BokamarkadurApplication {
 			REI502M_2.setSubjects(Subjects.COMPUTERSCIENCE);
 			REI502M_2.setPrice(9995);
 			REI502M_2.setStatus("For sale");
+			REI502M_2.setImage("DataMining.jpg");
 			bookRepository.save(REI502M_2);
 
 			Book TÖL101G = new Book();
@@ -64,6 +67,7 @@ public class BokamarkadurApplication {
 			TÖL101G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TÖL101G.setPrice(14995);
 			TÖL101G.setStatus("For sale");
+			TÖL101G.setImage("cover-java2e.png");
 			bookRepository.save(TÖL101G);
 
 			Book TÖL104G = new Book();
@@ -73,6 +77,7 @@ public class BokamarkadurApplication {
 			TÖL104G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TÖL104G.setPrice(11495);
 			TÖL104G.setStatus("For sale");
+			TÖL104G.setImage("DMA.jpg");
 			bookRepository.save(TÖL104G);
 
 			Book TOL105G = new Book();
@@ -83,6 +88,7 @@ public class BokamarkadurApplication {
 			TOL105G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL105G.setPrice(5995);
 			TOL105G.setStatus("For sale");
+			TOL105G.setImage("python.jpg");
 			bookRepository.save(TOL105G);
 
 			Book TOL303G = new Book();
@@ -93,6 +99,7 @@ public class BokamarkadurApplication {
 			TOL303G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL303G.setPrice(11995);
 			TOL303G.setStatus("For sale");
+			TOL303G.setImage("firstCourse.jpg");
 			bookRepository.save(TOL303G);
 
 			Book TOL304G = new Book();
@@ -103,6 +110,7 @@ public class BokamarkadurApplication {
 			TOL304G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL304G.setPrice(10395);
 			TOL304G.setStatus("For sale");
+			TOL304G.setImage("programming languages.jpg");
 			bookRepository.save(TOL304G);
 
 			Book TOL305G = new Book();
