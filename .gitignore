@@ -32,3 +32,6 @@ build/
 
 ### Properties ###
 application.properties
+
+src/public/uploads/*
+!src/public/uploads/.gitkeep

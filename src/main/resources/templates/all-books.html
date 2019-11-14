@@ -17,6 +17,7 @@
         <table class="table  table-hover">
             <thead>
             <tr>
+                <th>Image</th>
                 <th>Title</th>
                 <th>Author</th>
                 <th>Edition</th>
@@ -31,6 +32,7 @@
             </thead>
             <tbody>
             <tr th:each="book : ${books}">
+                <td><img th:src="${book.image}"/></td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.edition}"></td>
@@ -50,7 +52,7 @@
 </div>
 <p><a href="../">Return to frontpage</a></p>
 <p><a href="/newbook">Add a new book</a></p>
-<p><a href="/loginform">Login</a></p>
+<p><a href="/login">Login</a></p>
 <p><a href="/newAccount">Create a new account</a></p>
 <p><a href="/search">Search for a book</a></p>
 
