@@ -6,6 +6,19 @@
     <style>
         div {box-sizing: border-box;}
 
+        .row__members {
+            display: flex;
+            flex-direction: column;
+        }
+        .col__member {
+            display: flex;
+            flex-direction: row;
+        }
+        .row__about {
+            display:flex;
+            flex-direction: row;
+        }
+
         .image {
             width: 100%;
             height: auto;
@@ -92,7 +105,7 @@
 <div layout:fragment="content" class="container">
     <h1>Bókamarkaður - Book exchange market for students</h1>
 
-    <h3>Newly added</h3>
+    <h3>Recently added</h3>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -110,6 +123,9 @@
         </tbody>
     </table>
 
+    <p><a href="/updateUserInfo">Update your profile information</a></p>
+    <p><a href="/logout">Logout</a></p>
+
 
     <div class="jumbotron">
     <!--<p><a href="/all-books">View all books</a></p>
@@ -122,7 +138,7 @@
 
         <!-- Container (About Section) -->
         <div id="about" class="container-fluid">
-            <div class="row">
+            <div class="row__about">
                 <div class="col-sm-8">
                     <h2>About Project</h2><br>
                     <h4>Yes ... here is all about us ... but i will let our teacher Sunna and miss university Þórdís to write something here, because am not good !</h4><br>
@@ -138,46 +154,56 @@
         <br>
         <br>
         <div class="container-fluid bg-grey">
-            <div class="row">
-                <div class="col-sm-4">
-                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="Logo" width="250" height="250" class="image"/></span>
-                    <div class="overlay">My Name is Sunna</div>
-                </div>
-                <div class="col-sm-8">
-                    <h2>Our Team Member - Ladies first -,-</h2><br>
-                    <h4><strong>Sunna sensei:</strong> Yes it her info so just let she write about it.</h4><br>
-                    <p><strong>VISION:</strong>To become fyrst Elon musk version in icelandic women. Don't forget to help person write this xD, cause he poor. </p>
-                </div>
-                <br>
-                <div class="col-sm-8">
-                    <h4><strong>Ungfrú Þórdís</strong> Yes it her info so just let she write about it.</h4><br>
-                    <p><strong>VISION:</strong>To able control ADA. Don't forget to help person write this xD, cause he poor. </p>
-                </div>
-                <div class="col-sm-4">
-                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/10655432_10152293863361105_1854029716845306074_o.jpg?_nc_cat=101&_nc_oc=AQn5HOEewPd-rWNACf6NHBVuZwYzTQqQumRHMppDcOEauSeXPdHA221cn4Hi4GjL7Ig&_nc_ht=scontent.frkv3-1.fna&oh=83481d5711b71f30a8519ecc7a124951&oe=5E4B504C" alt="Logo" width="250" height="250" class="image"/></span>
-                    <div class="overlay">My Name is Þórdís</div>
+            <div class="row__members">
+                <h2>Our Team Member - Ladies first -,-</h2><br>
+                <div class="col__member">
+                    <div class="col-sm-4">
+                        <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="Logo" width="250" height="250" class="image"/></span>
+                        <div class="overlay">My Name is Sunna</div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h4><strong>Sunna sensei:</strong> Yes it her info so just let she write about it.</h4><br>
+                        <p><strong>VISION:</strong>To become fyrst Elon musk version in icelandic women. Don't forget to help person write this xD, cause he poor. </p>
+                    </div>
                 </div>
                 <br>
                 <br>
+                <div class="col__member">
+                    <div class="col-sm-8">
+                        <h4><strong>Ungfrú Þórdís</strong> Yes it her info so just let she write about it.</h4><br>
+                        <p><strong>VISION:</strong>To able control ADA. Don't forget to help person write this xD, cause he poor. </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/10655432_10152293863361105_1854029716845306074_o.jpg?_nc_cat=101&_nc_oc=AQn5HOEewPd-rWNACf6NHBVuZwYzTQqQumRHMppDcOEauSeXPdHA221cn4Hi4GjL7Ig&_nc_ht=scontent.frkv3-1.fna&oh=83481d5711b71f30a8519ecc7a124951&oe=5E4B504C" alt="Logo" width="250" height="250" class="image"/></span>
+                        <div class="overlay">My Name is Þórdís</div>
+                    </div>
+                </div>
                 <br>
-                <div class="col-sm-4">
-                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/737455_4559758749621_1229454040_o.jpg?_nc_cat=110&_nc_oc=AQlQfFRZrLTYY9i3GdsdDtyDV3Gb_bf9UW8w9ujRgcmK0e7xbQ1pvScOEncJz_lxtZE&_nc_ht=scontent.frkv3-1.fna&oh=5a1218fd91afe99b8f5d90e9c87e5d7c&oe=5E4E4452" alt="Logo" width="250" height="250" class="image"/></span>
-                    <div class="overlay">My Name is Baldvin</div>
-                </div>
-                <div class="col-sm-8">
-                    <h2>Why menn alway second ? -,-</h2><br>
-                    <h4><strong>Baldvin:</strong> Yes it his info so just let him write about it.</h4><br>
-                    <p><strong>VISION:</strong>To become billionaire. Don't forget to help person write this xD, cause he poor. </p>
+                <br>
+                <h2>Why menn alway second ? -,-</h2><br>
+                <div class="col__member">
+                    <div class="col-sm-4">
+                        <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/737455_4559758749621_1229454040_o.jpg?_nc_cat=110&_nc_oc=AQlQfFRZrLTYY9i3GdsdDtyDV3Gb_bf9UW8w9ujRgcmK0e7xbQ1pvScOEncJz_lxtZE&_nc_ht=scontent.frkv3-1.fna&oh=5a1218fd91afe99b8f5d90e9c87e5d7c&oe=5E4E4452" alt="Logo" width="250" height="250" class="image"/></span>
+                        <div class="overlay">My Name is Baldvin</div>
+                    </div>
+                    <div class="col-sm-8">
+                        <h4><strong>Baldvin:</strong> Yes it his info so just let him write about it.</h4><br>
+                        <p><strong>VISION:</strong>To become billionaire. Don't forget to help person write this xD, cause he poor. </p>
+                    </div>
                 </div>
                 <br>
-                <div class="col-sm-8">
-                    <h4><strong>Hieu:</strong> Well im just normal person like you who read this.</h4><br>
-                    <p><strong>VISION:</strong>Do something simple to help YOU who read this.</p>
+                <br>
+                <div class="col__member">
+                    <div class="col-sm-8">
+                        <h4><strong>Hieu:</strong> Well im just normal person like you who read this.</h4><br>
+                        <p><strong>VISION:</strong>Do something simple to help YOU who read this.</p>
+                    </div>
+                    <div class="col-sm-4">
+                        <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/12311049_10153215981705849_7761966582152182792_n.jpg?_nc_cat=107&_nc_oc=AQnsVvTyOe-4I7DEL8vcWHNgD_Kpqx86Sup051vwK4pM4LWmKyq10H8FYAkopqAiZB8&_nc_ht=scontent.frkv3-1.fna&oh=9f313d2a783b578b5f3a8322de6b292f&oe=5E546F17" alt="Logo" width="250" height="250" class="image"/></span>
+                        <div class="overlay">My Name is Hieu</div>
+                    </div>
                 </div>
-                <div class="col-sm-4">
-                    <span><img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/12311049_10153215981705849_7761966582152182792_n.jpg?_nc_cat=107&_nc_oc=AQnsVvTyOe-4I7DEL8vcWHNgD_Kpqx86Sup051vwK4pM4LWmKyq10H8FYAkopqAiZB8&_nc_ht=scontent.frkv3-1.fna&oh=9f313d2a783b578b5f3a8322de6b292f&oe=5E546F17" alt="Logo" width="250" height="250" class="image"/></span>
-                    <div class="overlay">My Name is Hieu</div>
-                </div>
+
             </div>
         </div>
 
@@ -228,189 +254,7 @@
                     </div>
                 </div>
             </div>
-
-    <p><a href="/updateUserInfo">Update your profile information</a></p>
-    <p><a href="/logout">Logout</a></p>
-
-    <!-- Search dæmi er komið annars staðar
-    <label for="site-search">Leita bok</label>
-    <input type="search" id="site-search" name="q"
-           placeholder="Sla' bokin...">
-    <button>Leit</button>
-
-
-    <div class="cart-items"> <p class="center">Karfa er tomt</p> </div>
-    -->
-
-
-    <!-- Login og new account er líka komið annars staðar
-    <form>
-    <a>Innskrar</a>
-
-        <div class="container">
-            <label>><b>Notendanafn</b></label>
-            <input type="text" placeholder="Sla' Notendanafn" name="uname" required>
-
-            <label><b>Lykilord</b></label>
-            <input type="password" placeholder="Sla' Lykilord" name="psw" required>
-
-            <button type="submit">Innskrar</button>
-            <label>
-                <input type="checkbox" uncheck="uncheck" name="remember"> Munna eftir mig
-            </label>
-        </div>
-
-        <div class="container">
-            <button type="button" class="cancelbtn">Haetta vid</button>
-            <span class="psw">Gleyma <a href="#">lykilord?</a></span>
-        </div>
-    </form>
-    <a href="/newAccount">Nyr Adgang</a>
-
-    -->
-<!--
-    <span>Allar flokkar</span>
-    <a class="dropdown-toggle" ></a>
-    <li class="level-0">
-        <a  title="Háskóla Ísland" class="strong" href="Flokka 1">Háskóla Ísland </a>
-    <ul>
-            <li><a href="Flokka 2">Akademísk enska </a></li>
-            <li><a href="Flokka 2">Almenn bókmenntafræði </a></li>
-            <li><a href="Flokka 2">Almenn málvísindi </a></li>
-            <li><a href="Flokka 2">Alþjóðlegt nám í menntunarfræði </a></li>
-            <li><a href="Flokka 2">Alþjóðlegt nám í menntunarfræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Austur-Asíufræði </a></li>
-            <li><a href="Flokka 2">Danska </a></li>
-            <li><a href="Flokka 2">Danska - diplóma </a></li>
-            <li><a href="Flokka 2">Djáknanám </a></li>
-            <li><a href="Flokka 2">Djáknanám, viðbótardiplóma </a></li>
-            <li><a href="Flokka 2">Eðlisfræði </a></li>
-            <li><a href="Flokka 2">Efnafræði </a></li>
-            <li><a href="Flokka 2">Efnaverkfræði </a></li>
-            <li><a href="Flokka 2">Enska </a></li>
-            <li><a href="Flokka 2">Ferðamálafræði </a></li>
-            <li><a href="Flokka 2">Félagsfræði </a></li>
-            <li><a href="Flokka 2">Félagsráðgjöf </a></li>
-            <li><a href="Flokka 2">Fjölmiðlafræði </a></li>
-            <li><a href="Flokka 2">Fornleifafræði </a></li>
-            <li><a href="Flokka 2">Franska - diplóma </a></li>
-            <li><a href="Flokka 2">Frönsk fræði </a></li>
-            <li><a href="Flokka 2">Geislafræði </a></li>
-            <li><a href="Flokka 2">Gríska </a></li>
-            <li><a href="Flokka 2">Grunnskólakennarafræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á erlend tungumál </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á íslensku </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á list- og verkgreinar </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á náttúrugreinar </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á samfélagsgreinar </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á stærðfræði </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla með áherslu á upplýsingatækni og miðlun </a></li>
-            <li><a href="Flokka 2">Grunnskólakennsla yngri barna </a></li>
-            <li><a href="Flokka 2">Guðfræði </a></li>
-            <li><a href="Flokka 2">Hagfræði </a></li>
-            <li><a href="Flokka 2">Hagnýtt stærðfræði </a></li>
-            <li><a href="Flokka 2">Heilbrigðisgagnafræði </a></li>
-            <li><a href="Flokka 2">Heilsuefling og heimilisfræði </a></li>
-            <li><a href="Flokka 2">Heimspeki </a></li>
-            <li><a href="Flokka 2">Hjúkrunarfræði </a></li>
-            <li><a href="Flokka 2">Hugbúnaðarverkfræði </a></li>
-            <li><a href="Flokka 2">Iðnaðarverkfræði </a></li>
-            <li><a href="Flokka 2">Íslenska </a></li>
-            <li><a href="Flokka 2">Íslenska sem annað mál </a></li>
-            <li><a href="Flokka 2">Ítalska </a></li>
-            <li><a href="Flokka 2">Ítalska - diplóma </a></li>
-            <li><a href="Flokka 2">Íþrótta- og heilsufræði </a></li>
-            <li><a href="Flokka 2">Japanska - diplóma </a></li>
-            <li><a href="Flokka 2">Japanskt mál og menning </a></li>
-            <li><a href="Flokka 2">Jarðeðlisfræði </a></li>
-            <li><a href="Flokka 2">Jarðfræði </a></li>
-            <li><a href="Flokka 2">Kennslufræði iðnmeistara </a></li>
-            <li><a href="Flokka 2">Kennslufræði verk- og starfsmenntunar </a></li>
-            <li><a href="Flokka 2">Kínversk fræði </a></li>
-            <li><a href="Flokka 2">Kínverska - diplóma </a></li>
-            <li><a href="Flokka 2">Klassísk fræði </a></li>
-            <li><a href="Flokka 2">Klassísk mál - diplóma </a></li>
-            <li><a href="Flokka 2">Kvikmyndafræði </a></li>
-            <li><a href="Flokka 2">Kynjafræði, aukagrein </a></li>
-            <li><a href="Flokka 2">Landfræði </a></li>
-            <li><a href="Flokka 2">Latína </a></li>
-            <li><a href="Flokka 2">Leikskólafræði </a></li>
-            <li><a href="Flokka 2">Leikskólakennarafræði </a></li>
-            <li><a href="Flokka 2">Leikskólakennarafræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Listfræði </a></li>
-            <li><a href="Flokka 2">Lífefna- og sameindalíffræði </a></li>
-            <li><a href="Flokka 2">Lífeindafræði </a></li>
-            <li><a href="Flokka 2">Líffræði </a></li>
-            <li><a href="Flokka 2">Líffræðileg mannfræði </a></li>
-            <li><a href="Flokka 2">Lyfjafræði </a></li>
-            <li><a href="Flokka 2">Læknisfræði </a></li>
-            <li><a href="Flokka 2">Lögfræði </a></li>
-            <li><a href="Flokka 2">Mannfræði </a></li>
-            <li><a href="Flokka 2">Matvælafræði </a></li>
-            <li><a href="Flokka 2">Málþroski og læsi, viðbótardiplóma </a></li>
-            <li><a href="Flokka 2">Mið-Austurlandafræði </a></li>
-            <li><a href="Flokka 2">Mið-Austurlandafræði og arabíska - diplóma </a></li>
-            <li><a href="Flokka 2">Miðaldafræði </a></li>
-            <li><a href="Flokka 2">Næringarfræði </a></li>
-            <li><a href="Flokka 2">Rafmagns- og tölvuverkfræði </a></li>
-            <li><a href="Flokka 2">Ritlist, aukagrein </a></li>
-            <li><a href="Flokka 2">Rússneska </a></li>
-            <li><a href="Flokka 2">Rússneska - diplóma </a></li>
-            <li><a href="Flokka 2">Safnafræði </a></li>
-            <li><a href="Flokka 2">Sagnfræði </a></li>
-            <li><a href="Flokka 2">Samfélagstúlkun </a></li>
-            <li><a href="Flokka 2">Sálfræði </a></li>
-            <li><a href="Flokka 2">Sjúkraþjálfunarfræði </a></li>
-            <li><a href="Flokka 2">Skjalfræði </a></li>
-            <li><a href="Flokka 2">Spænska </a></li>
-            <li><a href="Flokka 2">Spænska - diplóma </a></li>
-            <li><a href="Flokka 2">Starfstengt diplómanám fyrir fólk með þroskahömlun </a></li>
-            <li><a href="Flokka 2">Stjórnmálafræði </a></li>
-            <li><a href="Flokka 2">Stærðfræði </a></li>
-            <li><a href="Flokka 2">Stærðfræði og stærðfræðimenntun </a></li>
-            <li><a href="Flokka 2">Sænska - diplóma </a></li>
-            <li><a href="Flokka 2">Talmeinafræði (undirbúningsnám) </a></li>
-            <li><a href="Flokka 2">Tannlæknisfræði </a></li>
-            <li><a href="Flokka 2">Tannsmíði </a></li>
-            <li><a href="Flokka 2">Táknmálsfræði og táknmálstúlkun </a></li>
-            <li><a href="Flokka 2">Tómstunda- og félagsmálafræði </a></li>
-            <li><a href="Flokka 2">Tómstunda- og félagsmálafræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Tæknifræði </a></li>
-            <li><a href="Flokka 2">Tölvunarfræði </a></li>
-            <li><a href="Flokka 2">Umhverfis- og byggingarverkfræði </a></li>
-            <li><a href="Flokka 2">Uppeldis- og menntunarfræði </a></li>
-            <li><a href="Flokka 2">Uppeldis- og menntunarfræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Verkfræðileg eðlisfræði </a></li>
-            <li><a href="Flokka 2">Vélaverkfræði </a></li>
-            <li><a href="Flokka 2">Viðskiptafræði </a></li>
-            <li><a href="Flokka 2">Þjóðfræði </a></li>
-            <li><a href="Flokka 2">Þroskaþjálfafræði </a></li>
-            <li><a href="Flokka 2">Þroskaþjálfafræði - aukagrein </a></li>
-            <li><a href="Flokka 2">Þýðingafræði, aukagrein </a></li>
-            <li><a href="Flokka 2">Þýska </a></li>
-            <li><a href="Flokka 2">Þýska - diplóma </a></li>
-    </ul>
-    </li>
-    <li>
-        <a  title="Háskóla Reykjavík" class="strong" href="Flokka 1">Háskóla Reykjavík </a>
-    <ul>
-            <li><a href="Flokka 2">Byggingafræði </a></li>
-            <li><a href="Flokka 2">Haftengd nýsköpun </a></li>
-            <li><a href="Flokka 2">Hagfræði </a></li>
-            <li><a href="Flokka 2">Iðnfræði </a></li>
-            <li><a href="Flokka 2">Íþróttafræði </a></li>
-            <li><a href="Flokka 2">Lögfræði </a></li>
-            <li><a href="Flokka 2">Sálfræði </a></li>
-            <li><a href="Flokka 2">Tæknifræði </a></li>
-            <li><a href="Flokka 2">Tölvunarfræði </a></li>
-            <li><a href="Flokka 2">Tölvunarstærðfræði </a></li>
-            <li><a href="Flokka 2">Verkfræði </a></li>
-            <li><a href="Flokka 2">Viðskiptafræði </a></li>
-    </ul>
-    </li>
-
--->
-
+        </main>
     </div>
 </div>
 </body>
