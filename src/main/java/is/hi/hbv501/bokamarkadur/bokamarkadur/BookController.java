@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +31,8 @@ public class BookController {
 
     private static String uploadedFolder = "/src/main/resources/static/";
     private static String currentDirectory = System.getProperty("user.dir");
+
+    private static Date date = new Date();
 
     private BookService bookService;
     private UserService userService;
@@ -107,6 +110,8 @@ public class BookController {
         }
         book.setImage(file.getOriginalFilename());
         book.setStatus("For sale");
+        book.setDate(date);
+        System.out.println("date: " + date);
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());
         book.setUser(current);

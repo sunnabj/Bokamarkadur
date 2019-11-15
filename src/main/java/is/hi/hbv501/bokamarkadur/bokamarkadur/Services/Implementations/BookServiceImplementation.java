@@ -7,8 +7,11 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.domain.Specification;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -90,6 +93,11 @@ public class BookServiceImplementation implements BookService {
     @Override
     public List<Book> findByAuthor(String author, String status) {
         return repository.findAll(hasAuthorAndStatus(author, status));
+    }
+
+    @Override
+    public List<Book> findNewestBooks() {
+        return repository.findNewestBooks();
     }
 
     // Currently not being used.

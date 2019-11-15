@@ -1,5 +1,6 @@
 <!DOCTYPE HTML>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/main_layout}"
+      xmlns:th="http://www.w3.org/1999/xhtml" th="https://thymeleaf.org">
 <head>
     <title>Bókamarkaður</title>
     <style>
@@ -90,6 +91,25 @@
 <body>
 <div layout:fragment="content" class="container">
     <h1>Bókamarkaður - Book exchange market for students</h1>
+
+    <h3>Newly added</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.title}"></td>
+            <td th:text="${book.author}"></td>
+            <td th:text="${book.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+
 
     <div class="jumbotron">
     <!--<p><a href="/all-books">View all books</a></p>

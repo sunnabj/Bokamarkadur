@@ -1,6 +1,7 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Book {
@@ -23,6 +24,7 @@ public class Book {
     private Integer price;
     private String image;
     private String status;
+    private Date date;
 
     // Many books can belong to each user.
     @ManyToOne(targetEntity=User.class)//(cascade=CascadeType.PERSIST)
@@ -66,6 +68,8 @@ public class Book {
 
     public String getStatus() { return status; }
 
+    public Date getDate() { return date; }
+
     public User getUser() { return user; }
 
     public void setId(long id) {
@@ -98,10 +102,12 @@ public class Book {
 
     public void setStatus(String status) { this.status = status; }
 
+    public void setDate(Date date) { this.date = date; }
+
     public void setUser(User user) { this.user = user; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Subjects subjects, Integer price, String image, String status, User user) {
+                Subjects subjects, Integer price, String image, String status, Date date, User user) {
 
         this.id = id;
         this.title = title;
@@ -112,6 +118,7 @@ public class Book {
         this.price = price;
         this.image = image;
         this.status = status;
+        this.date = date;
         this.user = user;
     }
 
