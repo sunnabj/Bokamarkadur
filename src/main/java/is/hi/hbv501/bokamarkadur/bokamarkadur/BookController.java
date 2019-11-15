@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -87,6 +86,15 @@ public class BookController {
         }
         return "add-book";
     }
+
+    /*
+     * Returns a page of about development.
+     */
+    @RequestMapping(value="/aboutus", method = RequestMethod.GET)
+    public String aboutus() {
+        return "about-us";
+    }
+
 
     /*
      * A form to insert information about a book a user wants to put up for sale.

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <title>User</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-size: 1.3rem;
+            font-family: 'Oswald', sans-serif;
+            background: #f9f9f9;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 2rem;
+        }
+
+        .main-header {
+            height: 55vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .main-header h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .main-header h1 span {
+            color: #b50d10;
+        }
+
+        .main-header p {
+            font-size: 2rem;
+        }
+
+        .card {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 2rem;
+            background: #f1f1f1;
+            margin-bottom: 2rem;
+        }
+        .card h3 {
+            margin-bottom: 2rem;
+        }
+
+        .card img {
+            height: 400px;
+        }
+
+        .card > div {
+            padding: 2rem;
+        }
+
+        .card:nth-child(even) img {
+            order: 2;
+        }
+
+        .buttoncss{
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            padding: 0.8rem 1.8rem;
+            margin-top: 2rem;
+            cursor: pointer;
+        }
+
+        .buttoncss:hover {
+            opacity: 0.8;
+        }
+        @media(max-width:900px) {
+            .card {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div layout:fragment="content">
+        <header class="main-header">
+            <h1><span>About Project</span> Gallery</h1>
+            <p>
+                Yes ... here is all about us ... but i will let our teacher Sunna and miss university Þórdís to write something here, because am not good !
+            </p>
+        </header>
+
+        <main class="container">
+            <section class="card">
+                <img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="" />
+                <div>
+                    <h3>Sunna sensei:</h3>
+                    <p>
+                        Reason why i've called sensei ? cuz im smart badass !!! BEMM
+                        VISION:To become fyrst Elon musk version in icelandic women. Don't forget to help person write this xD, cause he poor.
+                    </p>
+                    <a href="https://www.facebook.com/sunnazool" class="buttoncss">Contact me / CALL ME</a>
+                </div>
+            </section>
+
+            <section class="card" data-aos="fade-left">
+                <img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/p960x960/10655432_10152293863361105_1854029716845306074_o.jpg?_nc_cat=101&_nc_oc=AQn_FftK-_50bNyQSC9xodKHZzWi3U8JQxX4sBPU6HaMOXS6va6SjhTpZpftst1wP9g&_nc_ht=scontent.frkv3-1.fna&oh=4feefb3f75fc0120ecf3e003645a0ca3&oe=5E5A9E8C" alt="" />
+                <div>
+                    <h3>Ungfrú Þórdís</h3>
+                    <p>
+                        VISION:To able control ADA. Don't forget to help person write this xD, cause he poor.
+                    </p>
+                    <a href="https://www.facebook.com/thordisp" class="buttoncss">Contace me please</a>
+                </div>
+            </section>
+
+            <section class="card" data-aos="fade-right">
+                <img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t31.0-8/737455_4559758749621_1229454040_o.jpg?_nc_cat=110&_nc_oc=AQkeDZcxMcJ-9YCrXGsvL5aGVgMANI0W7RUdXNdz92CVEntxrPv44RV_W15xItatTUY&_nc_ht=scontent.frkv3-1.fna&oh=76581130de0e47b3323c2dda4ae2117f&oe=5E4E4452" alt="" />
+                <div>
+                    <h3>Baldvin Blær Oddsson</h3>
+                    <p>
+                        VISION:To become billionaire. Don't forget to help person write this xD, cause he poor.
+                    </p>
+                    <a href="https://www.facebook.com/baldvinbo" class="buttoncss">Contact me</a>
+                </div>
+            </section>
+
+            <section class="card" data-aos="fade-left">
+                <img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.15752-9/69755472_340283646905211_4735021965746634752_n.jpg?_nc_cat=102&_nc_oc=AQl0m9ZBYx5AnsX1aJjEd2H4dQQtVAtPkmvsVA4M7JxKRMtMvjrVvjsOm_VK89w3P_Y&_nc_ht=scontent.frkv3-1.fna&oh=1f7d10ffeb780b29e16ff97543ea398e&oe=5E8C55D7" alt="" />
+                <div>
+                    <h3>Hieu Van Phan</h3>
+                    <p>
+                        Hi, my name is Hieu.
+                        I'm a 24 years old study computer sciece at the University of Iceland.
+                    </p>
+                    <a href="https://www.facebook.com/hieu.v.phan" class="buttoncss">Contact Me</a>
+                </div>
+            </section>
+        </main>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            offset: 400, // offset (in px) from the original trigger point
+            delay: 0, // values from 0 to 3000, with step 50ms
+            duration: 1000 // values from 0 to 3000, with step 50ms
+        });
+    </script>
+</div>
+
+</body>
+
+</html>
