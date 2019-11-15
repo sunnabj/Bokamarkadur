@@ -15,12 +15,8 @@
             <option value="For sale">For sale</option>
             <option value="Requested">Requested</option>
         </select>
-        <select name="searchBy" class="form-control">
-            <option value="0">Title</option>
-            <option value="1">Author</option>
-        </select>
-            <input type="text" name="search" id="search" th:value="${search}" class="form-control" placeholder="Search"/>
-            <button type="submit" value="Search" class="btn btn-default">Submit</button>
+        <input type="text" name="search" id="search" th:value="${search}" class="form-control" placeholder="Search"/>
+        <button type="submit" value="Search" class="btn btn-default">Submit</button>
     </form>
     <div th:if="${search != null}">
         <div th:if="${#arrays.length(books) == 0}">

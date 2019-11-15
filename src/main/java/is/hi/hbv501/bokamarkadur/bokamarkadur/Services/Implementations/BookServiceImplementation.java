@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 @Service
 public class BookServiceImplementation implements BookService {
@@ -25,41 +26,21 @@ public class BookServiceImplementation implements BookService {
     BookRepository repository;
 
     /*
-     * Title: Search string
      * Status: Declares whether a book is for sale or requested
-     * Looks through all book titles in the DB and returns all books where the search string matches
-     * a part of the title.
-     */
-    static Specification<Book> containsTitleAndStatus(String title, String status) {
-        return (book, cq, cb) -> {
-            return cb.and(
-                    cb.like(cb.lower(book.get("title")), "%" + title.toLowerCase() + "%"),
-                    cb.equal(book.get("status"), status)
-            );
-        };
-    }
-
-    /*
      * Author: Search string
-     * Status: Declares whether a book is for sale or requested
-     * Looks through all book authors in the DB and returns all books where the search string matches
-     * a part of the author name.
+     * Title: Search string
+     * Looks through all book titles and authors in the DB and returns all books where the search string matches
+     * a part of the title or author name.
      */
-    static Specification<Book> hasAuthorAndStatus(String author, String status) {
+    static Specification<Book> containsTitleOrAuthor(String status, String author, String title) {
         return (book, cq, cb) -> {
-            return cb.and(
-                    cb.like(cb.lower(book.get("author")), "%" + author.toLowerCase() + "%"),
-                    cb.equal(book.get("status"), status)
+            return cb.or(cb.and(cb.equal(book.get("status"), status),
+                    cb.like(cb.lower(book.get("title")), "%" + author.toLowerCase() + "%")),
+                    (cb.and(cb.equal(book.get("status"), status),
+                    cb.or(cb.like(cb.lower(book.get("author")), "%" + title.toLowerCase() + "%")))
+                    )
             );
         };
-    }
-
-    /*
-     * Currently not being used.
-     * Retrieves a status of a book, that is whether it is for sale or requested.
-     */
-    static Specification<Book> getStatus(String status) {
-        return (book, cq, cb) -> cb.equal(book.get("status"), status);
     }
 
     @Autowired
@@ -86,24 +67,13 @@ public class BookServiceImplementation implements BookService {
     }
 
     @Override
-    public List<Book> findByTitle(String title, String status) {
-        return repository.findAll(containsTitleAndStatus(title, status));
-    }
-
-    @Override
-    public List<Book> findByAuthor(String author, String status) {
-        return repository.findAll(hasAuthorAndStatus(author, status));
+    public List<Book> findByAuthorOrTitle(String status, String author, String title) {
+        return repository.findAll(containsTitleOrAuthor(status, author, title));
     }
 
     @Override
     public List<Book> findNewestBooks() {
         return repository.findNewestBooks();
-    }
-
-    // Currently not being used.
-    @Override
-    public List<Book> findByStatus(String status) {
-        return repository.findAll(getStatus(status));
     }
 
     @Override

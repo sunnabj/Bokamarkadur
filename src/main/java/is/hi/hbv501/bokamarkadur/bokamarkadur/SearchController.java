@@ -37,27 +37,16 @@ public class SearchController {
     /*
      * Returns search results.
      * The user inserts a search string and chooses whether to search for books for sale
-     * or requested books, and if he wants to search by book titles or authors.
+     * or requested books. Returns search results for either title or author.
      */
     @RequestMapping(value= "/search", method = RequestMethod.POST)
     public String searchBook(
             @RequestParam(value = "search", required = false) String search,
-            @RequestParam(value = "searchBy", required = true) int searchBy,
             @RequestParam(value = "status", required = true) String status,
             Model model
     ){
-        List<Book> book = new ArrayList<>();
-        // The user can choose to search by book titles or authors.
-        switch (searchBy) {
-            case 0:
-                book = bookService.findByTitle(search, status);
-                break;
-            case 1:
-                book = bookService.findByAuthor(search, status);
-                break;
-            default:
-                break;
-        }
+        List<Book> book = bookService.findByAuthorOrTitle(status, search, search);
+
         model.addAttribute("search", search);
         model.addAttribute("books", book);
 
