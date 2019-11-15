@@ -16,19 +16,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpSession;
 
 
 @Controller
 public class BookController {
 
-    private static String UPLOADED_FOLDER = "/src/main/resources/static/";
+    private static String uploadedFolder = "/src/main/resources/static/";
+    private static String currentDirectory = System.getProperty("user.dir");
+
+    private static Date date = new Date();
 
     private BookService bookService;
     private UserService userService;
@@ -90,37 +94,24 @@ public class BookController {
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public String addBookForSale(@Valid Book book, BindingResult result, Model model, HttpSession session,
-                                 @RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+                                 @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return "sell-book";
         }
-        String currentDirectory = System.getProperty("user.dir");
 
         try {
-
-            System.out.println("The current working directory is " + currentDirectory);
-            String current = new java.io.File( "." ).getCanonicalPath();
-            System.out.println("The current working directory is " + current);
-        } catch (IOException iex) {}
-
-        if (file.isEmpty()) {
-            redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-            return "redirect:uploadStatus";
-        } try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(currentDirectory + UPLOADED_FOLDER + file.getOriginalFilename());
+            Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
             Files.write(path, bytes);
-
-            redirectAttributes.addFlashAttribute("message",
-                    "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("UPLOADED_FOLDLER: " + UPLOADED_FOLDER + ", file: " + file.getOriginalFilename());
         book.setImage(file.getOriginalFilename());
         book.setStatus("For sale");
+        book.setDate(date);
+        System.out.println("date: " + date);
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());
         book.setUser(current);
@@ -142,10 +133,21 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public String addRequestBook(@Valid Book book, BindingResult result, Model model, HttpSession session) {
+    public String addRequestBook(@Valid Book book, BindingResult result, Model model, HttpSession session,
+                                 @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return "request-book"; //Inni í gæsalöppum: HTML skrá.
         }
+        try {
+            // Get the file and save it somewhere
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
+            Files.write(path, bytes);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        book.setImage(file.getOriginalFilename());
         book.setStatus("Requested");
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());
