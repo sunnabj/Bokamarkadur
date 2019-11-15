@@ -5,8 +5,6 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.BookRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.UserRepository;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations.BookServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -14,10 +12,41 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.concurrent.ThreadLocalRandom;
+
 @SpringBootApplication
 @EnableJpaRepositories
 
 public class BokamarkadurApplication {
+
+	Date d1 = new Date(2323223232L);
+	Date d2 = new Date();
+
+	Date randomDate = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate0 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate1 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate2 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate3 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate4 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate5 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate6 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate7 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate8 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate9 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
+	Date randomDate10 = new Date(ThreadLocalRandom.current()
+			.nextLong(d1.getTime(), d2.getTime()));
 
 	public static void main(String[] args) {
 		SpringApplication.run(BokamarkadurApplication.class, args);
@@ -45,6 +74,8 @@ public class BokamarkadurApplication {
 			REI502M.setSubjects(Subjects.COMPUTERSCIENCE);
 			REI502M.setPrice(12995);
 			REI502M.setStatus("For sale");
+			REI502M.setImage("2016-data-mining.jpg");
+			REI502M.setDate(randomDate);
 			bookRepository.save(REI502M);
 
 			Book REI502M_2 = new Book();
@@ -54,6 +85,8 @@ public class BokamarkadurApplication {
 			REI502M_2.setSubjects(Subjects.COMPUTERSCIENCE);
 			REI502M_2.setPrice(9995);
 			REI502M_2.setStatus("For sale");
+			REI502M_2.setImage("DataMining.jpg");
+			REI502M_2.setDate(randomDate0);
 			bookRepository.save(REI502M_2);
 
 			Book TÖL101G = new Book();
@@ -64,6 +97,8 @@ public class BokamarkadurApplication {
 			TÖL101G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TÖL101G.setPrice(14995);
 			TÖL101G.setStatus("For sale");
+			TÖL101G.setImage("cover-java2e.png");
+			TÖL101G.setDate(randomDate1);
 			bookRepository.save(TÖL101G);
 
 			Book TÖL104G = new Book();
@@ -73,6 +108,8 @@ public class BokamarkadurApplication {
 			TÖL104G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TÖL104G.setPrice(11495);
 			TÖL104G.setStatus("For sale");
+			TÖL104G.setImage("DMA.jpg");
+			TÖL104G.setDate(randomDate2);
 			bookRepository.save(TÖL104G);
 
 			Book TOL105G = new Book();
@@ -83,6 +120,8 @@ public class BokamarkadurApplication {
 			TOL105G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL105G.setPrice(5995);
 			TOL105G.setStatus("For sale");
+			TOL105G.setImage("python.jpg");
+			TOL105G.setDate(randomDate3);
 			bookRepository.save(TOL105G);
 
 			Book TOL303G = new Book();
@@ -93,6 +132,8 @@ public class BokamarkadurApplication {
 			TOL303G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL303G.setPrice(11995);
 			TOL303G.setStatus("For sale");
+			TOL303G.setImage("firstCourse.jpg");
+			TOL303G.setDate(randomDate4);
 			bookRepository.save(TOL303G);
 
 			Book TOL304G = new Book();
@@ -103,6 +144,8 @@ public class BokamarkadurApplication {
 			TOL304G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL304G.setPrice(10395);
 			TOL304G.setStatus("For sale");
+			TOL304G.setImage("programming languages.jpg");
+			TOL304G.setDate(randomDate5);
 			bookRepository.save(TOL304G);
 
 			Book TOL305G = new Book();
@@ -113,6 +156,7 @@ public class BokamarkadurApplication {
 			TOL305G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL305G.setPrice(12995);
 			TOL305G.setStatus("For sale");
+			TOL305G.setDate(randomDate6);
 			bookRepository.save(TOL305G);
 
 			Book TOL101G = new Book();
@@ -123,6 +167,7 @@ public class BokamarkadurApplication {
 			TOL101G.setSubjects(Subjects.COMPUTERSCIENCE);
 			TOL101G.setPrice(13795);
 			TOL101G.setStatus("For sale");
+			TOL101G.setDate(randomDate7);
 			bookRepository.save(TOL101G);
 
 			Book BYG201G = new Book();
@@ -133,6 +178,7 @@ public class BokamarkadurApplication {
 			BYG201G.setSubjects(Subjects.CIVILENGINEERING);
 			BYG201G.setPrice(12195);
 			BYG201G.setStatus("For sale");
+			BYG201G.setDate(randomDate8);
 			bookRepository.save(BYG201G);
 
 			Book BYG501G = new Book();
@@ -143,6 +189,7 @@ public class BokamarkadurApplication {
 			BYG501G.setSubjects(Subjects.CIVILENGINEERING);
 			BYG501G.setPrice(12995);
 			BYG501G.setStatus("For sale");
+			BYG501G.setDate(randomDate);
 			bookRepository.save(BYG501G);
 
 			Book BYG503G = new Book();
@@ -152,6 +199,7 @@ public class BokamarkadurApplication {
 			BYG503G.setSubjects(Subjects.CIVILENGINEERING);
 			BYG503G.setPrice(10995);
 			BYG503G.setStatus("For sale");
+			BYG503G.setDate(randomDate9);
 			bookRepository.save(BYG503G);
 
 			Book IDN101M = new Book();
@@ -162,6 +210,7 @@ public class BokamarkadurApplication {
 			IDN101M.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN101M.setPrice(13995);
 			IDN101M.setStatus("For sale");
+			IDN101M.setDate(randomDate);
 			bookRepository.save(IDN101M);
 
 			Book IDN103G = new Book();
@@ -172,6 +221,7 @@ public class BokamarkadurApplication {
 			IDN103G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN103G.setPrice(11995);
 			IDN103G.setStatus("For sale");
+			IDN103G.setDate(randomDate10);
 			bookRepository.save(IDN103G);
 
 			Book IDN113F = new Book();
@@ -181,7 +231,8 @@ public class BokamarkadurApplication {
 			IDN113F.setCondition("New");
 			IDN113F.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN113F.setPrice(16995);
-			IDN113F.setStatus("For sale");
+			IDN113F.setStatus("Requested");
+			IDN113F.setDate(randomDate8);
 			bookRepository.save(IDN113F);
 
 			Book IDN122F = new Book();
@@ -191,7 +242,8 @@ public class BokamarkadurApplication {
 			IDN122F.setCondition("New");
 			IDN122F.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN122F.setPrice(7695);
-			IDN122F.setStatus("For sale");
+			IDN122F.setStatus("Requested");
+			IDN122F.setDate(randomDate5);
 			bookRepository.save(IDN122F);
 
 			Book IDN210F = new Book();
@@ -201,7 +253,8 @@ public class BokamarkadurApplication {
 			IDN210F.setCondition("New");
 			IDN210F.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN210F.setPrice(3895);
-			IDN210F.setStatus("For sale");
+			IDN210F.setStatus("Requested");
+			IDN210F.setDate(randomDate1);
 			bookRepository.save(IDN210F);
 
 			Book IDN301G = new Book();
@@ -211,7 +264,8 @@ public class BokamarkadurApplication {
 			IDN301G.setCondition("New");
 			IDN301G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			IDN301G.setPrice(11995);
-			IDN301G.setStatus("For sale");
+			IDN301G.setStatus("Requested");
+			IDN301G.setDate(randomDate0);
 			bookRepository.save(IDN301G);
 
 			Book RAF201G = new Book();
@@ -221,7 +275,8 @@ public class BokamarkadurApplication {
 			RAF201G.setCondition("New");
 			RAF201G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			RAF201G.setPrice(13995);
-			RAF201G.setStatus("For sale");
+			RAF201G.setStatus("Requested");
+			RAF201G.setDate(randomDate10);
 			bookRepository.save(RAF201G);
 
 			Book RAF403G = new Book();
@@ -231,7 +286,8 @@ public class BokamarkadurApplication {
 			RAF403G.setCondition("New");
 			RAF403G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			RAF403G.setPrice(12995);
-			RAF403G.setStatus("For sale");
+			RAF403G.setStatus("Requested");
+			RAF403G.setDate(randomDate9);
 			bookRepository.save(RAF403G);
 
 			Book RAF501G = new Book();
@@ -241,7 +297,8 @@ public class BokamarkadurApplication {
 			RAF501G.setCondition("New");
 			RAF501G.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF501G.setPrice(9295);
-			RAF501G.setStatus("For sale");
+			RAF501G.setStatus("Requested");
+			RAF501G.setDate(randomDate8);
 			bookRepository.save(RAF501G);
 
 			Book RAF504G = new Book();
@@ -251,7 +308,8 @@ public class BokamarkadurApplication {
 			RAF504G.setCondition("New");
 			RAF504G.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF504G.setPrice(12995);
-			RAF504G.setStatus("For sale");
+			RAF504G.setStatus("Requested");
+			RAF504G.setDate(randomDate7);
 			bookRepository.save(RAF504G);
 
 			Book RAF507M = new Book();
@@ -261,7 +319,8 @@ public class BokamarkadurApplication {
 			RAF507M.setCondition("New");
 			RAF507M.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF507M.setPrice(12995);
-			RAF507M.setStatus("For sale");
+			RAF507M.setStatus("Requested");
+			RAF507M.setDate(randomDate6);
 			bookRepository.save(RAF507M);
 
 			Book TOV301G = new Book();
@@ -271,7 +330,8 @@ public class BokamarkadurApplication {
 			TOV301G.setCondition("New");
 			TOV301G.setSubjects(Subjects.Electrical_Computer_Engineering);
 			TOV301G.setPrice(12495);
-			TOV301G.setStatus("For sale");
+			TOV301G.setStatus("Requested");
+			TOV301G.setDate(randomDate5);
 			bookRepository.save(TOV301G);
 
 			Book TOV501M = new Book();
@@ -281,7 +341,8 @@ public class BokamarkadurApplication {
 			TOV501M.setCondition("New");
 			TOV501M.setSubjects(Subjects.Electrical_Computer_Engineering);
 			TOV501M.setPrice(16995);
-			TOV501M.setStatus("For sale");
+			TOV501M.setStatus("Requested");
+			TOV501M.setDate(randomDate4);
 			bookRepository.save(TOV501M);
 
 			Book VEL103M = new Book();
@@ -292,6 +353,7 @@ public class BokamarkadurApplication {
 			VEL103M.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			VEL103M.setPrice(13995);
 			VEL103M.setStatus("For sale");
+			VEL103M.setDate(randomDate3);
 			bookRepository.save(VEL103M);
 
 			Book VEL301G = new Book();
@@ -300,7 +362,8 @@ public class BokamarkadurApplication {
 			VEL301G.setEdition(9);  VEL301G.setCondition("New");
 			VEL301G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			VEL301G.setPrice(11495);
-			VEL301G.setStatus("For sale");
+			VEL301G.setStatus("Requested");
+			VEL301G.setDate(randomDate2);
 			bookRepository.save(VEL301G);
 
 			Book VEL302G = new Book();
@@ -310,7 +373,8 @@ public class BokamarkadurApplication {
 			VEL302G.setCondition("New");
 			VEL302G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			VEL302G.setPrice(14495);
-			VEL302G.setStatus("For sale");
+			VEL302G.setStatus("Requested");
+			VEL302G.setDate(randomDate1);
 			bookRepository.save(VEL302G);
 
 			Book VEL501M = new Book();
@@ -319,7 +383,8 @@ public class BokamarkadurApplication {
 			VEL501M.setCondition("New");
 			VEL501M.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			VEL501M.setPrice(12995);
-			VEL501M.setStatus("For sale");
+			VEL501M.setStatus("Requested");
+			VEL501M.setDate(randomDate0);;
 			bookRepository.save(VEL501M);
 
 			Book VEL502G = new Book();
@@ -328,7 +393,8 @@ public class BokamarkadurApplication {
 			VEL502G.setEdition(8);
 			VEL502G.setSubjects(Subjects.Industrial_and_Mechanical_Engineering);
 			VEL502G.setPrice(11495);
-			VEL502G.setStatus("For sale");
+			VEL502G.setStatus("Requested");
+			VEL502G.setDate(randomDate);
 			bookRepository.save(VEL502G);
 
 			User Tester = new User();

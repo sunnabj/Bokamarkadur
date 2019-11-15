@@ -32,13 +32,11 @@
                 th:text="${elem.name()}"
                 id="subjects" />
     </select>
-        <input type="file" name="file" /><br/><br/>
-    <input type="submit" value="Submit">
-    <p>Here the user will be able to upload a picture.</p>
-        <div th:if="${message}">
-            <h2 th:text="${message}"/>
-        </div>
 
+    <label for="image">Image</label>
+    <input type="file" name="file" id="image"/><br/><br/>
+
+    <input type="submit" value="Submit">
 
 <p><a href="/">Return to frontpage</a></p>
 

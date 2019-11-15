@@ -3,15 +3,15 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Services;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
-import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 public interface BookService {
 
     /*
-     * These functions represent the queries explained in the UserRepository,
+     * These functions represent the queries explained in the BookRepository,
      * and serve as a layer between the controller and the database.
      */
     Book save(Book book);
@@ -23,4 +23,5 @@ public interface BookService {
     List<Book> findByStatus(String status);
     List<Book> findByUser(User user);
     List<Book> findBySubjects(Subjects subject);
+    List<Book> findNewestBooks();
 }
