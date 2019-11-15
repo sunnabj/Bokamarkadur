@@ -175,4 +175,21 @@ public class BookController {
         model.addAttribute("Books", subjectbooks);
         return "subject-results";
     }
+
+
+    /*
+     * Returns a page where the logged in user can see all books he has put on the site,
+     * both for sale and requested.
+     */
+    @RequestMapping(value="/myBooks", method = RequestMethod.GET)
+    public String myBooks(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
+        User current = userService.findByUsername(sessionUser.getUsername());
+        model.addAttribute("books", bookService.findByUser(current));
+        return "my-books";
+    }
+
 }

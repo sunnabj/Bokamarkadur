@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
+<head>
+    <title>My books</title>
+    <style>
+        .image{
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+
+<body>
+<div layout:fragment="content" class="container">
+
+
+    <div th:switch="${books}">
+        <h2 th:case="null">You have no requested books or book for sale</h2>
+        <div th:case="*">
+            <h2>My Books</h2>
+            <table class="table  table-hover">
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:href="@{/viewbook/{id}(id=${book.id})}" th:text="${book.title}"></td>
+                    <td th:text="${book.status}"></td>
+                    <td><a th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p><a href="/newbook">Add a new book</a></p>
+</div>
+</body>
+</html>

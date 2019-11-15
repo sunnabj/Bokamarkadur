@@ -105,6 +105,7 @@
 <div layout:fragment="content" class="container">
     <h1>Bókamarkaður - Book exchange market for students</h1>
 
+    <br>
     <h3>Recently added</h3>
     <table class="table table-striped">
         <thead>
@@ -112,6 +113,7 @@
             <th scope="col">Title</th>
             <th scope="col">Author</th>
             <th scope="col">Status</th>
+            <th scope="col">Information</th>
         </tr>
         </thead>
         <tbody>
@@ -119,11 +121,28 @@
             <td th:text="${book.title}"></td>
             <td th:text="${book.author}"></td>
             <td th:text="${book.status}"></td>
+            <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <br>
+    <h3>Current subjects available</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">Subject</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book : ${subjectBooks}">
+            <td><a th:href="@{/viewsubjectbooks/{id}(id=${book.subjects})}" th:text="${book.subjects}"></a></td>
         </tr>
         </tbody>
     </table>
 
+    <p><a href="/newbook">Add a new book</a></p>
     <p><a href="/updateUserInfo">Update your profile information</a></p>
+    <p><a href="/myBooks">My Books</a></p>
     <p><a href="/logout">Logout</a></p>
 
 
