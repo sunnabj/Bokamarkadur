@@ -18,9 +18,7 @@ public interface BookService {
     void delete(Book book);
     List<Book> findAll();
     Optional<Book> findById(long id);
-    List<Book> findByTitle(String title, String status);
-    List<Book> findByAuthor(String author, String status);
-    List<Book> findByStatus(String status);
+    List<Book> findByAuthorOrTitle(String statusSearch, String authorSearch, String titleSearch);
     List<Book> findByUser(User user);
     List<Book> findBySubjects(Subjects subject);
     List<Book> findNewestBooks();
