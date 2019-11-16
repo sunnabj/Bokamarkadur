@@ -3,6 +3,8 @@
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link href="css/style.css" rel="stylesheet" />
+
     <title>User</title>
     <style>
         * {
@@ -89,20 +91,47 @@
                 display: block;
             }
         }
+        .main-header{
+            padding: 0;
+            padding-bottom: 10px;
+
+        }
+
+        body{
+            padding-top: 0px;
+        }
+
+        .asd1{
+            text-align: right;
+            background-color: transparent;
+            font-weight: bold;
+        }
+        .asd{
+            text-align: left;
+            background-color: transparent;
+        }
     </style>
 </head>
 <body>
+<script src="js/jquery-1.10.2.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="//maps.google.com/maps/api/js?sensor=true"></script>
+<script src="js/main.js"></script>
 
 <div layout:fragment="content">
-        <header class="main-header">
-            <h1><span>About Project</span> Bókamarkaður </h1>
-            <p>
-                Yes ... here is all about us ... but i will let our teacher Sunna and miss university Þórdís to write something here, because am not good !
-            </p>
-        </header>
+    <header class="main-header"><div id="home" class="home"></div></header>
 
-        <main class="container">
-            <section class="card">
+    <main class="container">
+        <div class="card  asd1" >
+            <h1></h1>
+            <h1><span>About Project</span> Bókamarkaður </h1>
+        </div>
+
+        <div class="card  asd">
+            <h3>Yes ... here is all about us ... but i will let our teacher Sunna and miss university Þórdís to write something here, because am not good !</h3>
+        </div>
+
+            <section class="card" data-aos="fade-right">
                 <img src="https://scontent.frkv3-1.fna.fbcdn.net/v/t1.0-9/69918186_10219801214798809_6580321498735575040_o.jpg?_nc_cat=108&_nc_oc=AQkytgmKz6UBt8XWgVhe2HZmTJnhQsGGl3EaIk_cBBmgstwMdOYx8Q2nOW7b0IJRX0I&_nc_ht=scontent.frkv3-1.fna&oh=455c82ab7e0757f47d908b9e80ce788f&oe=5E4BEDB7" alt="" />
                 <div>
                     <h3>Sunna sensei:</h3>
