@@ -1,8 +1,9 @@
 <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
-
+    <script src="/js/main.js"></script>
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-fixed-top blurry">
         <style>
+            *{outline: none;}
             body { padding-top: 51px; }
             .navbar .navbar-brand {padding: 5px 15px;  }
             .navbar .navbar-brand img {display: inline-block;max-width:100%; height:auto;}
@@ -18,13 +19,57 @@
 
             /* Navbar padding sem sitja item i midjuni */
             .navbar-collapse{   overflow: hidden;         }
-            .navbar-padding {   width: 1160px;    margin: auto;   font-weight: 200;        }
-            .navbar-nav > li{  padding-left:10px;    padding-right:10px;       }
+            .navbar-padding {   width: 1160px;    margin: auto;   font-size: 1.7rem;        }
+            .navbar-nav > li{  padding-left:30px;    padding-right:30px;       }
             /* Scrollbar byrjar here */
             ::-webkit-scrollbar {   width: 12px;  }
             ::-webkit-scrollbar-track { background: #f1f1f1;   }
             ::-webkit-scrollbar-thumb { background: #555;      }
             ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.8);  }
+
+            .searchbtn{
+                border-color: transparent;
+                background-color: transparent;
+                color: white;
+            }
+            .searchbtn:hover{
+                border-color: transparent;
+                background-color: transparent;
+                color: darkgrey;
+            }
+            .searchbtn:active:after{
+                border-color: transparent;
+                background-color: transparent;
+                color: darkgrey;
+            }
+            .selectstatus1{
+                border-radius: 0;
+
+                background-color: transparent;
+                border: 1px solid white;
+                color :white;
+            }
+            .selectstatus1:hover{
+                border-radius: 0;
+                background-color: transparent;
+                border: 1px solid white;
+                color :darkgrey;
+            }
+            .selectstatus{
+                border-radius: 0;
+                padding: 0;
+                background-color: transparent;
+                border: 1px solid white;
+                color :white;
+            }
+            .selectstatus:hover{
+                padding: 0;
+                border-radius: 0;
+                background-color: transparent;
+                border: 1px solid white;
+                color :darkgrey;
+            }
+
         </style>
         <div class="container-fluid">
             <div class="navbar-header">
@@ -48,14 +93,28 @@
                     <li><a href="/all-books">View all books</a></li>
                     <!--<li><a href="/search">Search for a book</a></li>-->
 
-                    <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post" class="navbar-form">
-                        <select name="status" class="form-control">
+                    <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post" class="navbar-form ">
+                        <select name="status" class="form-control selectstatus">
                             <option value="For sale">For sale</option>
                             <option value="Requested">Requested</option>
                         </select>
                         <div class="form-group">
-                        <input type="text" name="search" id="search" th:value="${search}" class="form-control" placeholder="Search"/>
-                        <button type="submit" value="Search" class="btn btn-default">Submit</button>
+                        <input type="text" name="search" id="search" th:value="${search}" class="form-control selectstatus1" placeholder="Search"/>
+                            <button type="button" class="btnCustom btnCustom-default searchbtn">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                        <div id="main">
+                            <div class="c">
+                                <div class="search-bar">
+                                    <div class="glass-icon">
+                                        <div class="glass-icon-c">
+                                            <span class="glass-icon__circle"></span>
+                                            <span class="glass-icon__stick"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form></li>
                 </ul>
