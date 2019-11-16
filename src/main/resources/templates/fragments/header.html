@@ -1,18 +1,32 @@
-<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml">
+<header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+
     <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top blurry">
         <style>
             body { padding-top: 70px; }
             .navbar .navbar-brand {padding: 5px 15px;  }
-            .navbar .navbar-brand img {display: inline-block;}
-            .navbar {
-                background-color: transparent;
-                background-color: rgba(0,0,0,0.8);  }
-            .navbar-default .navbar-nav>li>a {
-                color: white;
+            .navbar .navbar-brand img {display: inline-block;max-width:100%; height:auto;}
+            .navbar {background-color: transparent;background-color: rgba(0,0,0,0.8); }
+            .navbar-default .navbar-nav>li>a {color: white;}
+            .navbar-default .navbar-nav>li>a:hover {color: darkgrey;}
+            .navbar-default .navbar-form{border-color: transparent; border-color: rgba(0,0,0,0.8); }
+            .navbar-default .navbar-collapse, .navbar-default .navbar-form {border-color: transparent; border-color: rgba(0,0,0,0.8);}
+            .navbar-collapse { border-color: transparent; border-color: rgba(0,0,0,0.8); }
+            .navbar-default {border-color: transparent; border-color: rgba(0,0,0,0.8); }
+            body {font-size: 1.3rem;font-family: 'Oswald', sans-serif;background: #f9f9f9;overflow-y: scroll;}
+            .blurry { backdrop-filter: blur(5px);   }/* þetta er blurry fyrir navbar mjög mikilvægt*/
+
+            .navbar-collapse{
+                overflow: hidden;
             }
-            .navbar-default .navbar-nav>li>a:hover {
-                color: darkgray;
+            .navbar-padding {
+                width: 1160px;
+                margin: auto;
+                font-weight: 200;
+            }
+            .navbar-nav > li{
+                padding-left:10px;
+                padding-right:10px;
             }
         </style>
         <div class="container-fluid">
@@ -24,11 +38,15 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="../">
-                    <img src="logo23.png" alt="Logo" width="105.291667" height="42"/>
-                </a>
+
             </div>
+            <div class="navbar-padding">
             <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a class="navbar-brand" href="../">
+                        <img src="logo23.png" alt="Logo" width="105.291667" height="42"/>
+                    </a></li>
+                </ul>
                 <ul class="nav navbar-nav">
                     <li><a href="/all-books">View all books</a></li>
                     <!--<li><a href="/search">Search for a book</a></li>-->
@@ -48,11 +66,12 @@
                         </div>
                     </form></li>
                 </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login" class="glyphicon glyphicon-log-in"> Login</a></li>
+                <ul class="nav navbar-nav">
+                    <li><a href="/login"> Login</a></li>
                     <li><a href="/newAccount">Sign Up</a></li>
-                    <li><a href="/aboutus" class="glyphicon glyphicon-user">About Us</a></li>
+                    <li><a href="/aboutus">About Us</a></li>
                 </ul>
+            </div>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
