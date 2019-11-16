@@ -16,18 +16,15 @@
             body {font-size: 1.3rem;font-family: 'Oswald', sans-serif;background: #f9f9f9;overflow-y: scroll;}
             .blurry { backdrop-filter: blur(5px);   }/* þetta er blurry fyrir navbar mjög mikilvægt*/
 
-            .navbar-collapse{
-                overflow: hidden;
-            }
-            .navbar-padding {
-                width: 1160px;
-                margin: auto;
-                font-weight: 200;
-            }
-            .navbar-nav > li{
-                padding-left:10px;
-                padding-right:10px;
-            }
+            /* Navbar padding sem sitja item i midjuni */
+            .navbar-collapse{   overflow: hidden;         }
+            .navbar-padding {   width: 1160px;    margin: auto;   font-weight: 200;        }
+            .navbar-nav > li{  padding-left:10px;    padding-right:10px;       }
+            /* Scrollbar byrjar here */
+            ::-webkit-scrollbar {   width: 12px;  }
+            ::-webkit-scrollbar-track { background: #f1f1f1;   }
+            ::-webkit-scrollbar-thumb { background: #555;      }
+            ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.8);  }
         </style>
         <div class="container-fluid">
             <div class="navbar-header">
