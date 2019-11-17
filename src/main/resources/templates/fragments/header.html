@@ -1,5 +1,4 @@
 <header th:fragment="header" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
-    <script src="/js/main.js"></script>
     <!-- Static navbar -->
     <nav class="navbar navbar-default navbar-fixed-top blurry">
         <style>
@@ -10,10 +9,10 @@
             .navbar {background-color: transparent;background-color: rgba(0,0,0,0.8); }
             .navbar-default .navbar-nav>li>a {color: white;}
             .navbar-default .navbar-nav>li>a:hover {color: darkgrey;}
-            .navbar-default .navbar-form{border-color: transparent; border-color: rgba(0,0,0,0.8); }
-            .navbar-default .navbar-collapse, .navbar-default .navbar-form {border-color: transparent; border-color: rgba(0,0,0,0.8);}
+            /*.navbar-default .navbar-form{border-color: transparent; border-color: rgba(0,0,0,0.8); }*/
+            .navbar-collapse .navbar-form {border-color: transparent; border-color: rgba(0,0,0,0.8);}
             .navbar-collapse { border-color: transparent; border-color: rgba(0,0,0,0.8); }
-            .navbar-default {border-color: transparent; border-color: rgba(0,0,0,0.8); }
+            .navbar-default {border: hidden; border-color: unset}
             body {font-size: 1.3rem;font-family: 'Oswald', sans-serif;background: #f9f9f9;overflow-y: scroll;}
             .blurry { backdrop-filter: blur(5px);   }/* þetta er blurry fyrir navbar mjög mikilvægt*/
 

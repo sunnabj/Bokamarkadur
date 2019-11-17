@@ -4,7 +4,7 @@
 <head>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link href="css/style.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>User</title>
     <style>
         * {
@@ -16,13 +16,19 @@
             color: #333;
             text-decoration: none;
         }
+        a:hover{
+            text-decoration: none;
+        }
+        a:focus, a:hover {
+            text-decoration: none !important;
+        }
         .container {
             max-width: 1100px;
             margin: auto;
             padding: 0 2rem;
         }
         .main-header {
-            height: 55vh;
+            height: 65vh;
             padding: 2rem;
             display: flex;
             flex-direction: column;
@@ -72,20 +78,6 @@
             height:auto;
         }
 
-        .buttoncss{
-            display: inline-block;
-            background: #000;
-            color: #fff;
-            padding: 0.8rem 1.8rem;
-            margin-top: 2rem;
-            cursor: pointer;
-        }
-
-        .buttoncss:hover {
-            opacity: 0.8;
-            text-decoration: none;
-            color: #fff;
-        }
         @media(max-width:600px) {
             .card {
                 display: block;
@@ -96,7 +88,6 @@
             padding-bottom: 10px;
 
         }
-
         body{
             padding-top: 0px;
         }
@@ -110,13 +101,19 @@
             text-align: left;
             background-color: transparent;
         }
+        .fa-facebook .fa-linkedin .fa-instagram .fa-github{
+            padding-left: 1em;
+        }
+        .fa {
+            font-size: 30px;
+            width: 50px;
+            text-decoration: none;
+            margin: 5px 2px;
+        }
+
     </style>
 </head>
 <body>
-<script src="js/jquery-1.10.2.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="//maps.google.com/maps/api/js?sensor=true"></script>
-<script src="js/main.js"></script>
 
 <div layout:fragment="content">
     <header class="main-header"><div id="home" class="home"></div></header>
@@ -137,9 +134,14 @@
                     <h3>Sunna sensei:</h3>
                     <p>
                         Reason why i've called sensei ? cuz im smart badass !!! BEMM
+                        <br>
                         VISION:To become fyrst Elon musk version in icelandic women. Don't forget to help person write this xD, cause he poor.
                     </p>
-                    <a href="https://www.facebook.com/sunnazool" class="buttoncss">Contact me / CALL ME</a>
+                    <a href = "mailto: #" class="fa fa-envelope btnCustom btnCustom-default"></a>
+                    <a href="https://www.facebook.com/sunnazool" class="fa fa-facebook btnCustom btnCustom-default"></a>
+                    <a href="#" class="fa fa-instagram btnCustom btnCustom-default"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="#" class="fa fa-github"></a>
                 </div>
             </section>
 
@@ -150,7 +152,11 @@
                     <p>
                         VISION:To able control ADA. Don't forget to help person write this xD, cause he poor.
                     </p>
-                    <a href="https://www.facebook.com/thordisp" class="buttoncss">Contace me please</a>
+                    <a href = "mailto: #" class="fa fa-envelope"></a>
+                    <a href="https://www.facebook.com/thordisp" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="#" class="fa fa-github"></a>
                 </div>
             </section>
 
@@ -161,7 +167,11 @@
                     <p>
                         VISION:To become billionaire. Don't forget to help person write this xD, cause he poor.
                     </p>
-                    <a href="https://www.facebook.com/baldvinbo" class="buttoncss">Contact me</a>
+                    <a href = "mailto: #" class="fa fa-envelope"></a>
+                    <a href="https://www.facebook.com/baldvinbo" class="fa fa-facebook"></a>
+                    <a href="#" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="#" class="fa fa-github"></a>
                 </div>
             </section>
 
@@ -173,7 +183,11 @@
                         Hi, my name is Hieu.
                         I'm a 24 years old study computer sciece at the University of Iceland.
                     </p>
-                    <a href="https://www.facebook.com/hieu.v.phan" class="buttoncss">Contact Me</a>
+                    <a href = "mailto: hieu_@hotmail.com" class="fa fa-envelope"></a>
+                    <a href="https://www.facebook.com/hieu.v.phan" class="fa fa-facebook"></a>
+                    <a href="https://www.instagram.com/hieuvanphan/" class="fa fa-instagram"></a>
+                    <a href="#" class="fa fa-linkedin"></a>
+                    <a href="https://github.com/hieutote" class="fa fa-github"></a>
                 </div>
             </section>
         </main>
