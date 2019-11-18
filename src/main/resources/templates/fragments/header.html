@@ -5,7 +5,7 @@
             *{outline: none;}
             body { padding-top: 51px; }
             .navbar .navbar-brand {padding: 5px 15px;  }
-            .navbar .navbar-brand img {display: inline-block;max-width:100%; height:auto;}
+            .navbar .navbar-brand img {max-width:100%; height:auto;}
             .navbar {background-color: transparent;background-color: rgba(0,0,0,0.8); }
             .navbar-default .navbar-nav>li>a {color: white;}
             .navbar-default .navbar-nav>li>a:hover {color: darkgrey;}
@@ -27,14 +27,16 @@
             ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.8);  }
 
             .searchbtn{
-                border-color: transparent;
                 background-color: transparent;
                 color: white;
+                border: 1px solid white;
+                border-left: 0;
             }
             .searchbtn:hover{
-                border-color: transparent;
                 background-color: transparent;
                 color: darkgrey;
+                border: 1px solid white;
+                border-left: 0;
             }
             .searchbtn:active:after{
                 border-color: transparent;
@@ -43,7 +45,7 @@
             }
             .selectstatus1{
                 border-radius: 0;
-
+                outline: none;
                 background-color: transparent;
                 border: 1px solid white;
                 color :white;
@@ -51,10 +53,10 @@
             .selectstatus1:hover{
                 border-radius: 0;
                 background-color: transparent;
-                border: 1px solid white;
                 color :darkgrey;
             }
             .selectstatus{
+                outline: none;
                 border-radius: 0;
                 padding: 0;
                 background-color: transparent;
@@ -65,10 +67,12 @@
                 padding: 0;
                 border-radius: 0;
                 background-color: transparent;
-                border: 1px solid white;
                 color :darkgrey;
             }
 
+            .navbar-form .form-group{
+                display: flex;
+            }
         </style>
         <div class="container-fluid">
             <div class="navbar-header">
@@ -92,14 +96,14 @@
                     <li><a href="/all-books">View all books</a></li>
                     <!--<li><a href="/search">Search for a book</a></li>-->
 
-                    <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post" class="navbar-form ">
-                        <select name="status" class="form-control selectstatus">
+                    <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post" class="navbar-form input-group">
+                        <select name="status" class="form-control selectstatus input-group-addon">
                             <option value="For sale">For sale</option>
                             <option value="Requested">Requested</option>
                         </select>
                         <div class="form-group">
-                        <input type="text" name="search" id="search" th:value="${search}" class="form-control selectstatus1" placeholder="Search"/>
-                            <button type="button" class="btnCustom btnCustom-default searchbtn">
+                        <input type="text" name="search" id="search" th:value="${search}" class="form-control selectstatus1 input-group-addon" placeholder="Search for title/author ..."/>
+                            <button type="button" class=" searchbtn">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </div>
