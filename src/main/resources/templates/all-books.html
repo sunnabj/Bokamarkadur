@@ -37,8 +37,10 @@
             </thead>
             <tbody>
             <tr th:each="book : ${books}">
-
-                <td><img th:src="${book.image}" class="image" alt="No Image"/></td>
+                <td>
+                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
+                    <img th:if="${book.image == null}" th:src="nophoto.png" class="image" alt="No Image"/>
+                </td>
                 <td th:text="${book.title}"></td>
                 <td th:text="${book.author}"></td>
                 <td th:text="${book.edition}"></td>
