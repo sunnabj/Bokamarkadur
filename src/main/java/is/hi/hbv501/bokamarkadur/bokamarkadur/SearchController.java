@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,9 @@ public class SearchController {
      * Returns a page where the user can search for books.
      */
     @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search() {
+    public String search(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "search";
     }
 
@@ -43,12 +46,14 @@ public class SearchController {
     public String searchBook(
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "status", required = true) String status,
-            Model model
+            Model model, HttpSession session
     ){
         List<Book> book = bookService.findByAuthorOrTitle(status, search, search);
 
         model.addAttribute("search", search);
         model.addAttribute("books", book);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
 
         return "search";
     }

@@ -24,9 +24,12 @@
 </div>
 <div>
     <label><b>Books</b></label>
-    <tr th:each="book : ${user.books}">
-        <td><a th:href="@{/viewbook/{id}(id=${book.id})}" th:text="${book.title}">View book</a></td>
-    </tr>
+    <ul>
+        <tr th:each="book : ${user.books}">
+            <td><li><a th:href="@{/viewbook/{id}(id=${book.id})}" th:text="${book.title}">View book</a></li></td>
+        </tr>
+    </ul>
+
 </div>
 
 <p><a href="/">Return to frontpage</a></p>

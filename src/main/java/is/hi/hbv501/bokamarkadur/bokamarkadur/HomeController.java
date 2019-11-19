@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +31,9 @@ public class HomeController {
      * Returns 10 newest books for sale & requested.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String Home(Model model) {
+    public String Home(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         model.addAttribute("books", bookService.findNewestBooks());
         List<Book> availableBooks = bookService.findAll();
         //ArrayList<Book> availableBooksArray = (ArrayList<Book>) availableBooks;
