@@ -46,7 +46,9 @@ public class UserController {
      * Returns a form where a user can create a new user account.
      */
     @RequestMapping(value="/newAccount", method = RequestMethod.GET)
-    public String newuserForm(User user) {
+    public String newuserForm(User user, Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "new-account";
     }
 
@@ -57,7 +59,7 @@ public class UserController {
      * Returns a welcome page where the new user is addressed.
      */
     @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
-    public String addNewUser(@Valid User user, BindingResult result, Model model) {
+    public String addNewUser(@Valid User user, BindingResult result, Model model, HttpSession session) {
         if(result.hasErrors()) {
             return "new-account";
         }
@@ -68,6 +70,8 @@ public class UserController {
         }
 
         model.addAttribute("user", user); //Ekki?
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         //model.addAttribute("books", bookService.findAll()); // Maybe?
         return "welcome-user";
     }
@@ -76,9 +80,11 @@ public class UserController {
      * Returns a page with information about a particular user.
      */
     @RequestMapping(value ="/viewuser/{username}", method = RequestMethod.GET)
-    public String viewUser(@PathVariable("username") String username, Model model) {
+    public String viewUser(@PathVariable("username") String username, Model model, HttpSession session) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         model.addAttribute("user", user);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "user-info";
     }
 
@@ -87,10 +93,12 @@ public class UserController {
      * information.
      */
     @RequestMapping(value="/updateUserInfo", method = RequestMethod.GET)
-    public String userInfoForm(User user, HttpSession session) {
+    public String userInfoForm(User user, HttpSession session, Model model) {
         if ((User) session.getAttribute("LoggedInUser") == null) {
             return "please-log-in";
         }
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "update-userinfo";
     }
 
@@ -107,7 +115,8 @@ public class UserController {
         current.setInfo(user.info);
         userService.save(current);
         model.addAttribute("user", current);
-        return "users";
+        model.addAttribute("loggedIn", sessionUser);
+        return "user-info";
     }
 
 

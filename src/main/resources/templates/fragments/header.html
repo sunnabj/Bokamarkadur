@@ -131,7 +131,10 @@
                     </form></li>
                 </ul>
                 <ul class="nav navbar-nav">
-                    <li><a href="/login"> Login</a></li>
+                    <li>
+                        <a th:if="${loggedIn == null}" href="/login">Login</a>
+                        <a th:if="${loggedIn != null}" href="/logout">Logout</a>
+                    </li>
                     <li><a href="/newAccount">Sign Up</a></li>
                     <li><a href="/aboutus">About Us</a></li>
                 </ul>

@@ -37,9 +37,10 @@
 <body>
 <div layout:fragment="content" class="container">
     <h1>Bókamarkaður - Book exchange market for students</h1>
-<!--
+
     <br>
     <h3>Recently added</h3>
+<!--
     <table class="table table-responsive">
         <thead>
         <tr>
@@ -72,7 +73,10 @@
         <span class="cell" >
         <tr>
             <td>
-                <p><a th:href="@{/viewbook/{id}(id=${book.id})}"><img th:src="${book.image}" class="image" alt="No Image"/></a></p>
+                <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
+                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
+                    <img th:if="${book.image == null}" th:src="blanco.png" class="image" alt="No Image"/>
+                </a></p>
             </td>
         </tr>
         <tr>
@@ -91,8 +95,8 @@
         </div>
     </fieldset>
 </div>
-<!--
-    <h3>Current subjects available</h3>
+
+    <h3>Currently available subjects</h3>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -111,7 +115,7 @@
     <p><a href="/myBooks">My Books</a></p>
     <p><a href="/logout">Logout</a></p>
 
--->
+
     <div class="jumbotron">
     <!--<p><a href="/all-books">View all books</a></p>
     <p><a href="/newbook">Add a new book</a></p>

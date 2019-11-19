@@ -47,7 +47,9 @@ public class BookController {
      * Returns a page where you can see all books available on site, both for sale and requested.
      */
     @RequestMapping(value="/all-books", method = RequestMethod.GET)
-    public String allBooks(Model model) {
+    public String allBooks(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         model.addAttribute("books", bookService.findAll());
         return "all-books";
     }
@@ -63,16 +65,18 @@ public class BookController {
         //Deletes this book and returns the list of books again.
         bookService.delete(book);
         model.addAttribute("books", bookService.findAll());
-        return "Home";
+        return "redirect:/";
     }
 
     /*
      * Returns a page with information about a particular book
      */
     @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.GET)
-    public String viewBook(@PathVariable("id") long id, Model model) {
+    public String viewBook(@PathVariable("id") long id, Model model, HttpSession session) {
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         model.addAttribute("book", book);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "book-info";
     }
 
@@ -80,10 +84,12 @@ public class BookController {
      * Returns a page where the user can choose to either put up a book for sale or request a book.
      */
     @RequestMapping(value="/newbook", method = RequestMethod.GET)
-    public String addBook(HttpSession session) {
+    public String addBook(HttpSession session, Model model) {
         if ((User) session.getAttribute("LoggedInUser") == null) {
             return "please-log-in";
         }
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "add-book";
     }
 
@@ -91,7 +97,9 @@ public class BookController {
      * Returns a page of about development.
      */
     @RequestMapping(value="/aboutus", method = RequestMethod.GET)
-    public String aboutus() {
+    public String aboutus(HttpSession session, Model model) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "about-us";
     }
 
@@ -125,6 +133,7 @@ public class BookController {
         book.setUser(current);
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
+        model.addAttribute("loggedIn", sessionUser);
         return "Success";
     }
 
@@ -132,7 +141,9 @@ public class BookController {
      * Returns a page where a user can put up a book for sale.
      */
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
-    public String addBookForSaleForm(Book book) {
+    public String addBookForSaleForm(Book book,Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "sell-book";
     }
 
@@ -162,6 +173,7 @@ public class BookController {
         book.setUser(current);
         bookService.save(book);
         model.addAttribute("books", bookService.findAll());
+        model.addAttribute("loggedIn", sessionUser);
         return "Success";
     }
 
@@ -169,7 +181,9 @@ public class BookController {
      * Returns a page where a user can request a book.
      */
     @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
-    public String addRequestBook(Book book) {
+    public String addRequestBook(Book book, Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "request-book";
     }
 
@@ -178,9 +192,11 @@ public class BookController {
      * a chosen subject.
      */
     @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
-    public String viewsubjectbooks(@PathVariable("subjects") Subjects subject, Model model) {
+    public String viewsubjectbooks(@PathVariable("subjects") Subjects subject, Model model, HttpSession session) {
         List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
         model.addAttribute("Books", subjectbooks);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
         return "subject-results";
     }
 
@@ -197,6 +213,7 @@ public class BookController {
         }
         User current = userService.findByUsername(sessionUser.getUsername());
         model.addAttribute("books", bookService.findByUser(current));
+        model.addAttribute("loggedIn", sessionUser);
         return "my-books";
     }
 
