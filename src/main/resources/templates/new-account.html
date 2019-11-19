@@ -8,7 +8,7 @@
 
 <body>
 <div layout:fragment="content" class="container">
-
+    <div class="jumbotron">
 <fieldset>
         <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post" >
             <legend>Create a user account</legend>
@@ -42,6 +42,7 @@
     </fieldset>
 
     <p><a href="/">Return to frontpage</a></p>
+    </div>
     </div>
 </body>
 

@@ -14,7 +14,7 @@
 
 <body>
 <div layout:fragment="content" class="container">
-
+    <div class="jumbotron">
 
 <div th:switch="${books}">
     <h2 th:case="null">No books yet!</h2>
@@ -58,7 +58,7 @@
 <p><a href="/login">Login</a></p>
 <p><a href="/newAccount">Create a new account</a></p>
 <p><a href="/search">Search for a book</a></p>
-
+    </div>
 </div>
 </body>
 </html>

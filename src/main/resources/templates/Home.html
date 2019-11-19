@@ -65,11 +65,8 @@
 
 
 <div class="container">
-
+    <h3>Recently added</h3>
     <fieldset class="scrollfield">
-
-
-
         <div class="itable wrapper" >
     <table width=200  th:each="book : ${books}" class="books">
         <span class="cell" >
@@ -81,13 +78,11 @@
         <tr>
             <p><td th:text="${book.title}"></td></p>
         </tr>
-
         <tr>
             <div id="my_box">
                 <p><td th:text="${book.author}"></td></p>
             </div>
         </tr>
-
         <tr>
             <p><td th:text="${book.price}"></td></p>
         </tr>
