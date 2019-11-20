@@ -37,11 +37,11 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     // But for now I add on to the original method and have another method, 'findConversation',
     // to return the conversation as whole between the two users, that is all messages between
     // the two users (sender and receiver) relevant to the book in question.
-    Message findMessage(User sender, User receiver, Book book);
+    //Message findMessage(User sender, User receiver, Book book);
 
     // Returns the list of messages between the two users (i.e.
     // it shows the conversation between them regarding a specific book).
-    List<Message> findConversation(User sender, User receiver, Book book);
+    //List<Message> findConversation(User sender, User receiver, Book book);
 
 
     // Not sure if we would ever want or need to get allMessages, but to be save it is here.
@@ -52,12 +52,12 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     // Not sure if we would ever want or need to find all messages for some user (which would
     // include all messages to all users about any and all books), but to be save it is here.
-    List<Message> findByUser(User user);
+    //List<Message> findByUser(User user);
 
     // Not sure if we would ever want or need to find all messages for one specific book,
     // from all users that have sent messages about that book title, but to be save it is here.
-    List<Message> findByBook(Book book);
+    //List<Message> findByBook(Book book);
 
-    Optional<Message> acceptMessage(Message message, User user, Book book);
+    //Optional<Message> acceptMessage(Message message, User user, Book book);
 
 }

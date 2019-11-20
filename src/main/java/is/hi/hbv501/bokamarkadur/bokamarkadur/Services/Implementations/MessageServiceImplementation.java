@@ -39,12 +39,12 @@ public class MessageServiceImplementation implements MessageService {
         return repository.findAll();
     }
 
-    @Override
-    public Message findByUser(String user) { return repository.findByUser(user); }
+    //@Override
+    //public List<Message> findByUser(String user) { return repository.findByUser(user); }
 
     // acceptMessage(Message message, User user, Book book);
-    @Override
-    public Optional<Message> acceptMessage(Message message, User user, Book book) { return repository.acceptMessage(message, user, book); }
+    //@Override
+    //public Optional<Message> acceptMessage(Message message, User user, Book book) { return repository.acceptMessage(message, user, book); }
 
 
 

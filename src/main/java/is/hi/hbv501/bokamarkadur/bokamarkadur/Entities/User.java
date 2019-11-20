@@ -33,6 +33,12 @@ public class User {
     @OneToMany(targetEntity=Book.class,mappedBy="user",cascade={CascadeType.ALL},orphanRemoval=true)
     private List<Book> books = new ArrayList<>();
 
+    @OneToMany(targetEntity=Message.class, mappedBy="receiver")
+    private List<Message> receivedMessages = new ArrayList<>();
+
+    @OneToMany(targetEntity=Message.class, mappedBy="sender")
+    private List<Message> sentMessages = new ArrayList<>();
+
     public User() {
 
     }
@@ -85,9 +91,25 @@ public class User {
 
     public void setBooks(List<Book> books) { this.books = books; }
 
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> received) {
+        this.receivedMessages = received;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sent) {
+        this.sentMessages = sent;
+    }
+
 
     public User(long id, String name, String username, String password, String info,
-                String email, List<Book> books) {
+                String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -95,11 +117,14 @@ public class User {
         this.info = info;
         this.email = email;
         this.books = books;
+        this.sentMessages = sentMessages;
+        this.receivedMessages = receivedMessages;
     }
 
     @Override
     public String toString() {
         return this.username;
     }
+
 
 }

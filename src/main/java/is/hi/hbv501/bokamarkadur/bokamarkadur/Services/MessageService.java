@@ -10,17 +10,16 @@ import java.util.Optional;
 public interface MessageService {
 
     /*
-     * These functions represent the queries explained in the UserRepository,
+     * These functions represent the queries explained in the MessageRepository,
      * and serve as a layer between the controller and the database.
      */
 
     Message save(Message message);
     Optional<Message> findById(long id);
     List<Message> findAll();
-    Message findByUser(String user);
-    List<Message> findByBook(Book book);
+    //List<Message> findByUser(String user);
+    //List<Message> findByBook(Book book);
 
     // acceptMessage(Message message, User user, Book book);
-    @Override
-    Message acceptMessage(Message message, User user, Book book);
+    //Message acceptMessage(Message message, User user, Book book);
 }

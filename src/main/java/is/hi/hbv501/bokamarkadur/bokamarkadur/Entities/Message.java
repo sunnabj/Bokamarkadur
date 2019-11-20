@@ -15,17 +15,21 @@ public class Message {
     private long id;
 
 
+    @ManyToOne(targetEntity=User.class)
     public User sender;
+
+    @ManyToOne(targetEntity=User.class)
     public User receiver;
+
+    @ManyToOne(targetEntity=Book.class)
     public Book book;
+
     public String message;
 
 
-
-
     //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)
-    @OneToMany(mappedBy="message")
-    private List<Message> messages = new ArrayList<>();
+    //@OneToMany(mappedBy="message")
+    //private List<Message> messages = new ArrayList<>();
 
     public Message() {
 
@@ -48,13 +52,9 @@ public class Message {
         this.sender = sender;
     }
 
-    public User getReceiver() {
-        return receiver;
-    }
+    public User getReceiver() { return receiver; }
 
-    public void setReceiver(User receiver) {
-        this.receiver = receiver;
-    }
+   public void setReceiver(User receiver) { this.receiver = receiver; }
 
     public String getMessage() {
         return message;
@@ -63,10 +63,6 @@ public class Message {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
-    public List<Message> getMessages() { return messages; }
-
 
     public Message(long id, String message, User sender, User receiver, Book book) {
         this.id = id;
