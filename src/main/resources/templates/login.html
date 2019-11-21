@@ -2,6 +2,11 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
+    <style>
+        .alert{
+            padding: 0px;
+        }
+    </style>
     <title>Login</title>
 </head>
 
@@ -14,13 +19,14 @@
 <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
     <div>
         <label for="username">Username</label>
-        <input type="text" name="username" id="username" th:field="*{username}" placeholder="Enter your username" class="form-control"/>
+        <input type="text" th:field="*{username}" id="username" placeholder="Enter your username" class="form-control" required>
+        <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></span>
     </div>
     <div>
         <label for="password">Password</label>
-        <input type="password" name="password" id="password" th:value="*{password}" placeholder="Enter your passwords" class="form-control"/>
+        <input type="password" th:field="*{password}" id="Password" placeholder="Enter your passwords" class="form-control" required>
+        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></span>
     </div>
-    <span th:if="${logError != null}" class="error">Wrong user or password</span>
     <input type="submit" value="Login" class="btn btn-default"/>
 </form>
 <p><a href="/">Return to frontpage</a></p>

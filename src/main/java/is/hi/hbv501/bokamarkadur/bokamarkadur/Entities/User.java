@@ -3,8 +3,6 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +25,13 @@ public class User {
     private long id;
     public String info;
 
-    @NotNull
     @Size(min = 2, message = "Length should be in at least 2 digits")
     public String name;
 
-    @NotEmpty
     @Size(min = 2, message = "Length should be at least 2 digits")
     public String username;
 
 
-    @NotEmpty(message = "Email field should not be empty")
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
 
