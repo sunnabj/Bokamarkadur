@@ -20,6 +20,7 @@
         <label for="password">Password</label>
         <input type="password" name="password" id="password" th:value="*{password}" placeholder="Enter your passwords" class="form-control"/>
     </div>
+    <span th:if="${logError != null}" class="error">Wrong user or password</span>
     <input type="submit" value="Login" class="btn btn-default"/>
 </form>
 <p><a href="/">Return to frontpage</a></p>

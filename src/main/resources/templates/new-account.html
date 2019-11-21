@@ -2,6 +2,23 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
+    <style>
+        .error {
+            color: #D8000C;
+            background-color: #FFD2D2;
+            border: 1px solid #ffb8e7;
+            display:table;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 40px;
+            border-radius: 15px;
+        }
+        .alert{
+            padding: 0px;
+        }
+
+        .text-field{}
+    </style>
     <title>Book exchange market for students</title>
 </head>
 
@@ -9,33 +26,34 @@
 <body>
 <div layout:fragment="content" class="container">
     <div class="jumbotron">
+        <span th:text="${message}" class="error"></span>
+        <br>
 <fieldset>
-        <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post" >
+        <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post" class="text-field">
             <legend>Create a user account</legend>
             <div>
                 <label for="name">Name</label>
                 <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control" required>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></span>
             </div>
             <div>
                 <label for="email">Email</label>
                 <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control" required>
-                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></span>
             </div>
             <div>
                 <label for="username">Username</label>
                 <input type="text" th:field="*{username}" id="username" placeholder="Username" class="form-control" required>
-                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></span>
             </div>
             <div>
                 <label for="password">Password</label>
-                <input type="password" th:field="*{password}" id="password" placeholder="Password" class="form-control" required>
-                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <input type="password" th:field="*{password}" id="Password" placeholder="Password" class="form-control" required>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></span>
             </div>
             <div>
-                <label>
-                    Reenter password: <input type="password" class="form-control" required>
-                </label>
+                <label for="retypePassword">Confirm Password</label>
+                <input type="password" th:field="*{retypePassword}" id="retypePassword" placeholder="Confirm Password" class="form-control" required>
             </div>
             <input type="submit" value="Confirm" class="btn btn-default" >
         </form>
@@ -44,6 +62,20 @@
     <p><a href="/">Return to frontpage</a></p>
     </div>
     </div>
+<script>
+    $('#confirm_password').keyup(function () {
+        var password = $('password').val();
+        var confirmpass = $('confirm_pass').val();
+
+        if(password != confirmpass) {
+            $('#showErrorPwd').html('Password are not matching');
+            return false;
+        } else {
+            return true;
+        }
+    })
+
+</script>
 </body>
 
 <footer>

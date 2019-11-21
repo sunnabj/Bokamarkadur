@@ -2,6 +2,10 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +25,35 @@ public class User {
     // Automatic generation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    public String name;
-    public String username;
-    public String email;
-    public String password;
     public String info;
+
+    @NotNull
+    @Size(min = 2, message = "Length should be in at least 2 digits")
+    public String name;
+
+    @NotEmpty
+    @Size(min = 2, message = "Length should be at least 2 digits")
+    public String username;
+
+
+    @NotEmpty(message = "Email field should not be empty")
+    @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
+    private String email;
+
+    @Size(min = 3, message = "Remind me to change it before erase dummy database !!! Length should be at least 8 digits (not 3 for now)")
+    public String password;
+
+    public String getRetypePassword() {
+        return retypePassword;
+    }
+
+    public void setRetypePassword(String retypePassword) {
+        this.retypePassword = retypePassword;
+    }
+
+    @Transient
+    public String retypePassword ;
+
 
     // One user can have many books in the database
     //@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
@@ -86,7 +113,7 @@ public class User {
     public void setBooks(List<Book> books) { this.books = books; }
 
 
-    public User(long id, String name, String username, String password, String info,
+    public User(long id, String name, String username, String password, String retypePassword, String info,
                 String email, List<Book> books) {
         this.id = id;
         this.name = name;
@@ -95,6 +122,7 @@ public class User {
         this.info = info;
         this.email = email;
         this.books = books;
+        this.retypePassword = retypePassword;
     }
 
     @Override
