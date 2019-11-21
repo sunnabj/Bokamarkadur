@@ -1,9 +1,11 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.MessageService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +37,13 @@ public class BookController {
 
     private BookService bookService;
     private UserService userService;
+    private MessageService messageService;
 
     @Autowired
-    public BookController(BookService bookService, UserService userService){
+    public BookController(BookService bookService, UserService userService, MessageService messageService){
         this.bookService = bookService;
         this.userService = userService;
+        this.messageService = messageService;
     }
 
 
@@ -80,6 +84,47 @@ public class BookController {
         return "book-info";
     }
 
+    /*
+     * Sends a message to the person selling/requesting the book you are viewing.
+
+    @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.POST)
+    public String messageBook(@Valid Message message, BindingResult result, Model model, HttpSession session) {
+        //Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
+        //model.addAttribute("book", book);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        //message.setReceiver(book.getUser());
+        message.setSender(userService.findByUsername(sessionUser.getUsername()));
+        //message.setBook(book);
+        return "messageBox";
+    }
+*/
+
+    @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
+    public String messageBook(@PathVariable("id") long id, @Valid Message message,
+                              BindingResult result, Model model, HttpSession session) {
+        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
+        model.addAttribute("message", message);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        User current = userService.findByUsername(sessionUser.getUsername());
+        message.setBook(book);
+        message.setSender(current);
+        message.setReceiver(book.getUser());
+        messageService.save(message);
+
+        return "redirect:/";
+    }
+
+
+    @RequestMapping(value="/messageBook/{id}", method = RequestMethod.GET)
+    public String sendRequest(@PathVariable("id") long id, Model model, HttpSession session) {
+        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
+        model.addAttribute("book", book);
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        return "messageBox";
+    }
     /*
      * Returns a page where the user can choose to either put up a book for sale or request a book.
      */
@@ -141,7 +186,7 @@ public class BookController {
      * Returns a page where a user can put up a book for sale.
      */
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
-    public String addBookForSaleForm(Book book,Model model, HttpSession session) {
+    public String addBookForSaleForm(Book book, Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
         return "sell-book";

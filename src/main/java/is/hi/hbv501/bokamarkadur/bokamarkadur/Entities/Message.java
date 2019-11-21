@@ -24,7 +24,7 @@ public class Message {
     @ManyToOne(targetEntity=Book.class)
     public Book book;
 
-    public String message;
+    public String body;
 
 
     //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)
@@ -57,16 +57,20 @@ public class Message {
    public void setReceiver(User receiver) { this.receiver = receiver; }
 
     public String getMessage() {
-        return message;
+        return body;
     }
 
     public void setMessage(String message) {
-        this.message = message;
+        this.body = message;
     }
 
-    public Message(long id, String message, User sender, User receiver, Book book) {
+    public Book getBook() { return book; }
+
+    public void setBook(Book book) { this.book = book; }
+
+    public Message(long id, String body, User sender, User receiver, Book book) {
         this.id = id;
-        this.message = message;
+        this.body = body;
         this.sender = sender;
         this.receiver = receiver;
         this.book = book;

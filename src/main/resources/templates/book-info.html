@@ -41,7 +41,19 @@
             <label><b>User</b></label>
             <label><td><a th:href="@{/viewuser/{id}(id=${book.user})}" th:text="${book.user}"></a></td></label>
         </div>
+        <div>
+            <label><b>Request book</b></label>
+            <label><td><a th:href="@{/messageBook/{id}(id=${book.id})}" th:text="${book.id}"></a></td></label>
+        </div>
     </div>
+<!--
+    <div>
+        <form action="#" th:action="@{/sendRequest}" th:object="${message}" method="get">
+            <label>Do you want to buy/sell this book? Let the user know!</label>
+                <input type="submit" value="Submit">
+        </form>
+    </div>
+-->
 
 
     <p><a href="/">Return to frontpage</a></p>
