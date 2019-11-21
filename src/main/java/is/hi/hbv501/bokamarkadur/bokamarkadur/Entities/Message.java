@@ -14,6 +14,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public String body;
 
     @ManyToOne(targetEntity=User.class)
     public User sender;
@@ -23,8 +24,6 @@ public class Message {
 
     @ManyToOne(targetEntity=Book.class)
     public Book book;
-
-    public String body;
 
 
     //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
+<head>
+    <title>Update user infomation</title>
+</head>
+
+
+<body>
+<div layout:fragment="content" class="container">
+
+    <h2>Send a message</h2>
+
+    <form action="#" th:action="@{/messageBook/{id}(id=${book.id})}" th:object="${message}" method="post">
+        <label for="body">You want this book? Send a message!</label>
+
+        <div>
+            <textarea rows="4", cols="50" th:field="*{body}" id="body" placeholder="Message"></textarea>
+            <span th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
+        </div>
+
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+</body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
+</html>
