@@ -2,17 +2,17 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <title>Send a message to user</title>
+    <title>Reply to a message</title>
 </head>
 
 
 <body>
 <div layout:fragment="content" class="container">
 
-    <h2>Send a message</h2>
+    <h2>Send a reply</h2>
 
-    <form action="#" th:action="@{/messageBook/{id}(id=${book.id})}" th:object="${message}" method="post">
-        <label for="messageBody">Send a message to <label for="name"><td th:text="${book.user.name}" id="name" placeholder="Name"></td></label>!</label>
+    <form action="#" th:action="@{/replyMessage/{id}(id=${initialMessage.id})}" th:object="${newMessage}" method="post">
+        <label for="messageBody">Send a reply to <label for="name"><td th:text="${initialMessage.sender.name}" id="name" placeholder="Name"></td></label>!</label>
         <div>
             <textarea rows="4", cols="50" th:field="*{messageBody}" id="messageBody" placeholder="Write something"></textarea>
             <span th:if="${#fields.hasErrors('messageBody')}" th:errors="*{messageBody}"></span>

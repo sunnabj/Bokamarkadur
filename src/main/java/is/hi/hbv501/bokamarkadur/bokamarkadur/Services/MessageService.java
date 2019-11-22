@@ -17,7 +17,8 @@ public interface MessageService {
     Message save(Message message);
     Optional<Message> findById(long id);
     List<Message> findAll();
-    //List<Message> findByUser(String user);
+    List<Message> findByReceiver(User receiver);
+    List<Message> findBySender(User sender);
     //List<Message> findByBook(Book book);
 
     // acceptMessage(Message message, User user, Book book);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class MessageController {
@@ -67,5 +68,90 @@ public class MessageController {
         model.addAttribute("message", message);
         return "messageBox";
     }
+
+
+    @RequestMapping(value="/myMessages", method = RequestMethod.GET)
+    public String viewMessages(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        if (sessionUser == null) {
+            return "please-log-in";
+        }
+        User current = userService.findByUsername(sessionUser.getUsername());
+        List<Message> receivedMessages = messageService.findByReceiver(current);
+        //Prófa að prenta
+        System.out.println("Received messages:");
+        for (int i = 0; i < receivedMessages.size(); i++) {
+            System.out.println(receivedMessages.get(i));
+        }
+        model.addAttribute("receivedmessages", receivedMessages);
+
+        List<Message> sentMessages = messageService.findBySender(current);
+        //Prófa að prenta
+        System.out.println("Sent messages:");
+        for (int i = 0; i < sentMessages.size(); i++) {
+            System.out.println(sentMessages.get(i));
+        }
+        model.addAttribute("sentmessages", sentMessages);
+        return "myMessages";
+    }
+
+    // Opnar síðu þar sem þú getur svarað skilaboði sem þú ýttir á
+    @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.GET)
+    public String pushReply(@PathVariable("id") long id, Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        if (sessionUser == null) {
+            return "please-log-in";
+        }
+        // Skilaboðin sem þú ert að svara
+        Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
+        // Ný tóm skilaboð inn í módelið -> Reply skilaboðin sem þú ætlar að skrifa
+        Message newMessage = new Message();
+        model.addAttribute("newMessage", newMessage);
+        //Þarf þetta? Virðist engu breyta
+        model.addAttribute("initialMessage", initialMessage);
+        return "replyMessage";
+    }
+
+    // Sendir reply skilaboð sem þú skrifar
+    @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
+    public String sendReply(@PathVariable("id") long id, @Valid Message newMessage, Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        if (sessionUser == null) {
+            return "please-log-in";
+        }
+        // Skilaboðin sem þú ert að svara
+        Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
+        model.addAttribute("initialMessage", initialMessage);
+        // Ný skilaboð sett inn af módelinu
+        model.addAttribute("newMessage", newMessage);
+        newMessage.setBook(initialMessage.getBook());
+        User current = userService.findByUsername(sessionUser.getUsername());
+        newMessage.setSender(current);
+        newMessage.setReceiver(initialMessage.getSender());
+        messageService.save(initialMessage);
+        messageService.save(newMessage);
+        return "redirect:/myMessages";
+    }
+
+
+    /*
+    @RequestMapping(value="/myMessages", method = RequestMethod.POST)
+    public String viewMessages(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        if (sessionUser == null) {
+            return "please-log-in";
+        }
+        User current = userService.findByUsername(sessionUser.getUsername());
+        List<Message> receivedMessages = messageService.findByReceiver(current);
+        model.addAttribute("receivedmessages", receivedMessages);
+        List<Message> sentMessages = messageService.findBySender(current);
+        model.addAttribute("sentmessages", sentMessages);
+        return "myMessages";
+    }
+     */
 
 }

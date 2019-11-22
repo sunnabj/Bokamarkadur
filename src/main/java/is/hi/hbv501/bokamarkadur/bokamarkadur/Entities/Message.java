@@ -75,4 +75,9 @@ public class Message {
         this.book = book;
     }
 
+    @Override
+    public String toString() {
+        return this.messageBody;
+    }
+
 }

@@ -52,7 +52,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     // Not sure if we would ever want or need to find all messages for some user (which would
     // include all messages to all users about any and all books), but to be save it is here.
-    //List<Message> findByUser(User user);
+    List<Message> findByReceiver(User receiver);
+    List<Message> findBySender(User sender);
 
     // Not sure if we would ever want or need to find all messages for one specific book,
     // from all users that have sent messages about that book title, but to be save it is here.
