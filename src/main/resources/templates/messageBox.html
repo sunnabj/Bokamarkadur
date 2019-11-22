@@ -12,11 +12,11 @@
     <h2>Send a message</h2>
 
     <form action="#" th:action="@{/messageBook/{id}(id=${book.id})}" th:object="${message}" method="post">
-        <label for="body">You want this book? Send a message!</label>
+        <label for="messageBody">You want this book? Send a message!</label>
 
         <div>
-            <textarea rows="4", cols="50" th:field="*{body}" id="body" placeholder="Message"></textarea>
-            <span th:if="${#fields.hasErrors('body')}" th:errors="*{body}"></span>
+            <textarea rows="4", cols="50" th:field="*{messageBody}" id="messageBody" placeholder="String"></textarea>
+            <span th:if="${#fields.hasErrors('messageBody')}" th:errors="*{messageBody}"></span>
         </div>
 
         <div>

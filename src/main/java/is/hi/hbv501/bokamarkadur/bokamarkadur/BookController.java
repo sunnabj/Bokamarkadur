@@ -85,47 +85,6 @@ public class BookController {
     }
 
     /*
-     * Sends a message to the person selling/requesting the book you are viewing.
-
-    @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.POST)
-    public String messageBook(@Valid Message message, BindingResult result, Model model, HttpSession session) {
-        //Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        //model.addAttribute("book", book);
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        //message.setReceiver(book.getUser());
-        message.setSender(userService.findByUsername(sessionUser.getUsername()));
-        //message.setBook(book);
-        return "messageBox";
-    }
-*/
-
-    @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
-    public String messageBook(@PathVariable("id") long id, @Valid Message message,
-                              BindingResult result, Model model, HttpSession session) {
-        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        model.addAttribute("message", message);
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        User current = userService.findByUsername(sessionUser.getUsername());
-        message.setBook(book);
-        message.setSender(current);
-        message.setReceiver(book.getUser());
-        messageService.save(message);
-
-        return "redirect:/";
-    }
-
-
-    @RequestMapping(value="/messageBook/{id}", method = RequestMethod.GET)
-    public String sendRequest(@PathVariable("id") long id, Model model, HttpSession session) {
-        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        model.addAttribute("book", book);
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "messageBox";
-    }
-    /*
      * Returns a page where the user can choose to either put up a book for sale or request a book.
      */
     @RequestMapping(value="/newbook", method = RequestMethod.GET)

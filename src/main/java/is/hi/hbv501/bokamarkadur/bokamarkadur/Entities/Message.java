@@ -14,7 +14,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public String body;
+    public String messageBody;
 
     @ManyToOne(targetEntity=User.class)
     public User sender;
@@ -55,21 +55,21 @@ public class Message {
 
    public void setReceiver(User receiver) { this.receiver = receiver; }
 
-    public String getMessage() {
-        return body;
+    public String getMessageBody() {
+        return messageBody;
     }
 
-    public void setMessage(String message) {
-        this.body = message;
+    public void setMessageBody(String messageBody) {
+        this.messageBody = messageBody;
     }
 
     public Book getBook() { return book; }
 
     public void setBook(Book book) { this.book = book; }
 
-    public Message(long id, String body, User sender, User receiver, Book book) {
+    public Message(long id, String messageBody, User sender, User receiver, Book book) {
         this.id = id;
-        this.body = body;
+        this.messageBody = messageBody;
         this.sender = sender;
         this.receiver = receiver;
         this.book = book;
