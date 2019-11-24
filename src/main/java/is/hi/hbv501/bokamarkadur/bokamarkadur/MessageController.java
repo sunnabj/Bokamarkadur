@@ -50,7 +50,7 @@ public class MessageController {
         message.setReceiver(book.getUser());
         messageService.save(message);
         System.out.println("ID á new Message í request message POST eftir save: " + message.getId());
-        return "messageSuccess";
+        return "redirect:/myMessages";
     }
 
     /*
@@ -65,6 +65,10 @@ public class MessageController {
         }
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         model.addAttribute("book", book);
+        User current = userService.findByUsername(sessionUser.getUsername());
+        if (current == book.getUser()) {
+            return "notSameUser";
+        }
         Message message = new Message();
         System.out.println("ID á new Message í request message GET: " + message.getId());
         model.addAttribute("message", message);
@@ -98,6 +102,10 @@ public class MessageController {
         }
         // Skilaboðin sem þú ert að svara
         Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
+        User current = userService.findByUsername(sessionUser.getUsername());
+        if (current == initialMessage.getSender()) {
+            return "notSameUser";
+        }
         // Ný tóm skilaboð inn í módelið -> Reply skilaboðin sem þú ætlar að skrifa
         Message newMessage = new Message();
         model.addAttribute("newMessage", newMessage);
