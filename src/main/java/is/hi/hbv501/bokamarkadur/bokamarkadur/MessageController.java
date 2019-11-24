@@ -38,6 +38,7 @@ public class MessageController {
     public String messageBook(@PathVariable("id") long id, @Valid Message message,
                               Model model, HttpSession session) {
 
+        System.out.println("ID á new Message í request message POST: " + message.getId());
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         model.addAttribute("book", book);
         model.addAttribute("message", message);
@@ -48,7 +49,7 @@ public class MessageController {
         message.setSender(current);
         message.setReceiver(book.getUser());
         messageService.save(message);
-
+        System.out.println("ID á new Message í request message POST eftir save: " + message.getId());
         return "messageSuccess";
     }
 
@@ -65,6 +66,7 @@ public class MessageController {
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         model.addAttribute("book", book);
         Message message = new Message();
+        System.out.println("ID á new Message í request message GET: " + message.getId());
         model.addAttribute("message", message);
         return "messageBox";
     }
@@ -82,7 +84,7 @@ public class MessageController {
         //Prófa að prenta
         System.out.println("Received messages:");
         for (int i = 0; i < receivedMessages.size(); i++) {
-            System.out.println(receivedMessages.get(i));
+            System.out.println(receivedMessages.get(i) + " hefur ID: " + receivedMessages.get(i).getId());
         }
         model.addAttribute("receivedmessages", receivedMessages);
 
@@ -90,7 +92,7 @@ public class MessageController {
         //Prófa að prenta
         System.out.println("Sent messages:");
         for (int i = 0; i < sentMessages.size(); i++) {
-            System.out.println(sentMessages.get(i));
+            System.out.println(sentMessages.get(i) + " hefur ID: " + sentMessages.get(i).getId());
         }
         model.addAttribute("sentmessages", sentMessages);
         return "myMessages";
@@ -109,7 +111,6 @@ public class MessageController {
         // Ný tóm skilaboð inn í módelið -> Reply skilaboðin sem þú ætlar að skrifa
         Message newMessage = new Message();
         model.addAttribute("newMessage", newMessage);
-        //Þarf þetta? Virðist engu breyta
         model.addAttribute("initialMessage", initialMessage);
         return "replyMessage";
     }
@@ -126,32 +127,18 @@ public class MessageController {
         Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
         model.addAttribute("initialMessage", initialMessage);
         // Ný skilaboð sett inn af módelinu
+        String newMessageBody = newMessage.messageBody;
+        newMessage = new Message();
+        newMessage.setMessageBody(newMessageBody);
         model.addAttribute("newMessage", newMessage);
         newMessage.setBook(initialMessage.getBook());
         User current = userService.findByUsername(sessionUser.getUsername());
         newMessage.setSender(current);
         newMessage.setReceiver(initialMessage.getSender());
-        messageService.save(initialMessage);
+        //messageService.save(initialMessage);
         messageService.save(newMessage);
         return "redirect:/myMessages";
     }
 
-
-    /*
-    @RequestMapping(value="/myMessages", method = RequestMethod.POST)
-    public String viewMessages(Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        if (sessionUser == null) {
-            return "please-log-in";
-        }
-        User current = userService.findByUsername(sessionUser.getUsername());
-        List<Message> receivedMessages = messageService.findByReceiver(current);
-        model.addAttribute("receivedmessages", receivedMessages);
-        List<Message> sentMessages = messageService.findBySender(current);
-        model.addAttribute("sentmessages", sentMessages);
-        return "myMessages";
-    }
-     */
 
 }
