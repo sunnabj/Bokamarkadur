@@ -27,8 +27,7 @@
                     <td th:text="${message.sender}"></td>
                     <td th:text="${message.book}"></td>
                     <td th:text="${message.messageBody}"></td>
-                    <!--<label><td><a th:href="@{/messageBook/{id}(id=${message.book.id})}" th:text="${message.book.id}"></a></td></label>-->
-                    <label><td><a th:href="@{/replyMessage/{id}(id=${message.id})}" th:text="${message.id}"></a></td></label>
+                    <label><td><a th:href="@{/replyMessage/{id}(id=${message.id})}">Write a reply</a></td></label>
                 </tr>
                 </tbody>
             </table>

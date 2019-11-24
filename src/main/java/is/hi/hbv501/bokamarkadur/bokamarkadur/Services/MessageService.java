@@ -19,6 +19,7 @@ public interface MessageService {
     List<Message> findAll();
     List<Message> findByReceiver(User receiver);
     List<Message> findBySender(User sender);
+    //List<Message> findBySenderAndReceiverAndBook(User sender, User receiver, Book book)
     //List<Message> findByBook(Book book);
 
     // acceptMessage(Message message, User user, Book book);

@@ -81,19 +81,9 @@ public class MessageController {
         }
         User current = userService.findByUsername(sessionUser.getUsername());
         List<Message> receivedMessages = messageService.findByReceiver(current);
-        //Prófa að prenta
-        System.out.println("Received messages:");
-        for (int i = 0; i < receivedMessages.size(); i++) {
-            System.out.println(receivedMessages.get(i) + " hefur ID: " + receivedMessages.get(i).getId());
-        }
         model.addAttribute("receivedmessages", receivedMessages);
 
         List<Message> sentMessages = messageService.findBySender(current);
-        //Prófa að prenta
-        System.out.println("Sent messages:");
-        for (int i = 0; i < sentMessages.size(); i++) {
-            System.out.println(sentMessages.get(i) + " hefur ID: " + sentMessages.get(i).getId());
-        }
         model.addAttribute("sentmessages", sentMessages);
         return "myMessages";
     }
@@ -126,11 +116,11 @@ public class MessageController {
         // Skilaboðin sem þú ert að svara
         Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
         model.addAttribute("initialMessage", initialMessage);
-        // Ný skilaboð sett inn af módelinu
+        // Módelið nær í messageBody strenginn
         String newMessageBody = newMessage.messageBody;
+        // Ný skilaboð búin til með messageBody og viðeigandi upplýsingum - vistuð í gagnagrunninn.
         newMessage = new Message();
         newMessage.setMessageBody(newMessageBody);
-        model.addAttribute("newMessage", newMessage);
         newMessage.setBook(initialMessage.getBook());
         User current = userService.findByUsername(sessionUser.getUsername());
         newMessage.setSender(current);

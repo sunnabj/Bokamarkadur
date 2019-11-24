@@ -55,6 +55,8 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
     List<Message> findByReceiver(User receiver);
     List<Message> findBySender(User sender);
 
+    //List<Message> findBySenderAndReceiverAndBook(User sender, User receiver, Book book)
+
     // Not sure if we would ever want or need to find all messages for one specific book,
     // from all users that have sent messages about that book title, but to be save it is here.
     //List<Message> findByBook(Book book);
