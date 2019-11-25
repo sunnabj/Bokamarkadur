@@ -1,13 +1,12 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,15 +58,24 @@ public class UserController {
      * Returns a welcome page where the new user is addressed.
      */
     @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
-    public String addNewUser(@Valid User user, BindingResult result, Model model, HttpSession session) {
+    public String addNewUser(@Valid User user, BindingResult result, Model model, HttpSession session, Errors errors) {
         if(result.hasErrors()) {
             return "new-account";
         }
         // Checks if this username already exists. If not -> A new user is created, else not.
         User exists = userService.findByUsername(user.username);
-        if (exists == null) {
+        if (exists != null) {
+            model.addAttribute("message", "Username already exist");
+            return "new-account";
+        }
+        else if(!user.password.equals(user.retypePassword)) {
+            model.addAttribute("message", "Confirm Password is not equal to Password");
+            return "new-account";
+        } else if (exists == null && user.password.equals(user.retypePassword) ) {
             userService.save(user);
         }
+
+
 
         model.addAttribute("user", user); //Ekki?
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -118,7 +126,5 @@ public class UserController {
         model.addAttribute("loggedIn", sessionUser);
         return "user-info";
     }
-
-
 
 }

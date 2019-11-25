@@ -2,6 +2,8 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,12 +23,32 @@ public class User {
     // Automatic generation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    public String name;
-    public String username;
-    public String email;
-    public String password;
     public String info;
+
+    @Size(min = 2, message = "Length should be in at least 2 digits")
+    public String name;
+
+    @Size(min = 2, message = "Length should be at least 2 digits")
+    public String username;
+
+
+    @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
+    private String email;
+
+    @Size(min = 3, message = "Remind me to change it before erase dummy database !!! Length should be at least 8 digits (not 3 for now)")
+    public String password;
+
+    public String getRetypePassword() {
+        return retypePassword;
+    }
+
+    public void setRetypePassword(String retypePassword) {
+        this.retypePassword = retypePassword;
+    }
+
+    @Transient
+    public String retypePassword ;
+
 
     // One user can have many books in the database
     //@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
@@ -110,6 +132,8 @@ public class User {
 
     public User(long id, String name, String username, String password, String info,
                 String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
+    public User(long id, String name, String username, String password, String retypePassword, String info,
+                String email, List<Book> books) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -119,12 +143,12 @@ public class User {
         this.books = books;
         this.sentMessages = sentMessages;
         this.receivedMessages = receivedMessages;
+        this.retypePassword = retypePassword;
     }
 
     @Override
     public String toString() {
         return this.username;
     }
-
 
 }

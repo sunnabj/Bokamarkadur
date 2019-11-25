@@ -37,10 +37,7 @@
 <body>
 <div layout:fragment="content" class="container">
     <h1>Bókamarkaður - Book exchange market for students</h1>
-
-    <br>
 <!--
-    <h3>Recently added</h3>
     <table class="table table-responsive">
         <thead>
         <tr>
@@ -66,6 +63,7 @@
 
 
 <div class="container">
+    <br>
     <h3>Recently added</h3>
     <fieldset class="scrollfield">
         <div class="itable wrapper" >
@@ -75,7 +73,7 @@
             <td>
                 <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
                     <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
-                    <img th:if="${book.image == null}" th:src="blanco.png" class="image" alt="No Image"/>
+                    <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
                 </a></p>
             </td>
         </tr>
@@ -126,7 +124,7 @@
     <p><a href="/users">View all users</a></p>-->
 
 
-    </div>
+        </div>
     </div>
 </div>
 </body>
