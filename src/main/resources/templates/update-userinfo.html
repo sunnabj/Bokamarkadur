@@ -11,31 +11,17 @@
 
 <h2>Update your profile information:</h2>
 <form action="#" th:action="@{/updateUserInfo}" th:object="${user}" method="post">
-    <label for="info">Tell us a little bit about yourself</label>
-    <div>
-        <textarea rows="4", cols="50" th:field="*{info}" id="info" placeholder="Information"></textarea>
+    <div class="form-group">
+        <label for="info">Tell us a little bit about yourself</label>
+        <textarea rows="4", cols="50" th:field="*{info}" id="info" placeholder="Information" class="form-control"></textarea>
         <span th:if="${#fields.hasErrors('info')}" th:errors="*{info}"></span>
     </div>
     <div>
-        <input type="submit" value="Submit">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
 </form>
-
-<p><a href="/">Return to the frontpage</a></p>
 
 </div>
 </body>
 
-<footer>
-    <div class="footer-col col-md-3 col-sm-12 contact">
-        <div class="footer-col-inner">
-            <h3 class="title">Contact</h3>
-            <div class="row">
-                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
-                <p></i><a href="hafasamband">Contact Us</a></p>
-            </div>
-        </div>
-    </div>
-    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
-</footer>
 </html>
