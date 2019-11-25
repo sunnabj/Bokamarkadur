@@ -142,6 +142,9 @@ public class BookController {
      */
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
     public String addBookForSaleForm(Book book,Model model, HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
         return "sell-book";
@@ -182,6 +185,9 @@ public class BookController {
      */
     @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
     public String addRequestBook(Book book, Model model, HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
         return "request-book";

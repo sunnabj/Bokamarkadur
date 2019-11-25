@@ -16,8 +16,16 @@
         .alert{
             padding: 0px;
         }
-
-        .text-field{}
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        .btn {
+            margin-bottom: 20px;
+        }
+        .form-input {
+            margin-bottom: 10px;
+        }
     </style>
     <title>Book exchange market for students</title>
 </head>
@@ -30,36 +38,35 @@
         <br>
 <fieldset>
         <form action="#" th:action="@{/newAccount}" th:object="${user}" method="post" class="text-field">
-            <legend>Create a user account</legend>
-            <div>
+            <h2>Create a user account</h2>
+            <div class="form-input">
                 <label for="name">Name</label>
                 <input type="text" th:field="*{name}" id="name" placeholder="Name" class="form-control" required>
                 <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"></span>
             </div>
-            <div>
+            <div class="form-input">
                 <label for="email">Email</label>
                 <input type="text" th:field="*{email}" id="email" placeholder="Email" class="form-control" required>
                 <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"></span>
             </div>
-            <div>
+            <div class="form-input">
                 <label for="username">Username</label>
                 <input type="text" th:field="*{username}" id="username" placeholder="Username" class="form-control" required>
                 <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"></span>
             </div>
-            <div>
+            <div class="form-input">
                 <label for="password">Password</label>
                 <input type="password" th:field="*{password}" id="Password" placeholder="Password" class="form-control" required>
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"></span>
             </div>
-            <div>
+            <div class="form-input">
                 <label for="retypePassword">Confirm Password</label>
                 <input type="password" th:field="*{retypePassword}" id="retypePassword" placeholder="Confirm Password" class="form-control" required>
             </div>
-            <input type="submit" value="Confirm" class="btn btn-default" >
+            <input type="submit" value="Confirm" class="btn btn-primary" >
         </form>
     </fieldset>
 
-    <p><a href="/">Return to frontpage</a></p>
     </div>
     </div>
 <script>
@@ -78,16 +85,4 @@
 </script>
 </body>
 
-<footer>
-    <div class="footer-col col-md-3 col-sm-12 contact">
-        <div class="footer-col-inner">
-            <h3 class="title">Contact</h3>
-            <div class="row">
-                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
-                <p></i><a href="hafasamband">Contact Us</a></p>
-            </div>
-        </div>
-    </div>
-    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
-</footer>
 </html>
