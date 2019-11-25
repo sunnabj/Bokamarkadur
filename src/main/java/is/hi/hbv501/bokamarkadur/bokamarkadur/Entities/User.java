@@ -130,10 +130,8 @@ public class User {
     }
 
 
-    public User(long id, String name, String username, String password, String info,
-                String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
     public User(long id, String name, String username, String password, String retypePassword, String info,
-                String email, List<Book> books) {
+                String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
         this.id = id;
         this.name = name;
         this.username = username;
