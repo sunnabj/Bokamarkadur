@@ -133,39 +133,8 @@
                             </div>
                         </div>
                     </form></li>
-<<<<<<< HEAD
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a th:if="${loggedIn == null}" href="/login">Login</a>
-                        <a th:if="${loggedIn != null}" href="/logout">Logout</a>
-                    </li>
-                    <li><a href="/newAccount">Sign Up</a></li>
-                    <!--
-                    <li>
-                        <a th:if="${loggedIn == null}" href="/newAccount">Sign Up</a>
-                        <a th:if="${loggedIn != null}">
-                            <select name="User Activity">
-                                <option value="Add a new book">
-                                    <a href="/newbook">Add a new book</a>
-                                </option>
-                                <option value="Update profile information">
-                                    <a href="/updateUserInfo">Update your profile information</a>
-                                </option>
-                                <option value="My books">
-                                    <a href="/myBooks">My Books</a>
-                                </option>
-                                <option value="My messages">
-                                    <a href="/myMessages">My Messages</a>
-                                </option>
-                            </select>
-                        </a>
-                    </li>
-                    -->
-=======
                     <li><a th:if="${loggedIn == null}" href="/login">Login</a></li>
                     <li><a th:if="${loggedIn == null}" href="/newAccount">Sign Up</a></li>
->>>>>>> NavbarBranch
                     <li><a href="/aboutus">About Us</a></li>
                     <li th:if="${loggedIn != null}" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -175,6 +144,8 @@
                             <li><a href="/newbook">Add a New Book</a></li>
                             <li><a href="/myBooks">My Books</a></li>
                             <li><a href="/updateUserInfo">Update Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/myMessages">My Messages</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="/logout">Logout</a></li>
                         </ul>
