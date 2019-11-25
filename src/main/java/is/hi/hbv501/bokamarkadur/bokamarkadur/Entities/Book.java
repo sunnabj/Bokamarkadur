@@ -32,7 +32,7 @@ public class Book {
     @JoinColumn(name="user_username")
     private User user;
 
-    @OneToMany(targetEntity=Message.class, mappedBy="book")
+    @OneToMany(targetEntity=Message.class, mappedBy="book", cascade=CascadeType.ALL)
     private List<Message> messages;
 
     public Subjects subjects;

@@ -1,4 +1,4 @@
-package is.hi.hbv501.bokamarkadur.bokamarkadur;
+package is.hi.hbv501.bokamarkadur.bokamarkadur.Controllers;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
