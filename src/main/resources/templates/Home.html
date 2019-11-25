@@ -35,98 +35,54 @@
 
 
 <body>
-<div layout:fragment="content" class="container">
-    <h1>Bókamarkaður - Book exchange market for students</h1>
-<!--
-    <table class="table table-responsive">
-        <thead>
-        <tr>
-            <th scope="col">Image</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Status</th>
-            <th scope="col">Information</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="book : ${books}">
-            <td><img th:src="${book.image}" class="image" alt="No Image"/></td>
-            <td th:text="${book.title}"></td>
-            <td th:text="${book.author}"></td>
-            <td th:text="${book.status}"></td>
-            <td><a th:href="@{/viewbook/{id}(id=${book.id})}">View book</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <br>
--->
-
-
-<div class="container">
-    <br>
-    <h3>Recently added</h3>
-    <fieldset class="scrollfield">
-        <div class="itable wrapper" >
-    <table width=200  th:each="book : ${books}" class="books">
-        <span class="cell" >
-        <tr>
-            <td>
-                <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
-                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
-                    <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
-                </a></p>
-            </td>
-        </tr>
-        <tr>
-            <p><td th:text="${book.title}"></td></p>
-        </tr>
-        <tr>
-            <div id="my_box">
-                <p><td th:text="${book.author}"></td></p>
+    <div layout:fragment="content" class="container">
+        <h1>Bókamarkaður - Book exchange market for students</h1>
+    <div class="container">
+        <br>
+        <h3>Recently added</h3>
+        <fieldset class="scrollfield">
+            <div class="itable wrapper" >
+                <table width=200  th:each="book : ${books}" class="books">
+                    <span class="cell" >
+                        <tr>
+                            <td>
+                                <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
+                                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
+                                    <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
+                                </a></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <p><td th:text="${book.title}"></td></p>
+                        </tr>
+                        <tr>
+                            <div id="my_box">
+                                <p><td th:text="${book.author}"></td></p>
+                            </div>
+                        </tr>
+                        <tr>
+                            <p><td th:text="${book.price}"></td></p>
+                        </tr>
+                    </span>
+                </table>
             </div>
-        </tr>
-        <tr>
-            <p><td th:text="${book.price}"></td></p>
-        </tr>
-        </span>
-    </table>
-        </div>
-    </fieldset>
-</div>
+        </fieldset>
+    </div>
 
     <h3>Currently available subjects</h3>
     <table class="table table-striped">
         <thead>
-        <tr>
-            <th scope="col">Subject</th>
-        </tr>
+            <tr>
+                <th scope="col">Subject</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${subjectBooks}">
-            <td><a th:href="@{/viewsubjectbooks/{id}(id=${book.subjects})}" th:text="${book.subjects}"></a></td>
-        </tr>
+            <tr th:each="book : ${subjectBooks}">
+                <td><a th:href="@{/viewsubjectbooks/{id}(id=${book.subjects})}" th:text="${book.subjects}"></a></td>
+            </tr>
         </tbody>
     </table>
-
-    <p><a href="/newbook">Add a new book</a></p>
-    <p><a href="/updateUserInfo">Update your profile information</a></p>
-    <p><a href="/myBooks">My Books</a></p>
-    <p><a href="/myMessages">My Messages</a></p>
-    <p><a href="/logout">Logout</a></p>
-
-
-    <div class="jumbotron">
-    <!--<p><a href="/all-books">View all books</a></p>
-    <p><a href="/newbook">Add a new book</a></p>
-    <p><a href="/login">Login</a></p>
-    <p><a href="/newAccount">Create a new account</a></p>
-    <p><a href="/search">Search for a book</a></p>
-    <p><a href="/users">View all users</a></p>-->
-
-
-        </div>
     </div>
-</div>
 </body>
 
 </html>

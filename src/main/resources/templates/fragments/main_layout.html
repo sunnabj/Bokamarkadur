@@ -7,18 +7,35 @@
     <!--<link rel="stylesheet" href="/bootstrap-theme.min.css">-->
     <!-- Latest compiled and minified JavaScript -->
     <!--<script src="/bootstrap.min.js"></script>-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Oswald&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        .wrapper {
+            flex: 1 0 auto;
+            min-height: calc( 100vh - 190px );
+        }
+        .footer {
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 <body>
-<!--header.html  that's here  -->
-<div th:replace="fragments/header :: header"></div>
+    <div class="wrapper">
+        <!--header.html  that's here  -->
+        <div th:replace="fragments/header :: header"></div>
 
-<div layout:fragment="content"></div>
-<!--footer.html  that's here  -->
-<div th:replace="fragments/footer :: footer"></div>
+        <div layout:fragment="content"></div>
+
+    </div>
+    <!--footer.html  that's here  -->
+    <footer class="footer" th:replace="fragments/footer :: footer"></footer>
 </body>
 </html>
