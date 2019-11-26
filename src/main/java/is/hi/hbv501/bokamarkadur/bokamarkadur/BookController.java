@@ -175,6 +175,10 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+        if (book.getImage() == null) {
+            System.out.println("Myndin er núll!");
+        }
+        System.out.println("MYNDIN: " + book.getImage());
         book.setStatus("Requested");
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());

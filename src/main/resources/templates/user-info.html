@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
-    <title>User infomation</title>
+    <title>User Information</title>
 </head>
 
 
@@ -11,19 +11,19 @@
 
     <h2><td th:text="${user.username}"></td></h2>
     <div>
-        <label><b>Name</b></label>
+        <label><b>Name: </b></label>
         <label><td th:text="${user.name}"></td></label>
     </div>
     <div>
-        <label><b>Email</b></label>
+        <label><b>Email: </b></label>
         <label><td th:text="${user.email}"></td></label>
     </div>
     <div>
-        <label><b>Information</b></label>
+        <label><b>Information: </b></label>
         <label><td th:text="${user.info}"></td></label>
     </div>
     <div>
-        <label><b>Books</b></label>
+        <label><b>Books:</b></label>
         <ul>
             <tr th:each="book : ${user.books}">
                 <td><li><a th:href="@{/viewbook/{id}(id=${book.id})}" th:text="${book.title}">View book</a></li></td>
