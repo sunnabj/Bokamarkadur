@@ -30,7 +30,8 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private static String uploadedFolder = "/src/main/resources/static/";
+    //private static String uploadedFolder = "/src/main/resources/static/";
+    private static String uploadedFolder = "/static/";
     private static String currentDirectory = System.getProperty("user.dir");
 
     private static Date date = new Date();
