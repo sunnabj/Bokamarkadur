@@ -47,8 +47,8 @@
                         <tr>
                             <td>
                                 <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
-                                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
-                                    <img th:if="${book.image == null}" th:src="@{/Noimage.jpg}" class="image" alt="No Image"/>
+                                    <img th:if="${book.image != ''}" th:src="${book.image}" class="image" alt="No Image"/>
+                                    <img th:if="${book.image == ''}" th:src="@{/Noimage.jpg}" class="image" alt="No Image"/>
                                 </a></p>
                             </td>
                         </tr>

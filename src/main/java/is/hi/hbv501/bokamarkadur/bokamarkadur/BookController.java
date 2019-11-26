@@ -129,7 +129,7 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
-//        System.out.println("Book image " + book.getImage());
+        System.out.println("Book image " + "|" + book.getImage() + "|");
         book.setStatus("For sale");
         book.setDate(date);
         System.out.println("date: " + date);
