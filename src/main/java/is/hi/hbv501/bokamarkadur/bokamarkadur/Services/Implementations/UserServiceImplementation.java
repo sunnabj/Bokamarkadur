@@ -51,7 +51,7 @@ public class UserServiceImplementation implements UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User exists = findByUsername(user.username);
         if (exists != null) {
-            if (exists.password.equals(user.password) ||  passwordEncoder.matches(user.password, exists.password)) {
+            if (passwordEncoder.matches(user.password, exists.password)) {
                 return user;
             }
         }
