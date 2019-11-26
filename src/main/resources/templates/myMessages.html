@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
+<head>
+    <title>My messages</title>
+</head>
+
+
+<body>
+<div layout:fragment="content" class="container">
+
+    <div th:switch="${receivedmessages}">
+        <h2 th:case="null">You have not received any messages</h2>
+        <div th:case="*">
+            <h2>My received messages</h2>
+            <table class="table  table-hover">
+                <thead>
+                <tr>
+                    <th>Contact</th>
+                    <th>Book</th>
+                    <th>Message</th>
+                    <th>Reply</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message : ${receivedmessages}">
+                    <td th:text="${message.sender}"></td>
+                    <td th:text="${message.book}"></td>
+                    <td th:text="${message.messageBody}"></td>
+                    <label><td><a th:href="@{/replyMessage/{id}(id=${message.id})}">Write a reply</a></td></label>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div th:switch="${sentmessages}">
+        <h2 th:case="null">You have not sent any messages</h2>
+        <div th:case="*">
+            <h2>My sent messages</h2>
+            <table class="table  table-hover">
+                <thead>
+                <tr>
+                    <th>Contact</th>
+                    <th>Book</th>
+                    <th>Message</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message : ${sentmessages}">
+                    <td th:text="${message.receiver}"></td>
+                    <td th:text="${message.book}"></td>
+                    <td th:text="${message.messageBody}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

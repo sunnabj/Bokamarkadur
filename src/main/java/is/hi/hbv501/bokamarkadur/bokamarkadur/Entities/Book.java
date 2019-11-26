@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Book {
@@ -31,11 +32,22 @@ public class Book {
     @JoinColumn(name="user_username")
     private User user;
 
+    @OneToMany(targetEntity=Message.class, mappedBy="book", cascade=CascadeType.ALL)
+    private List<Message> messages;
+
     public Subjects subjects;
 
     // Entity constructors must be empty.
     public Book() {
 
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 
     public long getId() {
@@ -107,7 +119,8 @@ public class Book {
     public void setUser(User user) { this.user = user; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Subjects subjects, Integer price, String image, String status, Date date, User user) {
+                Subjects subjects, Integer price, String image, String status, Date date,
+                User user, List<Message> messages) {
 
         this.id = id;
         this.title = title;
@@ -120,6 +133,7 @@ public class Book {
         this.status = status;
         this.date = date;
         this.user = user;
+        this.messages = messages;
     }
 
     @Override
