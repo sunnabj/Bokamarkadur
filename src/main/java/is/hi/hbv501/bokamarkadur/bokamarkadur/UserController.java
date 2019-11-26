@@ -3,6 +3,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -72,6 +73,9 @@ public class UserController {
             model.addAttribute("message", "Confirm Password is not equal to Password");
             return "new-account";
         } else if (exists == null && user.password.equals(user.retypePassword) ) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String hashedPassword = passwordEncoder.encode(user.password);
+            user.password = hashedPassword;
             userService.save(user);
         }
 
@@ -126,5 +130,10 @@ public class UserController {
         model.addAttribute("loggedIn", sessionUser);
         return "user-info";
     }
+
+
+
+
+
 
 }

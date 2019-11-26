@@ -1,10 +1,10 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.UserRepository;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,9 +48,10 @@ public class UserServiceImplementation implements UserService {
      */
     @Override
     public User login(User user) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User exists = findByUsername(user.username);
         if (exists != null) {
-            if (exists.password.equals(user.password)) {
+            if (exists.password.equals(user.password) ||  passwordEncoder.matches(user.password, exists.password)) {
                 return user;
             }
         }
