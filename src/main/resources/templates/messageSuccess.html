@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
+<head>
+    <title>Message sent</title>
+</head>
+
+
+<body>
+<div layout:fragment="content" class="container">
+
+
+    <div th:action="@{/messageBook/{id}(id=${book.id})}" th:object="${message}" method="post">
+        <h2>Congratulations <label for="sender"><td th:text="${message.sender.name}" id="sender" placeholder="Sender"></td></label>!
+            You have sent a message!</h2>
+        <h2>The receiver is: <label for="receiver"><td th:text="${message.receiver.name}" id="receiver" placeholder="Receiver"></td></label></h2>
+        <h2>This regards the book: <label for="book"><td th:text="${message.book.title}" id="book" placeholder="Book"></td></label></h2>
+        <h2>The message is: <label for="messageBody"><td th:text="${message.messageBody}" id="messageBody" placeholder="Book"></td></label></h2>
+
+    </div>
+</div>
+</body>
+
+<footer>
+    <div class="footer-col col-md-3 col-sm-12 contact">
+        <div class="footer-col-inner">
+            <h3 class="title">Contact</h3>
+            <div class="row">
+                <p></i><a href="mailto:hi@hi.is">hi@hi.is</a></p>
+                <p></i><a href="hafasamband">Contact Us</a></p>
+            </div>
+        </div>
+    </div>
+    <a>&copy; Copyright 2019 Baldvin, Hieu, Sunna, Thordis</a>
+</footer>
+
+</html>

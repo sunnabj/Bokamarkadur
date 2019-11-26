@@ -3,8 +3,6 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,16 +25,13 @@ public class User {
     private long id;
     public String info;
 
-    @NotNull
     @Size(min = 2, message = "Length should be in at least 2 digits")
     public String name;
 
-    @NotEmpty
     @Size(min = 2, message = "Length should be at least 2 digits")
     public String username;
 
 
-    @NotEmpty(message = "Email field should not be empty")
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
 
@@ -59,6 +54,12 @@ public class User {
     //@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     @OneToMany(targetEntity=Book.class,mappedBy="user",cascade={CascadeType.ALL},orphanRemoval=true)
     private List<Book> books = new ArrayList<>();
+
+    @OneToMany(targetEntity=Message.class, mappedBy="receiver")
+    private List<Message> receivedMessages = new ArrayList<>();
+
+    @OneToMany(targetEntity=Message.class, mappedBy="sender")
+    private List<Message> sentMessages = new ArrayList<>();
 
     public User() {
 
@@ -112,9 +113,25 @@ public class User {
 
     public void setBooks(List<Book> books) { this.books = books; }
 
+    public List<Message> getReceivedMessages() {
+        return receivedMessages;
+    }
+
+    public void setReceivedMessages(List<Message> received) {
+        this.receivedMessages = received;
+    }
+
+    public List<Message> getSentMessages() {
+        return sentMessages;
+    }
+
+    public void setSentMessages(List<Message> sent) {
+        this.sentMessages = sent;
+    }
+
 
     public User(long id, String name, String username, String password, String retypePassword, String info,
-                String email, List<Book> books) {
+                String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -122,6 +139,8 @@ public class User {
         this.info = info;
         this.email = email;
         this.books = books;
+        this.sentMessages = sentMessages;
+        this.receivedMessages = receivedMessages;
         this.retypePassword = retypePassword;
     }
 

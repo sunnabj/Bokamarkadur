@@ -1,9 +1,11 @@
-package is.hi.hbv501.bokamarkadur.bokamarkadur;
+package is.hi.hbv501.bokamarkadur.bokamarkadur.Controllers;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.MessageService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,11 +37,13 @@ public class BookController {
 
     private BookService bookService;
     private UserService userService;
+    private MessageService messageService;
 
     @Autowired
-    public BookController(BookService bookService, UserService userService){
+    public BookController(BookService bookService, UserService userService, MessageService messageService){
         this.bookService = bookService;
         this.userService = userService;
+        this.messageService = messageService;
     }
 
 
@@ -142,6 +146,9 @@ public class BookController {
      */
     @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
     public String addBookForSaleForm(Book book,Model model, HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
         return "sell-book";
@@ -182,6 +189,9 @@ public class BookController {
      */
     @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
     public String addRequestBook(Book book, Model model, HttpSession session) {
+        if ((User) session.getAttribute("LoggedInUser") == null) {
+            return "please-log-in";
+        }
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
         return "request-book";

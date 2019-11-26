@@ -3,16 +3,27 @@
       layout:decorate="~{fragments/main_layout}" th="https://thymeleaf.org">
 <head>
     <title>Add book</title>
+    <style>
+        .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn {
+            width: 130px;
+            margin: 20px;
+        }
+    </style>
 </head>
 
 
 <body>
 <div layout:fragment="content" class="container">
 
-    <h3>I would like to</h3>
-    <p><a href="/addbookforsale">Sell a book</a></p>
-    <p><a href="/addrequestbook">Request a book</a></p>
-    <p><a href="/">Return to frontpage</a></p>
+    <a class="btn btn-primary btn-lg" href="/addbookforsale" role="button">Sell a Book</a>
+    <a class="btn btn-primary btn-lg" href="addrequestbook" role="button">Request a Book</a>
+
 </div>
 </body>
 

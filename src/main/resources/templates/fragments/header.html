@@ -3,7 +3,15 @@
     <nav class="navbar navbar-default navbar-fixed-top blurry">
         <style>
             *{outline: none;}
-            body { padding-top: 51px; }
+            body {
+                margin-top: 60px;
+                padding-top: 51px;
+            }
+            .navbar {
+                height: 80px;
+                display: flex;
+                align-items: center;
+            }
             .navbar .navbar-brand {padding: 5px 15px;  }
             .navbar .navbar-brand img {max-width:100%; height:auto;}
             .navbar {background-color: transparent;background-color: rgba(0,0,0,0.8); }
@@ -100,18 +108,14 @@
                     <li><a class="navbar-brand" href="../">
                         <img src="logo23.png" alt="Logo" width="105.291667" height="42"/>
                     </a></li>
-                </ul>
-                <ul class="nav navbar-nav">
                     <li><a href="/all-books">View all books</a></li>
-                    <!--<li><a href="/search">Search for a book</a></li>-->
-
                     <li><form action="#" th:action="@{/search}" th:object="${book}"  method="post" class="navbar-form input-group">
                         <select name="status" class="form-control selectstatus input-group-addon">
                             <option value="For sale">For sale</option>
                             <option value="Requested">Requested</option>
                         </select>
                         <div class="form-group">
-                        <input type="text" name="search" id="search" th:value="${search}" class="form-control selectstatus1 input-group-addon" placeholder="Search for title/author ..."/>
+                            <input type="text" name="search" id="search" th:value="${search}" class="form-control selectstatus1 input-group-addon" placeholder="Search for title/author ..."/>
                             <button type="button" class=" searchbtn">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
@@ -129,14 +133,23 @@
                             </div>
                         </div>
                     </form></li>
-                </ul>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a th:if="${loggedIn == null}" href="/login">Login</a>
-                        <a th:if="${loggedIn != null}" href="/logout">Logout</a>
-                    </li>
-                    <li><a href="/newAccount">Sign Up</a></li>
+                    <li><a th:if="${loggedIn == null}" href="/login">Login</a></li>
+                    <li><a th:if="${loggedIn == null}" href="/newAccount">Sign Up</a></li>
                     <li><a href="/aboutus">About Us</a></li>
+                    <li th:if="${loggedIn != null}" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-graduate"></i>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/newbook">Add a New Book</a></li>
+                            <li><a href="/myBooks">My Books</a></li>
+                            <li><a href="/updateUserInfo">Update Profile</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/myMessages">My Messages</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             </div><!--/.nav-collapse -->
