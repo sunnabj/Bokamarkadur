@@ -32,7 +32,8 @@ public class MessageController {
     }
 
     /*
-     * Býr til nýtt message með textanum sem maður skrifar í boxið :D
+     * Creates a new message with the text the user writes in the box, with the relevant book
+     * as attribute, and the user that added the book as receiver.
      */
     @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
     public String messageBook(@PathVariable("id") long id, @Valid Message message,
@@ -49,12 +50,11 @@ public class MessageController {
         message.setSender(current);
         message.setReceiver(book.getUser());
         messageService.save(message);
-        System.out.println("ID á new Message í request message POST eftir save: " + message.getId());
         return "redirect:/myMessages";
     }
 
     /*
-     * Opnar síðu með message boxi :D
+     * Returns a page with a messagebox where a user can send a message to a book owner/requester.
      */
     @RequestMapping(value="/messageBook/{id}", method = RequestMethod.GET)
     public String sendRequest(@PathVariable("id") long id, Model model, HttpSession session) {
@@ -66,16 +66,19 @@ public class MessageController {
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         model.addAttribute("book", book);
         User current = userService.findByUsername(sessionUser.getUsername());
+        // A user cannot send message to himself
         if (current == book.getUser()) {
             return "notSameUser";
         }
         Message message = new Message();
-        System.out.println("ID á new Message í request message GET: " + message.getId());
         model.addAttribute("message", message);
         return "messageBox";
     }
 
 
+    /*
+     * Returns a page with all messages the current logged in user has sent and received.
+     */
     @RequestMapping(value="/myMessages", method = RequestMethod.GET)
     public String viewMessages(Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -84,6 +87,7 @@ public class MessageController {
             return "please-log-in";
         }
         User current = userService.findByUsername(sessionUser.getUsername());
+
         List<Message> receivedMessages = messageService.findByReceiver(current);
         model.addAttribute("receivedmessages", receivedMessages);
 
@@ -92,7 +96,10 @@ public class MessageController {
         return "myMessages";
     }
 
-    // Opnar síðu þar sem þú getur svarað skilaboði sem þú ýttir á
+    /*
+     * Returns a page with a messagebox where a user can reply to a particular message
+     * he has received.
+     */
     @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.GET)
     public String pushReply(@PathVariable("id") long id, Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -100,20 +107,24 @@ public class MessageController {
         if (sessionUser == null) {
             return "please-log-in";
         }
-        // Skilaboðin sem þú ert að svara
+        // The message the user is about to reply to is fetched. It has all relevant information
+        // needed for the new reply message.
         Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
         User current = userService.findByUsername(sessionUser.getUsername());
+        // A user cannot send messages to himself.
         if (current == initialMessage.getSender()) {
             return "notSameUser";
         }
-        // Ný tóm skilaboð inn í módelið -> Reply skilaboðin sem þú ætlar að skrifa
+        // New empty messages are added to the model -> The messages the user is about to write.
         Message newMessage = new Message();
         model.addAttribute("newMessage", newMessage);
         model.addAttribute("initialMessage", initialMessage);
         return "replyMessage";
     }
 
-    // Sendir reply skilaboð sem þú skrifar
+    /*
+     * Creates and posts a reply to a particular message a user has received.
+     */
     @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
     public String sendReply(@PathVariable("id") long id, @Valid Message newMessage, Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -121,12 +132,12 @@ public class MessageController {
         if (sessionUser == null) {
             return "please-log-in";
         }
-        // Skilaboðin sem þú ert að svara
+        // The message the user is replying to
         Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
         model.addAttribute("initialMessage", initialMessage);
-        // Módelið nær í messageBody strenginn
+        // The model fetches the messageBody string the user inserted
         String newMessageBody = newMessage.messageBody;
-        // Ný skilaboð búin til með messageBody og viðeigandi upplýsingum - vistuð í gagnagrunninn.
+        // New messages are created with this messageBody and relevant information from the original message.
         newMessage = new Message();
         newMessage.setMessageBody(newMessageBody);
         newMessage.setBook(initialMessage.getBook());

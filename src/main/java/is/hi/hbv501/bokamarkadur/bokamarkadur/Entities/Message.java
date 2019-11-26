@@ -10,7 +10,7 @@ import java.util.List;
 public class Message {
 
     @Id
-    //Býr sjálfkrafa til ID gildi
+    //Automatic creation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
@@ -25,10 +25,6 @@ public class Message {
     @ManyToOne(targetEntity=Book.class)
     public Book book;
 
-
-    //(targetEntity=Book.class, mappedBy = "user", fetch=FetchType.EAGER)
-    //@OneToMany(mappedBy="message")
-    //private List<Message> messages = new ArrayList<>();
 
     public Message() {
 
