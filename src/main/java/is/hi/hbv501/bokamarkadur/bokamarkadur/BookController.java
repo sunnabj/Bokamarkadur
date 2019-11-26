@@ -1,4 +1,4 @@
-package is.hi.hbv501.bokamarkadur.bokamarkadur.Controllers;
+package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
@@ -129,6 +129,7 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+        System.out.println("Book image " + "|" + book.getImage() + "|");
         book.setStatus("For sale");
         book.setDate(date);
         System.out.println("date: " + date);

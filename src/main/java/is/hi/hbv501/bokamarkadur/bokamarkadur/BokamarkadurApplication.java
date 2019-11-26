@@ -341,7 +341,7 @@ public class BokamarkadurApplication {
 			RAF501G.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF501G.setPrice(9295);
 			RAF501G.setStatus("Requested");
-			RAF501G.setImage("21_RAF501G.jpg");
+			RAF501G.setImage("");
 			RAF501G.setDate(randomDate8);
 			RAF501G.setUser(Tester);
 			bookRepository.save(RAF501G);
@@ -354,7 +354,7 @@ public class BokamarkadurApplication {
 			RAF504G.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF504G.setPrice(12995);
 			RAF504G.setStatus("Requested");
-			RAF504G.setImage("22_RAF504G.jpg");
+			RAF504G.setImage("");
 			RAF504G.setDate(randomDate7);
 			RAF504G.setUser(Tester);
 			bookRepository.save(RAF504G);
@@ -367,7 +367,7 @@ public class BokamarkadurApplication {
 			RAF507M.setSubjects(Subjects.Electrical_Computer_Engineering);
 			RAF507M.setPrice(12995);
 			RAF507M.setStatus("Requested");
-			RAF507M.setImage("23_RAF507M.jpeg");
+			RAF507M.setImage("23_RAF507M.jpg");
 			RAF507M.setDate(randomDate6);
 			RAF507M.setUser(Tester);
 			bookRepository.save(RAF507M);
@@ -393,7 +393,7 @@ public class BokamarkadurApplication {
 			TOV501M.setSubjects(Subjects.Electrical_Computer_Engineering);
 			TOV501M.setPrice(16995);
 			TOV501M.setStatus("Requested");
-			TOV501M.setImage("25_TOV501M.jpeg");
+			TOV501M.setImage("25_TOV501M.jpg");
 			TOV501M.setDate(randomDate4);
 			TOV501M.setUser(Tester);
 			bookRepository.save(TOV501M);
