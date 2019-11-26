@@ -57,8 +57,8 @@
         </div>
         <div class="divider">
 <!--            Todo: Þarf að laga svo að mynd sjáist.-->
-            <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="Image"/>
-            <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
+            <img th:if="${book.image != null}" th:src="@{|/${book.image}|}" class="image" alt="Image"/>
+            <img th:if="${book.image == null}" th:src="@{/Noimage.jpg}" class="image" alt="No Image"/>
         </div>
     </div>
 
