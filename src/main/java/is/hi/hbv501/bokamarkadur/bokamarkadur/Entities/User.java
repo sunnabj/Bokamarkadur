@@ -35,7 +35,7 @@ public class User {
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
     private String email;
 
-    @Size(min = 3, message = "Remind me to change it before erase dummy database !!! Length should be at least 8 digits (not 3 for now)")
+    @Size(min = 8, message = "Length should be at least 8 digits")
     public String password;
 
     public String getRetypePassword() {
@@ -148,5 +148,7 @@ public class User {
     public String toString() {
         return this.username;
     }
+
+
 
 }

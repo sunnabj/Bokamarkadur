@@ -71,7 +71,7 @@ public class BokamarkadurApplication {
 			Tester.setEmail("tester@testing.com");
 			Tester.setInfo("I'm the best Tester ever!");
 			Tester.setName("Tester");
-			Tester.setPassword("123");
+			Tester.setPassword("12345678");
 			Tester.setUsername("Tester");
 			userRepository.save(Tester);
 
