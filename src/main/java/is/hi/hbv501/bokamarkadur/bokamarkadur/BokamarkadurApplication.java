@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -73,6 +74,9 @@ public class BokamarkadurApplication {
 			Tester.setName("Tester");
 			Tester.setPassword("12345678");
 			Tester.setUsername("Tester");
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String hashedPassword = passwordEncoder.encode(Tester.password);
+			Tester.password = hashedPassword;
 			userRepository.save(Tester);
 
 			Book REI502M = new Book();
