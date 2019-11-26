@@ -55,6 +55,9 @@ public class loginController {
         }
         model.addAttribute("books", bookService.findAll());
         User exists = userService.login(user);
+        if(user.password.equals(exists.password) && exists != null){
+            return "login";
+        }
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";
