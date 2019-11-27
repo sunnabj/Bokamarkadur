@@ -4,7 +4,6 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,17 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class SearchController {
 
-    private SearchService searchService;
     private BookService bookService;
     @Autowired
-    public SearchController(SearchService searchService, BookService bookService){
-        this.searchService = searchService;
+    public SearchController(BookService bookService){
         this.bookService = bookService;
     }
 
