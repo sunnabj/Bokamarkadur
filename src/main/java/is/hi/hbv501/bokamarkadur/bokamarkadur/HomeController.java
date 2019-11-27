@@ -19,11 +19,10 @@ import java.util.List;
 public class HomeController {
 
     private BookService bookService;
-    private UserService userService;
+
     @Autowired
-    public HomeController(BookService bookService, UserService userService){
+    public HomeController(BookService bookService){
         this.bookService = bookService;
-        this.userService = userService;
     }
 
     /*

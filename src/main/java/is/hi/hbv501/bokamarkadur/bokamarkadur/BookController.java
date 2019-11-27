@@ -38,13 +38,11 @@ public class BookController {
 
     private BookService bookService;
     private UserService userService;
-    private MessageService messageService;
 
     @Autowired
-    public BookController(BookService bookService, UserService userService, MessageService messageService){
+    public BookController(BookService bookService, UserService userService){
         this.bookService = bookService;
         this.userService = userService;
-        this.messageService = messageService;
     }
 
 
