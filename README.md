@@ -24,36 +24,64 @@ spring.datasource.password=insertYourPassword
 This program is a web application that provides the functions of a book exchange market.
 The program is written in Java with the Spring framework and uses thymeleaf for HTML.
 
-### Homepage ###
+### View recently added books ###
 
-* Shows the 10 books most recently added to the website
-* Shows a list of subjects from which books on the site are currently available.
-  * Each subject in the list works as a link that when pushed shows a page with information on all books in the relevant subject.
+* The ten books most recently added to the website are displayed on the front page. 
 
-### Navigation bar ###
+### View currently available book subjects ###
 
-* The Book market's logo redirects to the homepage
-* View all books returns a page with a list of every book.
-* About us returns a page about the project and it's authors.
-* The search function is in the middle. A user can choose to search for books for sale or for requested books, and when enter is pressed, a list of books where the title or the author include the string inserted to the search box.
-* When user is not logged in:
-  * Login returns a page where the user inserts his username and password and logs in if both are correct.
-  * Sign up returns a form where you can create a new account which you can then log into. Password needs to be at least 8 letters and username cannot match another username in the database.
-* When user is logged in - a dropdown menu appears:
-  * Add a new book: The logged in user can choose to add a book for sale or request a book. The user fills out a form with relevant information and can upload a photo.
-  * My Books: The logged in user can look at the books he has added to the site and delete them if he wishes.
-  * Update Profile: The logged in user can update information about himself which other users can see.
-  * My Messages: The user can view messages he has sent and messages he has received, and reply to those messages.
-  * Logout: Logs the current logged in user out.
-  
-### Request/Offer a book ###
+* A list of subjects that belong to books currently available on the site is displayed on the front page.
+  * Each subject in the list works as a link that when pushed shows a page with information on all books belonging to the relevant subject.
 
-* Where lists of books appear (front page, all books, all books from particular subject) it is possible to press view book.
-* This returns information about that particular book, where the name of the user that added it to the site can be pressed and his information viewed.
-* There is also a button which says "Request/Offer book." If the user is logged in, he is redirected to a page with a message box, where he can send a message to the user that owns the book or is requesting it, regarding the book.
-* This message appears in the received messages of that user, and the user can reply to this message. The reply message shows up in the received message list of the user that sent the original message.
-  * This way, users can communicate about certain books.
+### View all books ###
 
+* A link in the navigation bar redirects the user to a page with a list of all available books on the site.
+    * All relevant information on each book are displayed, that is title, author, price, whether it's for sale or requested, the user who added it, and more.
+
+### View a specific book ###
+
+* When a user is viewing a list of books, he can click a link to view the book, with it's information isolated on a specific page.
+
+### View a specific user ###
+
+* The user who added any particular book is shown with the book information. When the username is clicked, information about that user are displayed.
+
+### Search for a book ###
+
+* In the navigation bar is a search window. A user can choose to search for books for sale or requested books.
+    * The inserted string is compared with all book titles and all authors and the matching results are displayed on a new page.
+
+### About Us ###
+
+* A user can click "About Us" in the navigation bar and is then directed to a page with information about the project and its authors.
+
+### Sign up and login ###
+
+* A user can create a new account and login by pushing the relevant buttons in the navigation bar.
+* A dropdown menu appears in the menubar when a user logs in, with these following functions, which are only available when a user is logged in.
+
+#### Add a new book ####
+
+* The logged in user chooses whether he wants to add a book for sale or request a book, and then inserts relevant information about the book into a form, such as title, price and an optional picture.
+
+#### View My Books ####
+
+* The logged in user can view a list of the books he has added to the site.
+
+#### Update Profile Information ####
+
+* The logged in user can update his profile information, that is a text describing himself.
+
+#### Send a message regarding a particular book ####
+
+* When the logged in user views a book, as described above, he can now push a request/offer book button.
+    * This directs him to a page with a message box. He can write a message and send it to the user who added that particular book to the site.
+    * This is the only possible way to start a conversation with another user.
+
+#### View my messages ####
+
+* The logged in user can view his sent and received messages.
+* If he has any received messages, he can click "Reply", which redirects him to a page with a message box, where he inserts a message and sends to the person who sent him the original message.
 
 
 ## Designers ##
