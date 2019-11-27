@@ -37,18 +37,4 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter
         http.csrf().disable().authorizeRequests().anyRequest().permitAll();
     }
 
-
-
-//	@Bean
-//	@Override
-//	protected UserDetailsService userDetailsService() {
-//
-//
-//		List<UserDetails> users = new ArrayList<>();
-//		users.add(User.withDefaultPasswordEncoder().username("navin").password("1234").roles("USER").build());
-//
-//
-//		return new InMemoryUserDetailsManager(users);
-//	}
-
 }

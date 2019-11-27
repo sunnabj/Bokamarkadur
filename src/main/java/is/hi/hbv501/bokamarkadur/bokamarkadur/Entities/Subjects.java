@@ -3,6 +3,10 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 // A list of available subjects users can categorize their uploaded books to.
 public enum Subjects {
+    /*
+     * Each entity class represents a table in the database.
+     * This entity lists the Subjects available for books.
+     */
     BIOLOGY,
     BUSINESSADMINISTRATION,
     CIVILENGINEERING,

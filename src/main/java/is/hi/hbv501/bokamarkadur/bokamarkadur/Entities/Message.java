@@ -2,13 +2,16 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "MESSAGES")
 public class Message {
-
+    /*
+     * Each entity class represents a table in the database.
+     * This entity describes the Messages between users.
+     * Message entity has id, messageBody, User: sender, User: receiver,
+     * and the book in question.
+     */
     @Id
     //Automatic creation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -7,17 +7,18 @@ import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Each entity class represents a table in the database.
- * This one describes the users of the book exchange market.
- * Each one has a name, username, password, email and will
- * be able to insert information about himself, as well as
- * put books up for sale or request books through the site.
- */
 
 @Entity
 @Table(name = "USERS")
 public class User {
+
+    /*
+     * Each entity class represents a table in the database.
+     * This one describes the users of the book exchange market.
+     * Each one has a name, username, password, email and will
+     * be able to insert information about himself, as well as
+     * put books up for sale or request books through the site.
+     */
 
     @Id
     // Automatic generation of ID values
