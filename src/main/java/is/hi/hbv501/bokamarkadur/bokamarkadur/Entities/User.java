@@ -52,7 +52,6 @@ public class User {
 
 
     // One user can have many books in the database
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy="user")
     @OneToMany(targetEntity=Book.class,mappedBy="user",cascade={CascadeType.ALL},orphanRemoval=true)
     private List<Book> books = new ArrayList<>();
 

@@ -82,18 +82,4 @@ public class BookServiceImplementation implements BookService {
     @Override
     public List<Book> findBySubjects(Subjects subject) { return repository.findBySubjects(subject); }
 
-    // Something that didn't work.
-    /*
-    @Override
-    public List<Subjects> findAvailableSubjects(List<Book> books) {
-        return repository.findAvailableSubjects(books);
-    }
-*/
-    /*
-    @Override
-    List<Subjects> findAvailableSubjects(List<Book> books) {
-        SELECT subjects FROM Book;
-    }
-    */
-
 }

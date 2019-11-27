@@ -31,9 +31,10 @@ import java.util.List;
 public class BookController {
 
     //private static String uploadedFolder = "/src/main/resources/static/";
+    // The folder where images uploaded with added books are stored.
     private static String uploadedFolder = "/static/";
     private static String currentDirectory = System.getProperty("user.dir");
-
+    // A date attribute is required so that the most recently added books can be displayed.
     private static Date date = new Date();
 
     private BookService bookService;
@@ -44,7 +45,6 @@ public class BookController {
         this.bookService = bookService;
         this.userService = userService;
     }
-
 
     /*
      * Returns a page where you can see all books available on site, both for sale and requested.
@@ -97,7 +97,7 @@ public class BookController {
     }
 
     /*
-     * Returns a page of about development.
+     * Returns a page with information about the developers.
      */
     @RequestMapping(value="/aboutus", method = RequestMethod.GET)
     public String aboutus(HttpSession session, Model model) {

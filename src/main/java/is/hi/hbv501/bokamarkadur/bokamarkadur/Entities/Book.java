@@ -33,6 +33,7 @@ public class Book {
     @JoinColumn(name="user_username")
     private User user;
 
+    // If a book is deleted, it's associated messages are deleted as well.
     @OneToMany(targetEntity=Message.class, mappedBy="book", cascade=CascadeType.ALL)
     private List<Message> messages;
 

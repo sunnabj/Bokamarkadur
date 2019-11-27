@@ -27,7 +27,7 @@ public class HomeController {
 
     /*
      * Returns the home (front) page.
-     * Returns 10 newest books for sale & requested.
+     * Returns the 10 most recently added books to the site.
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Home(Model model, HttpSession session) {
@@ -35,7 +35,6 @@ public class HomeController {
         model.addAttribute("loggedIn", sessionUser);
         model.addAttribute("books", bookService.findNewestBooks());
         List<Book> availableBooks = bookService.findAll();
-        //ArrayList<Book> availableBooksArray = (ArrayList<Book>) availableBooks;
         ArrayList<Subjects> bookSubjects = new ArrayList<Subjects>();
         ArrayList<Book> subjectBooks = new ArrayList<Book>();
         // Go through all books and insert subjects into the bookSubjects array.
