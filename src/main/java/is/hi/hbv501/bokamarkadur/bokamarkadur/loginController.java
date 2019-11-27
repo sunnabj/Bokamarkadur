@@ -2,7 +2,6 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.LoginService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,13 +20,11 @@ public class loginController {
      * Handles the login and logout functions of the system.
      */
 
-    private LoginService loginService;
     private UserService userService;
     private BookService bookService;
 
     @Autowired
-    public loginController(LoginService loginService, UserService userService, BookService bookService) {
-        this.loginService = loginService;
+    public loginController(UserService userService, BookService bookService) {
         this.bookService = bookService;
         this.userService = userService;
     }
