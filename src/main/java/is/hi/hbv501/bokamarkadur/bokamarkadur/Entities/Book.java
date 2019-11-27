@@ -9,10 +9,11 @@ public class Book {
 
     /*
      * Each entity class represents a table in the database.
-     * This one describes the books available in the exchange market.
-     * Each one has a few attributes, such as title and price.
+     * This entity describes the books available in the exchange market.
+     * Book has id, title, author, edition, condition,
+                subjects, price, image, status, date,
+                user and list of messages.
      */
-
     @Id
     //Automatic generation of ID values.
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +33,7 @@ public class Book {
     @JoinColumn(name="user_username")
     private User user;
 
+    // If a book is deleted, it's associated messages are deleted as well.
     @OneToMany(targetEntity=Message.class, mappedBy="book", cascade=CascadeType.ALL)
     private List<Message> messages;
 

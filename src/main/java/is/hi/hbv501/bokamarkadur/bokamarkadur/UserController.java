@@ -18,7 +18,6 @@ import javax.validation.Valid;
 @Controller
 public class UserController {
 
-
     private UserService userService;
 
     @Autowired
@@ -27,14 +26,9 @@ public class UserController {
     }
 
     /*
-    // Some functions to be added later on.
-    + deleteUser(id : long, model : Model) : String
-     */
-
-    /*
      * Returns all users in the database, that is those who have created
      * an account through the site.
-     * Used in development. Won't be in the final product (probably).
+     * Used in development. Not intended to be reachable in a released product.
      */
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String usersGET(Model model){
@@ -69,6 +63,8 @@ public class UserController {
             model.addAttribute("message", "Username already exist");
             return "new-account";
         }
+        // Checks if the user retypes its password correctly
+        // If so - the password is hashed for security reasons, and the user is saved to the database.
         else if(!user.password.equals(user.retypePassword)) {
             model.addAttribute("message", "Confirm Password is not equal to Password");
             return "new-account";
@@ -79,12 +75,9 @@ public class UserController {
             userService.save(user);
         }
 
-
-
-        model.addAttribute("user", user); //Ekki?
+        model.addAttribute("user", user);
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         model.addAttribute("loggedIn", sessionUser);
-        //model.addAttribute("books", bookService.findAll()); // Maybe?
         return "welcome-user";
     }
 
