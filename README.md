@@ -84,7 +84,7 @@ The program is written in Java with the Spring framework and uses thymeleaf for 
 * If he has any received messages, he can click "Reply", which redirects him to a page with a message box, where he inserts a message and sends to the person who sent him the original message.
 
 
-## Designers ##
+## Developer ##
 
 * _Baldvin Blær Oddsson_
     * Email: bbo1@hi.is
