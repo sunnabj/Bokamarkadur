@@ -77,7 +77,7 @@ public class MessageController {
 
 
     /*
-     * Returns a page with all messages the current logged in user has sent and received.
+     * Returns a page with all messages the current logged in user has sent and received, separately.
      */
     @RequestMapping(value="/myMessages", method = RequestMethod.GET)
     public String viewMessages(Model model, HttpSession session) {
