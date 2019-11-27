@@ -1,6 +1,5 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur.Services.Implementations;
 
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories.MessageRepository;
@@ -44,18 +43,5 @@ public class MessageServiceImplementation implements MessageService {
 
     @Override
     public List<Message> findBySender(User sender) { return repository.findBySender(sender); }
-
-    /*
-    @Override
-    public List<Message> findBySenderAndReceiverAndBook(User sender, User receiver, Book book) {
-        return repository.findAll(contains(sender, receiver, book));
-    }
-    */
-
-    // acceptMessage(Message message, User user, Book book);
-    //@Override
-    //public Optional<Message> acceptMessage(Message message, User user, Book book) { return repository.acceptMessage(message, user, book); }
-
-
 
 }
