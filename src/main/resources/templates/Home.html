@@ -20,7 +20,7 @@
             background-color: transparent;
             border-color: transparent;
         }
-        .wrapper > span {
+        .wrapper1 > span {
             padding: 14px;
         }
         .scrollfield{
@@ -29,26 +29,29 @@
         }
         .container {
             padding-left: 0px;
+            padding-top: 30px;
+            padding-bottom: 30px;
         }
+
     </style>
 </head>
 
 
 <body>
     <div layout:fragment="content" class="container">
-        <h1>Bókamarkaður - Book exchange market for students</h1>
     <div class="container">
+        <h1>Bókamarkaður - Book exchange market for students</h1>
         <br>
         <h3>Recently added</h3>
         <fieldset class="scrollfield">
-            <div class="itable wrapper" >
+            <div class="itable wrapper1" >
                 <table width=200  th:each="book : ${books}" class="books">
                     <span class="cell" >
                         <tr>
                             <td>
                                 <p><a th:href="@{/viewbook/{id}(id=${book.id})}">
-                                    <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="No Image"/>
-                                    <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
+                                    <img th:if="${book.image != ''}" th:src="${book.image}" class="image" alt="No Image"/>
+                                    <img th:if="${book.image == ''}" th:src="@{/Noimage.jpg}" class="image" alt="No Image"/>
                                 </a></p>
                             </td>
                         </tr>

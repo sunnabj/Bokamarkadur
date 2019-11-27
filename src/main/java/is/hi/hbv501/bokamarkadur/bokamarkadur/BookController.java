@@ -1,4 +1,4 @@
-package is.hi.hbv501.bokamarkadur.bokamarkadur.Controllers;
+package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
@@ -30,7 +30,8 @@ import java.util.List;
 @Controller
 public class BookController {
 
-    private static String uploadedFolder = "/src/main/resources/static/";
+    //private static String uploadedFolder = "/src/main/resources/static/";
+    private static String uploadedFolder = "/static/";
     private static String currentDirectory = System.getProperty("user.dir");
 
     private static Date date = new Date();
@@ -129,6 +130,7 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+        System.out.println("Book image " + "|" + book.getImage() + "|");
         book.setStatus("For sale");
         book.setDate(date);
         System.out.println("date: " + date);
@@ -174,6 +176,10 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+        if (book.getImage() == null) {
+            System.out.println("Myndin er núll!");
+        }
+        System.out.println("MYNDIN: " + book.getImage());
         book.setStatus("Requested");
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(sessionUser.getUsername());

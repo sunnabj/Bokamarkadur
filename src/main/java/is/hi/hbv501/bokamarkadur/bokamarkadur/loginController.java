@@ -1,4 +1,4 @@
-package is.hi.hbv501.bokamarkadur.bokamarkadur.Controllers;
+package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
@@ -55,9 +55,6 @@ public class loginController {
         }
         model.addAttribute("books", bookService.findAll());
         User exists = userService.login(user);
-        if(user.password.equals(exists.password) && exists != null){
-            return "login";
-        }
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
             return "redirect:/";

@@ -19,12 +19,6 @@ public interface MessageRepository extends JpaRepository<Message, Long> {
 
     // Method for deleting messages.
     void delete(Message message);
-/*
-    //Hægt að gera @Query("SELECT o.s.frv. - okkar eigin SQL kóði")
-    // The Method for finding messages between users
-    // as we had in our Design Model was like this:
-    Message findMessage(User sender, User receiver);
-*/
 
     // I suggest needed changes to this. Messages between users are
     // regarding a specific book (not just a general chat about whatsoever)

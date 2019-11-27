@@ -10,6 +10,9 @@
         .divider {
             width: 50%;
         }
+        img {
+            max-height: 225px;
+        }
     </style>
 </head>
 
@@ -20,35 +23,35 @@
     <div class="divider-container">
         <div class="divider">
             <div>
-                <label><b>Title</b></label>
+                <label><b>Title: </b></label>
                 <label><td th:text="${book.title}"></td></label>
             </div>
             <div>
-                <label><b>Author</b></label>
+                <label><b>Author: </b></label>
                 <label><td th:text="${book.author}"></td></label>
             </div>
             <div>
-                <label><b>Edition</b></label>
+                <label><b>Edition: </b></label>
                 <label><td th:text="${book.edition}"></td></label>
             </div>
             <div>
-                <label><b>Condition</b></label>
+                <label><b>Condition: </b></label>
                 <label><td th:text="${book.condition}"></td></label>
             </div>
             <div>
-                <label><b>Price</b></label>
+                <label><b>Price: </b></label>
                 <label><td th:text="${book.price}"></td></label>
             </div>
             <div>
-                <label><b>Subject</b></label>
+                <label><b>Subject: </b></label>
                 <label><td th:text="${book.subjects}"></td></label>
             </div>
             <div>
-                <label><b>Status</b></label>
+                <label><b>Status: </b></label>
                 <label><td th:text="${book.status}"></td></label>
             </div>
             <div>
-                <label><b>User</b></label>
+                <label><b>User: </b></label>
                 <label><td><a th:href="@{/viewuser/{id}(id=${book.user})}" th:text="${book.user}"></a></td></label>
             </div>
             <div>
@@ -56,9 +59,8 @@
             </div>
         </div>
         <div class="divider">
-<!--            Todo: Þarf að laga svo að mynd sjáist.-->
-            <img th:if="${book.image != null}" th:src="${book.image}" class="image" alt="Image"/>
-            <img th:if="${book.image == null}" th:src="Noimage.jpg" class="image" alt="No Image"/>
+            <img th:if="${book.image != ''}" th:src="@{|/${book.image}|}" class="image" alt="Image"/>
+            <img th:if="${book.image == ''}" th:src="@{/Noimage.jpg}" class="image" alt="No Image"/>
         </div>
     </div>
 
