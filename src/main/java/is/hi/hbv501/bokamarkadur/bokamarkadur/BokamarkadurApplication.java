@@ -67,6 +67,7 @@ public class BokamarkadurApplication {
 			 * Some dummy data is inserted into the database when
 			 * application is started.
 			 */
+			/*
 			User Tester = new User();
 			Tester.setId(1);
 			Tester.setEmail("tester@testing.com");
@@ -463,7 +464,7 @@ public class BokamarkadurApplication {
 			VEL502G.setDate(randomDate);
 			VEL502G.setUser(Tester);
 			bookRepository.save(VEL502G);
-
+*/
 		}
 	}
 }
