@@ -10,11 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
-@Controller
+@RestController
 public class SearchController {
 
     private BookService bookService;
@@ -26,6 +27,9 @@ public class SearchController {
     /*
      * Returns a page where the user can search for books.
      */
+    /*
+    Sleppi slepp
+
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String search(Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -33,25 +37,22 @@ public class SearchController {
         return "search";
     }
 
+     */
+
     /*
      * Returns search results.
      * The user inserts a search string and chooses whether to search for books for sale
      * or requested books. Returns search results for either title or author.
      */
     @RequestMapping(value= "/search", method = RequestMethod.POST)
-    public String searchBook(
+    public List<Book> searchBook(
             @RequestParam(value = "search", required = false) String search,
             @RequestParam(value = "status", required = true) String status,
             Model model, HttpSession session
     ){
-        List<Book> book = bookService.findByAuthorOrTitle(status, search, search);
+        List<Book> books = bookService.findByAuthorOrTitle(status, search, search);
 
-        model.addAttribute("search", search);
-        model.addAttribute("books", book);
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-
-        return "search";
+        return books;
     }
 
 }

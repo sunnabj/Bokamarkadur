@@ -10,12 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
-@Controller
+@RestController
 public class HomeController {
 
     private BookService bookService;
@@ -29,6 +30,9 @@ public class HomeController {
      * Returns the home (front) page.
      * Returns the 10 most recently added books to the site.
      */
+    /*
+    * Spurning með þetta?
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Home(Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -58,4 +62,5 @@ public class HomeController {
         return "Home";
     }
 
+     */
 }
