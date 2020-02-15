@@ -3,16 +3,23 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class loginController {
@@ -52,18 +59,18 @@ public class loginController {
      * The logged in user is stored in the current session.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public User loginPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+    public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result, HttpSession session){
         if(result.hasErrors()){
-            //return Eitthvað villu object;
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-        model.addAttribute("books", bookService.findAll());
         User exists = userService.login(user);
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
-            return user; //eða exists
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, "Login successful", null), HttpStatus.OK);
         }
-        //return Eitthvað villuobject;
-        return user; //Bara til að hafa ekki villu
+        List<String> errors = new ArrayList<>();
+        errors.add("Login unsuccessful");
+        return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors),HttpStatus.BAD_REQUEST);
     }
 
 
@@ -71,7 +78,7 @@ public class loginController {
      * Logs the current user out.
      */
     /*
-    * Spurning með þetta - setAttribute? Þarf þess?
+    * Spurning með þetta - Má sleppa þessu? Þarf þetta setAttribute?
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
@@ -87,18 +94,15 @@ public class loginController {
     /*
      * Retrieves the current logged in user from the current session.
      */
-    /*
-    * Hmmmmmm, veit ekki með þetta
-     */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public String loggedinGET(HttpSession session, Model model){
-        model.addAttribute("books",bookService.findAll());
+    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session, Model model){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
-            model.addAttribute("loggedinuser", sessionUser);
-            return "loggedInUser";
+            return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
         }
-        return "redirect:/";
+        List<String> errors = new ArrayList<>();
+        errors.add("You must be logged in to visit this page");
+        return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
     }
 
 

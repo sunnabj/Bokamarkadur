@@ -221,7 +221,7 @@ public class BookController {
      */
     /*
     GET Slepp!
-    
+
     @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
     public List<Book> viewsubjectbooks(@PathVariable("subjects") Subjects subject, Model model, HttpSession session) {
         List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));

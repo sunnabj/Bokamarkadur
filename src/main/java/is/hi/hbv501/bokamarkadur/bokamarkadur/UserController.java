@@ -2,19 +2,21 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -64,23 +66,23 @@ public class UserController {
      * Returns a welcome page where the new user is addressed.
      */
     @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
-    public User addNewUser(@Valid User user, BindingResult result, Model model, HttpSession session, Errors errors) {
+    public ResponseEntity<LoginAndSignUpResponse> addNewUser(@Valid @RequestBody User user, BindingResult result) {
         if(result.hasErrors()) {
-            //return Villu-object
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
         // Checks if this username already exists. If not -> A new user is created, else not.
         User exists = userService.findByUsername(user.username);
         if (exists != null) {
-            //model.addAttribute("message", "Username already exist");
-            //return "new-account";
-            //return villuskilaboða-Object
+            List<String> errors = new ArrayList<>();
+            errors.add("Username already exists");
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors), HttpStatus.BAD_REQUEST);
         }
         // Checks if the user retypes its password correctly
         // If so - the password is hashed for security reasons, and the user is saved to the database.
         else if(!user.password.equals(user.retypePassword)) {
-            //model.addAttribute("message", "Confirm Password is not equal to Password");
-            //return "new-account";
-            //return villuskilaboða-Object
+            List<String> errors = new ArrayList<>();
+            errors.add("Confirm Password is not equal to Password");
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors), HttpStatus.BAD_REQUEST);
         } else if (exists == null && user.password.equals(user.retypePassword) ) {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String hashedPassword = passwordEncoder.encode(user.password);
@@ -88,7 +90,8 @@ public class UserController {
             userService.save(user);
         }
 
-        return user;
+        return new ResponseEntity<>(new LoginAndSignUpResponse(user, "User created successfully", null), HttpStatus.CREATED);
+
     }
 
     /*
@@ -129,6 +132,10 @@ public class UserController {
     /*
      * Updates information about the current logged in user.
      */
+    /*
+    * Græja þetta!
+     */
+
     @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
     public User updateUserInfo(@Valid User user, BindingResult result, Model model, HttpSession session) {
         if(result.hasErrors()) {
