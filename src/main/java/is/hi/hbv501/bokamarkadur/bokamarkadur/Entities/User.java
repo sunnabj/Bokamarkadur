@@ -54,6 +54,7 @@ public class User {
 
     // One user can have many books in the database
     @OneToMany(targetEntity=Book.class,mappedBy="user",cascade={CascadeType.ALL},orphanRemoval=true)
+    @JsonIgnoreProperties("user")
     private List<Book> books = new ArrayList<>();
 
     @OneToMany(targetEntity=Message.class, mappedBy="receiver")
