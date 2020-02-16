@@ -40,23 +40,6 @@ public class UserController {
         return new ResponseEntity<>(new GetAllUsersResponse(userService.findAll()), HttpStatus.OK);
     }
 
-
-    /*
-     * Returns a form where a user can create a new user account.
-     */
-    /*
-    Sleppelsi
-
-    @RequestMapping(value="/newAccount", method = RequestMethod.GET)
-    public String newuserForm(User user, Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "new-account";
-    }
-
-     */
-
-
     /*
      * Creates a new user in the database, based on what is written into the
      * new account form.
@@ -100,6 +83,38 @@ public class UserController {
         return new ResponseEntity<>(new GetUserResponse(user), HttpStatus.OK);
     }
 
+
+    /*
+     * Updates information about the current logged in user.
+     */
+    @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
+    public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result, HttpSession session) {
+        if(result.hasErrors()) {
+            return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(sessionUser.getUsername());
+        current.setInfo(user.info);
+        userService.save(current);
+        return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
+    }
+
+
+    /*
+     * Returns a form where a user can create a new user account.
+     */
+    /*
+    Sleppelsi
+
+    @RequestMapping(value="/newAccount", method = RequestMethod.GET)
+    public String newuserForm(User user, Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        return "new-account";
+    }
+
+     */
+
     /*
      * Returns a form where the logged in user can update his profile
      * information.
@@ -118,45 +133,6 @@ public class UserController {
     }
 
      */
-
-    /*
-     * Updates information about the current logged in user.
-     */
-
-    /*
-    Gamla
-
-    @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
-    public User updateUserInfo(@Valid User user, BindingResult result, Model model, HttpSession session) {
-        if(result.hasErrors()) {
-            //return eitthvað villu-object
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
-        current.setInfo(user.info);
-        userService.save(current);
-        return current;
-    }
-
-     */
-
-    /*
-    * Möguleg ný aðferð
-     */
-    @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
-    public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result, HttpSession session) {
-        if(result.hasErrors()) {
-            return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
-        current.setInfo(user.info);
-        userService.save(current);
-        return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
-    }
-
-
-
 
 
 

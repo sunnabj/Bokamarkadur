@@ -26,21 +26,6 @@ public class SearchController {
     }
 
     /*
-     * Returns a page where the user can search for books.
-     */
-    /*
-    Sleppi slepp
-
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String search(Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "search";
-    }
-
-     */
-
-    /*
      * Returns search results.
      * The user inserts a search string and chooses whether to search for books for sale
      * or requested books. Returns search results for either title or author.
@@ -58,5 +43,20 @@ public class SearchController {
 
         return new ResponseEntity<>(new SearchResponse(books), HttpStatus.OK);
     }
+
+    /*
+     * Returns a page where the user can search for books.
+     */
+    /*
+    Sleppi slepp
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String search(Model model, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        model.addAttribute("loggedIn", sessionUser);
+        return "search";
+    }
+
+     */
 
 }

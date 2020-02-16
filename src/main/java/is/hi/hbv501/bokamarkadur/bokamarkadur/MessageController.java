@@ -6,13 +6,14 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.MessageService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetMessageResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.SendMessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -37,8 +38,8 @@ public class MessageController {
      * as attribute, and the user that added the book as receiver.
      */
     @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
-    public Message messageBook(@PathVariable("id") long id, @Valid Message message,
-                              Model model, HttpSession session) {
+    public ResponseEntity<SendMessageResponse> messageBook(@PathVariable("id") long id, @Valid @RequestBody Message message,
+                                                           HttpSession session) {
 
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -46,9 +47,60 @@ public class MessageController {
         message.setBook(book);
         message.setSender(current);
         message.setReceiver(book.getUser());
-        messageService.save(message);
-        return message;
+        return new ResponseEntity<>(new SendMessageResponse(messageService.save(message)), HttpStatus.CREATED);
     }
+
+    /*
+     * Creates and posts a reply to a particular message a user has received.
+     */
+    @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
+    public ResponseEntity<SendMessageResponse> sendReply(@PathVariable("id") long id, @Valid @RequestBody Message newMessage, HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null) {
+            //return Eitthvað villu /please log in object
+        }
+        // The message the user is replying to
+        Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
+        // The model fetches the messageBody string the user inserted
+        String newMessageBody = newMessage.messageBody;
+        // New messages are created with this messageBody and relevant information from the original message.
+        newMessage = new Message();
+        newMessage.setMessageBody(newMessageBody);
+        newMessage.setBook(initialMessage.getBook());
+        User current = userService.findByUsername(sessionUser.getUsername());
+        newMessage.setSender(current);
+        newMessage.setReceiver(initialMessage.getSender());
+        return new ResponseEntity<>(new SendMessageResponse(messageService.save(newMessage)), HttpStatus.CREATED);
+    }
+
+    /*
+     * Returns a page with all messages the current logged in user has sent.
+     */
+    @RequestMapping(value = "/mySentMessages", method = RequestMethod.GET)
+    public ResponseEntity<GetMessageResponse> viewSentMessages(HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null) {
+            //Something?
+        }
+        User current = userService.findByUsername(sessionUser.getUsername());
+        List<Message> sentMessages = messageService.findBySender(current);
+        return new ResponseEntity<>(new GetMessageResponse(sentMessages), HttpStatus.OK);
+    }
+
+    /*
+     * Returns a page with all messages the current logged in user has received.
+     */
+    @RequestMapping(value = "/myReceivedMessages", method = RequestMethod.GET)
+    public ResponseEntity<GetMessageResponse> viewReceivedMessages(HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if (sessionUser == null) {
+            //Something?
+        }
+        User current = userService.findByUsername(sessionUser.getUsername());
+        List<Message> receivedMessages = messageService.findByReceiver(current);
+        return new ResponseEntity<>(new GetMessageResponse(receivedMessages), HttpStatus.OK);
+    }
+
 
     /*
      * Returns a page with a messagebox where a user can send a message to a book owner/requester.
@@ -73,32 +125,6 @@ public class MessageController {
         Message message = new Message();
         model.addAttribute("message", message);
         return "messageBox";
-    }
-
-     */
-
-
-    /*
-     * Returns a page with all messages the current logged in user has sent and received, separately.
-     */
-    /*
-    Sleppa líka?
-
-    @RequestMapping(value="/myMessages", method = RequestMethod.GET)
-    public String viewMessages(Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        if (sessionUser == null) {
-            return "please-log-in";
-        }
-        User current = userService.findByUsername(sessionUser.getUsername());
-
-        List<Message> receivedMessages = messageService.findByReceiver(current);
-        model.addAttribute("receivedmessages", receivedMessages);
-
-        List<Message> sentMessages = messageService.findBySender(current);
-        model.addAttribute("sentmessages", sentMessages);
-        return "myMessages";
     }
 
      */
@@ -131,31 +157,6 @@ public class MessageController {
     }
 
      */
-
-    /*
-     * Creates and posts a reply to a particular message a user has received.
-     */
-    @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
-    public Message sendReply(@PathVariable("id") long id, @Valid Message newMessage, Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null) {
-            //return Eitthvað villu /please log in object
-        }
-        // The message the user is replying to
-        Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
-        // The model fetches the messageBody string the user inserted
-        String newMessageBody = newMessage.messageBody;
-        // New messages are created with this messageBody and relevant information from the original message.
-        newMessage = new Message();
-        newMessage.setMessageBody(newMessageBody);
-        newMessage.setBook(initialMessage.getBook());
-        User current = userService.findByUsername(sessionUser.getUsername());
-        newMessage.setSender(current);
-        newMessage.setReceiver(initialMessage.getSender());
-        //messageService.save(initialMessage);
-        messageService.save(newMessage);
-        return newMessage;
-    }
 
 
 }

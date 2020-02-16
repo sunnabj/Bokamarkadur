@@ -14,11 +14,11 @@ public class GenericResponse {
         this.errors = errors;
     }
 
-    public String getMessage() {
+    public String getMsg() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public void setMsg(String message) {
         this.message = message;
     }
 

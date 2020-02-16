@@ -38,19 +38,6 @@ public class loginController {
     }
 
     /*
-     * Returns the page with the login form, where a user can sign in.
-     */
-    /*
-    Burt með þetta
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGET(User user){
-        return "login";
-    }
-
-     */
-
-    /*
      * Logs the user in. Activates when the user presses the login button
      * after having inserted his username and password.
      * Checks if the username exists and if the password fits, and if so,
@@ -73,6 +60,19 @@ public class loginController {
         return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors),HttpStatus.BAD_REQUEST);
     }
 
+    /*
+     * Retrieves the current logged in user from the current session.
+     */
+    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
+    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session, Model model){
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        if(sessionUser  != null){
+            return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
+        }
+        List<String> errors = new ArrayList<>();
+        errors.add("You must be logged in to visit this page");
+        return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+    }
 
     /*
      * Logs the current user out.
@@ -90,21 +90,17 @@ public class loginController {
         return "redirect:/";
     }
 
-
     /*
-     * Retrieves the current logged in user from the current session.
+     * Returns the page with the login form, where a user can sign in.
      */
-    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session, Model model){
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser  != null){
-            return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
-        }
-        List<String> errors = new ArrayList<>();
-        errors.add("You must be logged in to visit this page");
-        return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+    /*
+    Burt með þetta
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String loginGET(User user){
+        return "login";
     }
 
-
+     */
 
 }
