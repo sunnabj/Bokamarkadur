@@ -3,6 +3,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Book {

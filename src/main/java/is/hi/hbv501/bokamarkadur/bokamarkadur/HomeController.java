@@ -31,7 +31,9 @@ public class HomeController {
      * Returns the 10 most recently added books to the site.
      */
     /*
-    * Spurning með þetta?
+    * Hvernig í ósköpunum skal útfæra þetta?
+    * Tvær aðferðir - önnur sem nær í nýjustu bækur og hin sem nær í subjects?
+    * Jú, ætli það ekki! Þá bara hafa einhverja slóð fyrir hvora þeirra - forsíðan hlýtur að geta náð í hvort tveggja?
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String Home(Model model, HttpSession session) {

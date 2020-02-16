@@ -7,6 +7,8 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.AddBookResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.DeleteBookResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllBooksResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetBookResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,15 +50,12 @@ public class BookController {
     /*
      * Returns a page where you can see all books available on site, both for sale and requested.
      */
-    /*
-    Þarf nú reyndar ekki að vera...
-
-    @RequestMapping(value="/all-books", method = RequestMethod.GET)
-    public List<Book> allBooks(Model model, HttpSession session) {
-        return bookService.findAll();
+    @RequestMapping(value="/all-books")
+    public ResponseEntity<GetAllBooksResponse> allBooks() {
+        return new ResponseEntity<>(new GetAllBooksResponse(bookService.findAll()), HttpStatus.OK);
     }
 
-     */
+
 
     /*
      * Deletes a specific book
@@ -79,12 +78,19 @@ public class BookController {
      * Returns a page with information about a particular book
      */
     /*
-    Þurfum þetta eigi
+    Skil ekki af hverju þetta virkar ekki!
+    Return línan síðasta er að kvarta!
 
-    @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.GET)
-    public Book viewBook(@PathVariable("id") long id, Model model, HttpSession session) {
-        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        return book;
+    @RequestMapping(value ="/viewbook/{id}")
+    public ResponseEntity<GetBookResponse> viewBook(@PathVariable("id") long id, Model model, HttpSession session) {
+
+        if (!bookService.findById(id).isPresent()) {
+            List<String> errors = new ArrayList<>();
+            errors.add("No book with id: " + id + " exists");
+            return new ResponseEntity<>(new GetBookResponse(null, null, errors), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(new GetBookResponse(bookService.findById(id)), HttpStatus.OK);
     }
 
      */
@@ -219,16 +225,18 @@ public class BookController {
      * A method that retrieves books by subject. It returns a list of books belonging to
      * a chosen subject.
      */
-    /*
-    GET Slepp!
 
-    @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
-    public List<Book> viewsubjectbooks(@PathVariable("subjects") Subjects subject, Model model, HttpSession session) {
+    /*
+    Þetta virkar ekki heldur...
+
+    @RequestMapping(value ="/viewsubjectbooks/{subjects}")
+    public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") Subjects subject) {
         List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
-        return subjectbooks;
+        return new ResponseEntity<>(new GetAllBooksResponse(subjectbooks, HttpStatus.OK);
     }
 
      */
+
 
     /*
      * Returns a page where the logged in user can see all books he has put on the site,

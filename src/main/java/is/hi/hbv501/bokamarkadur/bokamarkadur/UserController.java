@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllUsersResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,16 +35,11 @@ public class UserController {
      * an account through the site.
      * Used in development. Not intended to be reachable in a released product.
      */
-    /*
-    Sleppa
-
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public String usersGET(Model model){
-        model.addAttribute("users", userService.findAll());
-        return "users";
+    public ResponseEntity<GetAllUsersResponse> usersGET(){
+        return new ResponseEntity<>(new GetAllUsersResponse(userService.findAll()), HttpStatus.OK);
     }
 
-     */
 
     /*
      * Returns a form where a user can create a new user account.
@@ -98,18 +94,11 @@ public class UserController {
     /*
      * Returns a page with information about a particular user.
      */
-    /*
-     * Nope - sleppedíslepp
     @RequestMapping(value ="/viewuser/{username}", method = RequestMethod.GET)
-    public String viewUser(@PathVariable("username") String username, Model model, HttpSession session) {
+    public ResponseEntity<GetUserResponse> viewUser(@PathVariable("username") String username, Model model, HttpSession session) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        model.addAttribute("user", user);
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "user-info";
+        return new ResponseEntity<>(new GetUserResponse(user), HttpStatus.OK);
     }
-
-     */
 
     /*
      * Returns a form where the logged in user can update his profile
