@@ -31,6 +31,7 @@ public class Book {
 
     // Many books can belong to each user.
     @ManyToOne(targetEntity=User.class)//(cascade=CascadeType.PERSIST)
+    @JsonIgnoreProperties("books")
     @JoinColumn(name="user_username")
     private User user;
 
