@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -132,9 +133,9 @@ public class UserController {
     /*
      * Updates information about the current logged in user.
      */
+
     /*
-    * Græja þetta!
-     */
+    Gamla
 
     @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
     public User updateUserInfo(@Valid User user, BindingResult result, Model model, HttpSession session) {
@@ -146,6 +147,23 @@ public class UserController {
         current.setInfo(user.info);
         userService.save(current);
         return current;
+    }
+
+     */
+
+    /*
+    * Möguleg ný aðferð
+     */
+    @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
+    public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result, HttpSession session) {
+        if(result.hasErrors()) {
+            return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(sessionUser.getUsername());
+        current.setInfo(user.info);
+        userService.save(current);
+        return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
     }
 
 
