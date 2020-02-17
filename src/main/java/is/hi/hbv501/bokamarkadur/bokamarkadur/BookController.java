@@ -136,9 +136,6 @@ public class BookController {
         return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
     }
 
-    /*
-    * Föll sem virka ekki enn!
-     */
 
     /*
      * Returns a page with information about a particular book
@@ -153,7 +150,6 @@ public class BookController {
         }
 
         return new ResponseEntity<>(new GetBookResponse(bookService.findById(id)), HttpStatus.OK);
-
     }
 
 
@@ -163,7 +159,7 @@ public class BookController {
      */
 
     /*
-    Þetta virkar ekki heldur...
+    Þarf að laga þessa aðferð!
 
     @RequestMapping(value ="/viewsubjectbooks/{subjects}")
     public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") Subjects subject) {
