@@ -143,23 +143,19 @@ public class BookController {
     /*
      * Returns a page with information about a particular book
      */
-    /*
-    Skil ekki af hverju þetta virkar ekki!
-    Return línan síðasta er að kvarta!
-
-    @RequestMapping(value ="/viewbook/{id}")
-    public ResponseEntity<GetBookResponse> viewBook(@PathVariable("id") long id, Model model, HttpSession session) {
+    @RequestMapping(value ="/viewbook/{id}", method = RequestMethod.GET)
+    public ResponseEntity<GetBookResponse> viewBook(@PathVariable("id") long id) {
 
         if (!bookService.findById(id).isPresent()) {
             List<String> errors = new ArrayList<>();
-            errors.add("No book with id: " + id + " exists");
+            errors.add("No book with id " + id + " exists");
             return new ResponseEntity<>(new GetBookResponse(null, null, errors), HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(new GetBookResponse(bookService.findById(id)), HttpStatus.OK);
+
     }
 
-     */
 
     /*
      * A method that retrieves books by subject. It returns a list of books belonging to

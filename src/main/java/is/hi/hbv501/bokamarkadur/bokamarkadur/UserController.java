@@ -3,6 +3,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllUsersResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetBookResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +79,9 @@ public class UserController {
      * Returns a page with information about a particular user.
      */
     @RequestMapping(value ="/viewuser/{username}", method = RequestMethod.GET)
-    public ResponseEntity<GetUserResponse> viewUser(@PathVariable("username") String username, Model model, HttpSession session) {
+    public ResponseEntity<GetUserResponse> viewUser(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        //Þarf að græja einhverja villuvirkni hérna!
         return new ResponseEntity<>(new GetUserResponse(user), HttpStatus.OK);
     }
 
