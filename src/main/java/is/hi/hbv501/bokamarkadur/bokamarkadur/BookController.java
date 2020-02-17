@@ -157,17 +157,13 @@ public class BookController {
      * A method that retrieves books by subject. It returns a list of books belonging to
      * a chosen subject.
      */
-
-    /*
-    Þarf að laga þessa aðferð!
-
     @RequestMapping(value ="/viewsubjectbooks/{subjects}")
     public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") Subjects subject) {
         List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
-        return new ResponseEntity<>(new GetAllBooksResponse(subjectbooks, HttpStatus.OK);
+        // TODO: Gera eitthvað villu response
+        return new ResponseEntity<>(new GetAllBooksResponse(subjectbooks), HttpStatus.OK);
     }
 
-     */
 
     /*
     * Föll sem má sleppa!
