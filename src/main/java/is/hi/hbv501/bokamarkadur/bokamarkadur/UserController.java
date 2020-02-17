@@ -81,7 +81,7 @@ public class UserController {
     @RequestMapping(value ="/viewuser/{username}", method = RequestMethod.GET)
     public ResponseEntity<GetUserResponse> viewUser(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        //Þarf að græja einhverja villuvirkni hérna!
+        //TODO: Græja villuresponse
         return new ResponseEntity<>(new GetUserResponse(user), HttpStatus.OK);
     }
 

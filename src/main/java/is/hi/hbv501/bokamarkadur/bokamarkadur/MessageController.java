@@ -106,7 +106,7 @@ public class MessageController {
      * Returns a page with a messagebox where a user can send a message to a book owner/requester.
      */
     /*
-     * Sleppa bara?
+     * TODO: Spurning með útfærslu - sleppa?
 
     @RequestMapping(value="/messageBook/{id}", method = RequestMethod.GET)
     public String sendRequest(@PathVariable("id") long id, Model model, HttpSession session) {
@@ -133,7 +133,7 @@ public class MessageController {
      * Returns a page with a messagebox where a user can reply to a particular message
      * he has received.
      */
-    /* Sleppa líka? Pínu dubious allt þetta slepp
+    /* TODO: Spá einnig í þessu eins og með síðasta
     @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.GET)
     public String pushReply(@PathVariable("id") long id, Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");

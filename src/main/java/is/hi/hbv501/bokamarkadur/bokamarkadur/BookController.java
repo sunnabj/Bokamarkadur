@@ -166,14 +166,11 @@ public class BookController {
 
 
     /*
-    * Föll sem má sleppa!
-     */
-
-    /*
      * Returns a page where the logged in user can see all books he has put on the site,
      * both for sale and requested.
      */
     /*
+    * TODO: Gera þetta virkt - /myBooks/{usereitthvað} vs nýta loggedIn?
     @RequestMapping(value="/myBooks", method = RequestMethod.GET)
     public String myBooks(Model model, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -186,6 +183,10 @@ public class BookController {
         return "my-books";
     }
 
+     */
+
+    /*
+     * Föll sem má sleppa!
      */
 
     /*
