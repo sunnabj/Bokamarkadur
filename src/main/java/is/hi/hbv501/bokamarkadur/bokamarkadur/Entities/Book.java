@@ -37,6 +37,7 @@ public class Book {
 
     // If a book is deleted, it's associated messages are deleted as well.
     @OneToMany(targetEntity=Message.class, mappedBy="book", cascade=CascadeType.ALL)
+    @JsonIgnoreProperties("book")
     private List<Message> messages;
 
     public Subjects subjects;

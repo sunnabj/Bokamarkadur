@@ -58,9 +58,11 @@ public class User {
     private List<Book> books = new ArrayList<>();
 
     @OneToMany(targetEntity=Message.class, mappedBy="receiver")
+    @JsonIgnoreProperties("receiver")
     private List<Message> receivedMessages = new ArrayList<>();
 
     @OneToMany(targetEntity=Message.class, mappedBy="sender")
+    @JsonIgnoreProperties("sender")
     private List<Message> sentMessages = new ArrayList<>();
 
     public User() {
