@@ -83,7 +83,7 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @RequestBody Book book, BindingResult result, HttpSession session,
+    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session,
                                                           @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
@@ -113,7 +113,7 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @RequestBody Book book, BindingResult result, Model model, HttpSession session,
+    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, Model model, HttpSession session,
                                  @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
