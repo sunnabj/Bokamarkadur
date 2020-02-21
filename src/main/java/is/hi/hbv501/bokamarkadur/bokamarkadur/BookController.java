@@ -5,10 +5,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Subjects;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.AddBookResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.DeleteBookResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllBooksResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetBookResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,16 +46,25 @@ public class BookController {
 
 
     /*
-    * Föll sem virka!
-     */
-
-
-    /*
      * Returns a page where you can see all books available on site, both for sale and requested.
+     * Leitin er bara inni í þessu.
+     * TODO: Láta þetta virka! Kemur response, en alltaf með tómu bókafylki!
+     * /search?search=Kafteinn+ofrubrok&status=for+sale
      */
-    @RequestMapping(value="/all-books")
-    public ResponseEntity<GetAllBooksResponse> allBooks() {
-        return new ResponseEntity<>(new GetAllBooksResponse(bookService.findAll()), HttpStatus.OK);
+    @RequestMapping(value="/all-books", method = RequestMethod.GET)
+    public ResponseEntity<GetAllBooksResponse> allBooks(
+            @RequestParam(value = "search" ,required = false) String search,
+            @RequestParam(value = "status", required = false) String status
+    ) {
+        if (search != null) {
+            List<Book> books = bookService.findByAuthorOrTitle(status, search, search);
+
+            return new ResponseEntity<>(new GetAllBooksResponse(books), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(new GetAllBooksResponse(bookService.findAll()), HttpStatus.OK);
+        }
+
     }
 
     /*
@@ -113,7 +119,7 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, Model model, HttpSession session,
+    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session,
                                  @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
@@ -169,6 +175,13 @@ public class BookController {
      * Returns a page where the logged in user can see all books he has put on the site,
      * both for sale and requested.
      */
+    @RequestMapping(value="/myBooks", method = RequestMethod.GET)
+    public ResponseEntity<GetAllBooksResponse> myBooks(HttpSession session) {
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(sessionUser.getUsername());
+        return new ResponseEntity<>(new GetAllBooksResponse(bookService.findByUser(current)), HttpStatus.OK);
+
+    }
     /*
     * TODO: Gera þetta virkt - /myBooks/{usereitthvað} vs nýta loggedIn?
     @RequestMapping(value="/myBooks", method = RequestMethod.GET)

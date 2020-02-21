@@ -32,17 +32,34 @@ public class SearchController {
      */
     /*
     * Alls ekki viss með þetta...
+    * /search?search=Kafteinn+ofrubrok&status=for+sale
      */
-    @RequestMapping(value= "/search", method = RequestMethod.POST)
+    /*
+    * Hmmmmm, hvernig skal gera þessa search?
+     */
+
+    /*
+    * Sleppa searchController!
+     */
+
+    @RequestMapping(value= "/search", method = RequestMethod.GET)
     public ResponseEntity<SearchResponse> searchBook(
-            @RequestBody SearchRequestWrapper searchRequestWrapper,
+            @RequestParam(value = "search" ,required = false) String search,
             @RequestParam(value = "status", required = true) String status
     ){
-        List<Book> books = bookService.findByAuthorOrTitle(status, searchRequestWrapper.getSearch(),
-                                                            searchRequestWrapper.getSearch());
+        List<Book> books = bookService.findByAuthorOrTitle(status, search, search);
 
         return new ResponseEntity<>(new SearchResponse(books), HttpStatus.OK);
     }
+
+    @RequestMapping(value= "/searchB", method = RequestMethod.GET)
+    public List<Book> searchBookB(
+            @RequestParam(value = "search", required = false) String search,
+            @RequestParam(value = "status", required = true) String status
+    ){
+        return bookService.findByAuthorOrTitle(status, search, search);
+    }
+
 
     /*
      * Returns a page where the user can search for books.

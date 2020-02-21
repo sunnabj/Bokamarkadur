@@ -8,7 +8,6 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -64,7 +63,7 @@ public class loginController {
      * Retrieves the current logged in user from the current session.
      */
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session, Model model){
+    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
             return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
@@ -80,15 +79,21 @@ public class loginController {
     /*
     * Spurning með þetta - Má sleppa þessu? Þarf þetta setAttribute?
      */
+    /*
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPOST(@Valid User user, BindingResult result, Model model, HttpSession session){
+    public ResponseEntity<LoginAndSignUpResponse> logout(BindingResult result, HttpSession session){
+
+        User sessionUser = (User) session.getAttribute("LoggedInUser");
+
         if(result.hasErrors()){
-            return "redirect:/";
+            return new ResponseEntity<>(new LoginAndSignUpResponse(sessionUser, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-        model.addAttribute("books", bookService.findAll());
+
         session.setAttribute("LoggedInUser", null);
-        return "redirect:/";
+        return new ResponseEntity<>(new LoginAndSignUpResponse(sessionUser, "Logout successful", null), HttpStatus.OK);
     }
+
+     */
 
     /*
      * Returns the page with the login form, where a user can sign in.

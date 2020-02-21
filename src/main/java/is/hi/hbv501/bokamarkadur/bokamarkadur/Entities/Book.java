@@ -31,7 +31,7 @@ public class Book {
 
     // Many books can belong to each user.
     @ManyToOne(targetEntity=User.class)//(cascade=CascadeType.PERSIST)
-    @JsonIgnoreProperties("books")
+    @JsonIgnoreProperties("books") //Fyrir lista: @JsonIgnoreProperties({"books", "blabla",...})
     @JoinColumn(name="user_username")
     private User user;
 

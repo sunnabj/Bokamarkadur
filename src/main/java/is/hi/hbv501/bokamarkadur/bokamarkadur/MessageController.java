@@ -76,7 +76,7 @@ public class MessageController {
     /*
      * Returns a page with all messages the current logged in user has sent.
      */
-    // TODO: Spá í útfærslu - tengja við ákveðinn user með /{id} eða tengja við session og loggedIn?
+    //TODO: Error virkni
     @RequestMapping(value = "/mySentMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewSentMessages(HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -91,7 +91,7 @@ public class MessageController {
     /*
      * Returns a page with all messages the current logged in user has received.
      */
-    //TODO: Sama og í mySentMessages
+    //TODO: Error virkni
     @RequestMapping(value = "/myReceivedMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewReceivedMessages(HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");

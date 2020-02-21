@@ -21,11 +21,11 @@ public class Message {
     public String messageBody;
 
     @ManyToOne(targetEntity=User.class)
-    @JsonIgnoreProperties("sentMessages")
+    @JsonIgnoreProperties({"sentMessages", "books"})
     public User sender;
 
     @ManyToOne(targetEntity=User.class)
-    @JsonIgnoreProperties("receivedMessages")
+    @JsonIgnoreProperties({"receivedMessages", "books"})
     public User receiver;
 
     @ManyToOne(targetEntity=Book.class)
