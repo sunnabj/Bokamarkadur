@@ -3,6 +3,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GenericResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +46,17 @@ public class loginController {
      * The logged in user is stored in the current session.
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result, HttpSession session){
+    public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result,
+                                                            HttpSession session){
         if(result.hasErrors()){
-            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, result.getFieldErrors()),
+                    HttpStatus.BAD_REQUEST);
         }
         User exists = userService.login(user);
         if(exists != null){
             session.setAttribute("LoggedInUser", user);
-            return new ResponseEntity<>(new LoginAndSignUpResponse(user, "Login successful", null), HttpStatus.OK);
+            return new ResponseEntity<>(new LoginAndSignUpResponse(user, "Login successful", null)
+                    , HttpStatus.OK);
         }
         List<String> errors = new ArrayList<>();
         errors.add("Login unsuccessful");
@@ -79,6 +83,19 @@ public class loginController {
     /*
     * Spurning með þetta - Má sleppa þessu? Þarf þetta setAttribute?
      */
+   /*
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ResponseEntity<LoginAndSignUpResponse> logout(BindingResult result) {
+
+        if(result.hasErrors()){
+            return new ResponseEntity<>(new LoginAndSignUpResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(new LoginAndSignUpResponse("Logout successful", null), HttpStatus.OK);
+
+    }
+   */
+
     /*
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ResponseEntity<LoginAndSignUpResponse> logout(BindingResult result, HttpSession session){

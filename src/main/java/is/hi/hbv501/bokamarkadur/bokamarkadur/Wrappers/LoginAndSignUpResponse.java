@@ -17,6 +17,10 @@ public class LoginAndSignUpResponse extends GenericResponse {
         this.user = user;
     }
 
+    public LoginAndSignUpResponse(String message, List<?> errors) {
+        super(message, errors);
+    }
+
     public User getUser() {
         return user;
     }

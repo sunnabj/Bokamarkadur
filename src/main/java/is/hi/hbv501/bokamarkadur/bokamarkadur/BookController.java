@@ -47,9 +47,8 @@ public class BookController {
 
     /*
      * Returns a page where you can see all books available on site, both for sale and requested.
-     * Leitin er bara inni í þessu.
-     * TODO: Láta þetta virka! Kemur response, en alltaf með tómu bókafylki!
-     * /search?search=Kafteinn+ofrubrok&status=for+sale
+     * Search parameter is possible - then books that fit the parameter and status are shown.
+     * T.d. /all-books?search=Data&status=For+sale
      */
     @RequestMapping(value="/all-books", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> allBooks(
@@ -182,83 +181,6 @@ public class BookController {
         return new ResponseEntity<>(new GetAllBooksResponse(bookService.findByUser(current)), HttpStatus.OK);
 
     }
-    /*
-    * TODO: Gera þetta virkt - /myBooks/{usereitthvað} vs nýta loggedIn?
-    @RequestMapping(value="/myBooks", method = RequestMethod.GET)
-    public String myBooks(Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if ((User) session.getAttribute("LoggedInUser") == null) {
-            return "please-log-in";
-        }
-        User current = userService.findByUsername(sessionUser.getUsername());
-        model.addAttribute("books", bookService.findByUser(current));
-        model.addAttribute("loggedIn", sessionUser);
-        return "my-books";
-    }
 
-     */
-
-    /*
-     * Föll sem má sleppa!
-     */
-
-    /*
-     * Returns a page where the user can choose to either put up a book for sale or request a book.
-     */
-    /*
-    @RequestMapping(value="/newbook", method = RequestMethod.GET)
-    public String addBook(HttpSession session, Model model) {
-        if ((User) session.getAttribute("LoggedInUser") == null) {
-            return "please-log-in";
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "add-book";
-    }
-    */
-
-    /*
-     * Returns a page with information about the developers.
-     */
-    /*
-    @RequestMapping(value="/aboutus", method = RequestMethod.GET)
-    public String aboutus(HttpSession session, Model model) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "about-us";
-    }
-    */
-
-    /*
-     * Returns a page where a user can put up a book for sale.
-     */
-    /*
-    @RequestMapping(value="/addbookforsale", method = RequestMethod.GET)
-    public String addBookForSaleForm(Book book,Model model, HttpSession session) {
-        if ((User) session.getAttribute("LoggedInUser") == null) {
-            return "please-log-in";
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "sell-book";
-    }
-
-     */
-
-    /*
-     * Returns a page where a user can request a book.
-     */
-    /*
-    @RequestMapping(value="/addrequestbook", method = RequestMethod.GET)
-    public String addRequestBook(Book book, Model model, HttpSession session) {
-        if ((User) session.getAttribute("LoggedInUser") == null) {
-            return "please-log-in";
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "request-book";
-    }
-
-     */
 
 }
