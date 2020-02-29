@@ -106,11 +106,19 @@ public class BookController {
         book.setImage(file.getOriginalFilename());
         book.setStatus("For sale");
         book.setDate(date);
-        //Spurning með sessionUser og HttpSession?
+
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
-        book.setUser(current);
-        return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+        if (sessionUser != null) {
+            User current = userService.findByUsername(sessionUser.getUsername());
+            book.setUser(current);
+            return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+        }
+
+        List<String> errors = new ArrayList<>();
+        errors.add("You must be logged in to visit this page");
+        return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+
+
     }
 
     /*
@@ -136,9 +144,17 @@ public class BookController {
         book.setStatus("Requested");
         //Spurning með sessionUser - er það notað?
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
-        book.setUser(current);
-        return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+
+        if (sessionUser != null) {
+            User current = userService.findByUsername(sessionUser.getUsername());
+            book.setUser(current);
+            return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+        }
+
+        List<String> errors = new ArrayList<>();
+        errors.add("You must be logged in to visit this page");
+        return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+
     }
 
 
@@ -162,7 +178,7 @@ public class BookController {
      * A method that retrieves books by subject. It returns a list of books belonging to
      * a chosen subject.
      */
-    @RequestMapping(value ="/viewsubjectbooks/{subjects}")
+    @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") Subjects subject) {
         List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
         // TODO: Gera eitthvað villu response
@@ -174,6 +190,7 @@ public class BookController {
      * Returns a page where the logged in user can see all books he has put on the site,
      * both for sale and requested.
      */
+    //TODO: VilluReponse þegar notandi er ekki loggaður inn
     @RequestMapping(value="/myBooks", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> myBooks(HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
