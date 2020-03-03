@@ -110,17 +110,15 @@ public class BookController {
         book.setDate(date);
 
         User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser != null) {
-            User current = userService.findByUsername(sessionUser.getUsername());
-            book.setUser(current);
-            return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+        if (sessionUser == null) {
+            List<String> errors = new ArrayList<>();
+            errors.add("You must be logged in to visit this page");
+            return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
 
-        List<String> errors = new ArrayList<>();
-        errors.add("You must be logged in to visit this page");
-        return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
-
-
+        User current = userService.findByUsername(sessionUser.getUsername());
+        book.setUser(current);
+        return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
     }
 
     /*
