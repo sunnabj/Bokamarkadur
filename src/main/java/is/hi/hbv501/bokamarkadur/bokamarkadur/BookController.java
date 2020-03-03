@@ -88,12 +88,12 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session,
-                                                          @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session) { //,
+                                                          //@RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-
+/*
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -104,6 +104,8 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+
+ */
         book.setStatus("For sale");
         book.setDate(date);
 
@@ -126,11 +128,12 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session,
-                                 @RequestParam("file") MultipartFile file) {
+    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session) { //,
+                                 //@RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
+        /*
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -141,6 +144,7 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+         */
         book.setStatus("Requested");
         //Spurning með sessionUser - er það notað?
         User sessionUser = (User) session.getAttribute("LoggedInUser");
