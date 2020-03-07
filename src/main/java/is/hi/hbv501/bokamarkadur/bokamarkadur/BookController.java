@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.security.core.Authentication;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -88,12 +89,13 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session) { //,
-                                                          //@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result,
+                                                          Authentication authentication,
+                                                          @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-/*
+
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -105,19 +107,29 @@ public class BookController {
         }
         book.setImage(file.getOriginalFilename());
 
- */
+
         book.setStatus("For sale");
         book.setDate(date);
 
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
+        //User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        /*
         if (sessionUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
 
-        User current = userService.findByUsername(sessionUser.getUsername());
-        book.setUser(current);
+         */
+        if (loggedinUser == null) {
+            List<String> errors = new ArrayList<>();
+            errors.add("You must be logged in to visit this page");
+            return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+        }
+
+        //User current = userService.findByUsername(sessionUser.getUsername());
+        //book.setUser(current);
+        book.setUser(loggedinUser);
         return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
     }
 
@@ -126,12 +138,13 @@ public class BookController {
      * Returns a page where the user is thanked for his contribution.
      */
     @RequestMapping(value ="/addrequestbook", method = RequestMethod.POST)
-    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result, HttpSession session) { //,
-                                 //@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<AddBookResponse> addRequestBook(@Valid @ModelAttribute Book book, BindingResult result,
+                                                          Authentication authentication,
+                                                        @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-        /*
+
         try {
             // Get the file and save it somewhere
             byte[] bytes = file.getBytes();
@@ -142,14 +155,13 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
-         */
-        book.setStatus("Requested");
-        //Spurning með sessionUser - er það notað?
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
 
-        if (sessionUser != null) {
-            User current = userService.findByUsername(sessionUser.getUsername());
-            book.setUser(current);
+        book.setStatus("Requested");
+        User loggedinUser = userService.findByUsername(authentication.getName());
+
+
+        if (loggedinUser != null) {
+            book.setUser(loggedinUser);
             return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
         }
 
@@ -194,9 +206,9 @@ public class BookController {
      */
     //TODO: VilluReponse þegar notandi er ekki loggaður inn
     @RequestMapping(value="/myBooks", method = RequestMethod.GET)
-    public ResponseEntity<GetAllBooksResponse> myBooks(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
+    public ResponseEntity<GetAllBooksResponse> myBooks(Authentication authentication) {
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        User current = userService.findByUsername(loggedinUser.getUsername());
         return new ResponseEntity<>(new GetAllBooksResponse(bookService.findByUser(current)), HttpStatus.OK);
 
     }

@@ -6,6 +6,8 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GenericResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
+//import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +47,7 @@ public class loginController {
      * If not, the login page is reloaded.
      * The logged in user is stored in the current session.
      */
+    // EKKI NOTA
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result,
                                                             HttpSession session){
@@ -66,6 +69,7 @@ public class loginController {
     /*
      * Retrieves the current logged in user from the current session.
      */
+    // EKKI NOTA
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -75,6 +79,13 @@ public class loginController {
         List<String> errors = new ArrayList<>();
         errors.add("You must be logged in to visit this page");
         return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+    }
+
+    // NÝTT!!!
+    @RequestMapping(value = "/loggedIn", method = RequestMethod.GET)
+    public User loggedInGET(Authentication authentication) {
+        System.out.println(authentication.getName());
+        return userService.findByUsername(authentication.getName()); //var getName() og rautt
     }
 
     /*

@@ -9,6 +9,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +47,7 @@ public class UserController {
      * new account form.
      * Returns a welcome page where the new user is addressed.
      */
+    // EKKI NOTA
     @RequestMapping(value ="/newAccount", method = RequestMethod.POST)
     public ResponseEntity<LoginAndSignUpResponse> addNewUser(@Valid @RequestBody User user, BindingResult result) {
         if(result.hasErrors()) {
@@ -90,12 +92,14 @@ public class UserController {
      * Updates information about the current logged in user.
      */
     @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
-    public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result, HttpSession session) {
+    public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result,
+                                                          HttpSession session, Authentication authentication) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        //User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(loggedinUser.getUsername());
         current.setInfo(user.info);
         userService.save(current);
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
