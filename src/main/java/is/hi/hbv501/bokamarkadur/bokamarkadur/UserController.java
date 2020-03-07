@@ -93,7 +93,7 @@ public class UserController {
      */
     @RequestMapping(value ="/updateUserInfo", method = RequestMethod.POST)
     public ResponseEntity<GetUserResponse> updateUserInfo(@Valid @RequestBody User user, BindingResult result,
-                                                          HttpSession session, Authentication authentication) {
+                                                          Authentication authentication) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }

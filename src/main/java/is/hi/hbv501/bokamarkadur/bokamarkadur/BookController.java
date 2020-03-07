@@ -121,7 +121,7 @@ public class BookController {
         }
 
          */
-        if (loggedinUser == null) {
+        if (authentication == null || loggedinUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
@@ -160,9 +160,12 @@ public class BookController {
         User loggedinUser = userService.findByUsername(authentication.getName());
 
 
-        if (loggedinUser != null) {
-            book.setUser(loggedinUser);
-            return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+        if (authentication != null) {
+            if (loggedinUser != null) {
+                book.setUser(loggedinUser);
+                return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+            }
+
         }
 
         List<String> errors = new ArrayList<>();
