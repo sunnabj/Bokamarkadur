@@ -73,7 +73,7 @@ public class BokamarkadurApplication {
 			Tester.setEmail("tester@testing.com");
 			Tester.setInfo("I'm the best Tester ever!");
 			Tester.setName("Tester");
-			Tester.setPhonenumber("6590792");
+			Tester.setPhonenumber("6161350");
 			Tester.setPassword("12345678");
 			Tester.setUsername("Tester");
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
