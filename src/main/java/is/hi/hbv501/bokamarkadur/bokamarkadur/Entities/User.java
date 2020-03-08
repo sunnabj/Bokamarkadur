@@ -50,7 +50,9 @@ public class User {
     }
 
     @Transient
-    public String retypePassword ;
+    public String retypePassword;
+
+    public String phonenumber;
 
 
     // One user can have many books in the database
@@ -103,6 +105,10 @@ public class User {
         this.username = username;
     }
 
+    public void setPhonenumber(String phonenumber) { this.phonenumber = phonenumber; }
+
+    public String getPhonenumber() { return phonenumber; }
+
     public String getInfo() {
         return info;
     }
@@ -136,7 +142,7 @@ public class User {
     }
 
 
-    public User(long id, String name, String username, String password, String retypePassword, String info,
+    public User(long id, String name, String username, String password, String retypePassword, String phonenumber, String info,
                 String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
         this.id = id;
         this.name = name;
@@ -144,6 +150,7 @@ public class User {
         this.password = password;
         this.info = info;
         this.email = email;
+        this.phonenumber = phonenumber;
         this.books = books;
         this.sentMessages = sentMessages;
         this.receivedMessages = receivedMessages;
