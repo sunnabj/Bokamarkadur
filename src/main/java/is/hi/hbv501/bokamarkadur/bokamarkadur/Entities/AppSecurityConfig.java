@@ -80,7 +80,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter
                 // Allow POST request to to register and authenticate
                 .authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate", "/register").permitAll().and()
                 // Allow GET requests to certain endpoints
-                .authorizeRequests().antMatchers(HttpMethod.GET, "/all-books", "/available-subjects",
+                .authorizeRequests().antMatchers(HttpMethod.GET, "/all-books", "/available-subjects", "/**.jpg",
                 "/viewbook/{id}", "/viewsubjectbooks/{subjects}", "/newest-books", "/available-subjects", "/users").permitAll()
                 // Require authentication for everything else
                 .anyRequest().authenticated().and()
