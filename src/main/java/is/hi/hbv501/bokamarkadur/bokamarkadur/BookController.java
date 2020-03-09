@@ -98,9 +98,11 @@ public class BookController {
 
         try {
             // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
-            Files.write(path, bytes);
+            if (file.getSize() > 0) {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
+                Files.write(path, bytes);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

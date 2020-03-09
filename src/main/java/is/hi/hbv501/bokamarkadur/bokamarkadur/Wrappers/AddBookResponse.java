@@ -17,11 +17,11 @@ public class AddBookResponse extends GenericResponse {
     public AddBookResponse(String message, List<?> errors) {
         this(null, message, errors);
     }
+
     public AddBookResponse(Book book, String message, List<?> errors) {
         super(message, errors);
         this.book = book;
     }
-
 
     public Book getBook() {
         return book;
