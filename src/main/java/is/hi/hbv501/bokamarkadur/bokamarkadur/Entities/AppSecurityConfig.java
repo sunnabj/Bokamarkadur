@@ -78,7 +78,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 // Allow POST request to to register and authenticate
-                .authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate", "/register").permitAll().and()
+                .authorizeRequests().antMatchers(HttpMethod.POST,"/authenticate", "/register", "/addbookforsale").permitAll().and()
                 // Allow GET requests to certain endpoints
                 .authorizeRequests().antMatchers(HttpMethod.GET, "/all-books", "/available-subjects", "/**.jpg",
                 "/viewbook/{id}", "/viewsubjectbooks/{subjects}", "/newest-books", "/available-subjects", "/users").permitAll()
