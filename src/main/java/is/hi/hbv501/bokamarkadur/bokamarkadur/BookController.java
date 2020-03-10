@@ -90,7 +90,7 @@ public class BookController {
      */
     @RequestMapping(value ="/addbookforsale", method = RequestMethod.POST)
     public ResponseEntity<AddBookResponse> addBookForSale(@Valid @ModelAttribute Book book, BindingResult result,
-//                                                          Authentication authentication,
+                                                          Authentication authentication,
                                                           @RequestParam("file") MultipartFile file) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
@@ -115,8 +115,7 @@ public class BookController {
 
         //User sessionUser = (User) session.getAttribute("LoggedInUser");
 
-        // TODO: Afkommenta!
-//        User loggedinUser = userService.findByUsername(authentication.getName());
+        User loggedinUser = userService.findByUsername(authentication.getName());
 
         /*
         if (sessionUser == null) {
@@ -126,20 +125,18 @@ public class BookController {
         }
          */
 
-        // TODO: Afkommenta!
-//        if (authentication == null || loggedinUser == null) {
-//            List<String> errors = new ArrayList<>();
-//            errors.add("You must be logged in to visit this page");
-//            return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
-//        }
+        if (authentication == null || loggedinUser == null) {
+            List<String> errors = new ArrayList<>();
+            errors.add("You must be logged in to visit this page");
+            return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+        }
 
 
 
         //User current = userService.findByUsername(sessionUser.getUsername());
         //book.setUser(current);
 
-        //TODO: Afkommenta!
-//        book.setUser(loggedinUser);
+        book.setUser(loggedinUser);
 
         return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
     }
