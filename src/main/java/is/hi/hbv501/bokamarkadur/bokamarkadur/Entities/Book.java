@@ -40,7 +40,9 @@ public class Book {
     @JsonIgnoreProperties("book")
     private List<Message> messages;
 
-    public Subjects subjects;
+    //public Subjects subjects;
+
+    public String subject;
 
     // Entity constructors must be empty.
     public Book() {
@@ -75,7 +77,7 @@ public class Book {
         return condition;
     }
 
-    public Subjects getSubjects() {return subjects; }
+    //public Subjects getSubjects() {return subjects; }
 
     public Integer getPrice() {
         return price;
@@ -88,6 +90,14 @@ public class Book {
     public Date getDate() { return date; }
 
     public User getUser() { return user; }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
 
     public void setId(long id) {
         this.id = id;
@@ -109,7 +119,7 @@ public class Book {
         this.condition = condition;
     }
 
-    public void setSubjects(Subjects subjects) { this.subjects = subjects; }
+    //public void setSubjects(Subjects subjects) { this.subjects = subjects; }
 
     public void setPrice(Integer price) {
         this.price = price;
@@ -124,7 +134,7 @@ public class Book {
     public void setUser(User user) { this.user = user; }
 
     public Book(long id, String title, String author, Integer edition, String condition,
-                Subjects subjects, Integer price, String image, String status, Date date,
+                String subject, Integer price, String image, String status, Date date,
                 User user, List<Message> messages) {
 
         this.id = id;
@@ -132,7 +142,7 @@ public class Book {
         this.author = author;
         this.edition = edition;
         this.condition = condition;
-        this.subjects = subjects;
+        this.subject = subject;
         this.price = price;
         this.image = image;
         this.status = status;

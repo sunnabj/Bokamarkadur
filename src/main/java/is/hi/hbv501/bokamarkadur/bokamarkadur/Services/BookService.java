@@ -20,6 +20,7 @@ public interface BookService {
     Optional<Book> findById(long id);
     List<Book> findByAuthorOrTitle(String statusSearch, String authorSearch, String titleSearch);
     List<Book> findByUser(User user);
-    List<Book> findBySubjects(Subjects subject);
+    //List<Book> findBySubjects(Subjects subject);
+    List<Book> findBySubject(String subject);
     List<Book> findNewestBooks();
 }

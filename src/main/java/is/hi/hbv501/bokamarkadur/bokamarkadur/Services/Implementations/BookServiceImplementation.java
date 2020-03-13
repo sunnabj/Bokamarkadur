@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.data.jpa.domain.Specification;
 
+import javax.security.auth.Subject;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -79,7 +80,10 @@ public class BookServiceImplementation implements BookService {
     @Override
     public List<Book> findByUser(User user) { return repository.findByUser(user); };
 
+    //@Override
+    //public List<Book> findBySubjects(Subjects subject) { return repository.findBySubjects(subject); }
+
     @Override
-    public List<Book> findBySubjects(Subjects subject) { return repository.findBySubjects(subject); }
+    public List<Book> findBySubject(String subject) { return repository.findBySubject(subject); }
 
 }

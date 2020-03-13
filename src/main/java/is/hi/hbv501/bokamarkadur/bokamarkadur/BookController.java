@@ -204,8 +204,8 @@ public class BookController {
      * a chosen subject.
      */
     @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
-    public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") Subjects subject) {
-        List<Book> subjectbooks = bookService.findBySubjects(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
+    public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") String subject) {
+        List<Book> subjectbooks = bookService.findBySubject(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
         // TODO: Gera eitthvað villu response
         return new ResponseEntity<>(new GetAllBooksResponse(subjectbooks), HttpStatus.OK);
     }

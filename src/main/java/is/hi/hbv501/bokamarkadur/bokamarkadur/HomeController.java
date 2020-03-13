@@ -6,6 +6,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.BookService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllBooksResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetSubjectResponse;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetSubjectsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,8 +42,8 @@ public class HomeController {
     }
 
     /*
-    * Fall til að sýna available subejcts.
-    */
+    * Fall til að sýna available subjects.
+
     @RequestMapping(value = "/available-subjects", method = RequestMethod.GET)
     public ResponseEntity<GetSubjectsResponse> availableSubjects() {
         List<Book> availableBooks = bookService.findAll();
@@ -57,6 +58,28 @@ public class HomeController {
 
         return new ResponseEntity<>(new GetSubjectsResponse(bookSubjects), HttpStatus.OK);
     }
+
+     */
+
+
+    /*
+    * Fall til að sýna available subjects - nema nú eru subjects strengur.
+    */
+    @RequestMapping(value = "/available-subjects", method = RequestMethod.GET)
+    public ResponseEntity<GetSubjectResponse> availableSubjects() {
+        List<Book> availableBooks = bookService.findAll();
+        ArrayList<String> bookSubjects = new ArrayList<String>();
+        // Go through all books and insert subjects into the bookSubjects array.
+        for (int i = 0; i < availableBooks.size(); i++) {
+            if (!bookSubjects.contains(availableBooks.get(i).getSubject())) {
+                bookSubjects.add(availableBooks.get(i).getSubject());
+            }
+        }
+        //TODO: Villuresponse?
+
+        return new ResponseEntity<>(new GetSubjectResponse(bookSubjects), HttpStatus.OK);
+    }
+
 
 
 

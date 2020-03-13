@@ -34,7 +34,9 @@ public interface BookRepository extends JpaRepository<Book, Long>, JpaSpecificat
 
     List<Book> findByUser(User user);
 
-    List<Book> findBySubjects(Subjects subject);
+    //List<Book> findBySubjects(Subjects subject);
+
+    List<Book> findBySubject(String subject);
 
     @Query(value = "SELECT * FROM book ORDER BY date DESC LIMIT 10;", nativeQuery = true)
     List<Book> findNewestBooks();
