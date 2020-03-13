@@ -98,9 +98,11 @@ public class BookController {
 
         try {
             // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
-            Files.write(path, bytes);
+            if (file.getSize() > 0) {
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(currentDirectory + uploadedFolder + file.getOriginalFilename());
+                Files.write(path, bytes);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -112,24 +114,30 @@ public class BookController {
         book.setDate(date);
 
         //User sessionUser = (User) session.getAttribute("LoggedInUser");
+
         User loggedinUser = userService.findByUsername(authentication.getName());
+
         /*
         if (sessionUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
-
          */
+
         if (authentication == null || loggedinUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
 
+
+
         //User current = userService.findByUsername(sessionUser.getUsername());
         //book.setUser(current);
+
         book.setUser(loggedinUser);
+
         return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
     }
 
