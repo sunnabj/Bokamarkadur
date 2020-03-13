@@ -37,6 +37,8 @@ public class MessageController {
      * Creates a new message with the text the user writes in the box, with the relevant book
      * as attribute, and the user that added the book as receiver.
      */
+    // Kommenta út tímabundið - þar til laga session
+    /*
     @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
     public ResponseEntity<SendMessageResponse> messageBook(@PathVariable("id") long id, @Valid @RequestBody Message message,
                                                            HttpSession session) {
@@ -49,10 +51,13 @@ public class MessageController {
         message.setReceiver(book.getUser());
         return new ResponseEntity<>(new SendMessageResponse(messageService.save(message)), HttpStatus.CREATED);
     }
+*/
 
     /*
      * Creates and posts a reply to a particular message a user has received.
      */
+    // Kommenta út tímabundið - þar til laga session
+    /*
     @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
     public ResponseEntity<SendMessageResponse> sendReply(@PathVariable("id") long id, @Valid @RequestBody Message newMessage, HttpSession session) {
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -73,9 +78,13 @@ public class MessageController {
         return new ResponseEntity<>(new SendMessageResponse(messageService.save(newMessage)), HttpStatus.CREATED);
     }
 
+     */
+
     /*
      * Returns a page with all messages the current logged in user has sent.
      */
+    // Kommenta út tímabundið - þar til skipti út session
+    /*
     //TODO: Error virkni
     @RequestMapping(value = "/mySentMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewSentMessages(HttpSession session) {
@@ -88,9 +97,13 @@ public class MessageController {
         return new ResponseEntity<>(new GetMessageResponse(sentMessages), HttpStatus.OK);
     }
 
+     */
+
     /*
      * Returns a page with all messages the current logged in user has received.
      */
+    //Kommenta út tímabundið - þar til skipti út session
+    /*
     //TODO: Error virkni
     @RequestMapping(value = "/myReceivedMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewReceivedMessages(HttpSession session) {
@@ -102,6 +115,8 @@ public class MessageController {
         List<Message> receivedMessages = messageService.findByReceiver(current);
         return new ResponseEntity<>(new GetMessageResponse(receivedMessages), HttpStatus.OK);
     }
+
+     */
 
 
     /*

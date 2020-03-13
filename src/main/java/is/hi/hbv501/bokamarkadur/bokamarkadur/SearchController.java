@@ -1,5 +1,6 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
+//TODO: Þetta er useless controller
 
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Book;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;

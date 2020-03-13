@@ -48,6 +48,7 @@ public class loginController {
      * The logged in user is stored in the current session.
      */
     // EKKI NOTA
+    /*
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result,
                                                             HttpSession session){
@@ -66,10 +67,13 @@ public class loginController {
         return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors),HttpStatus.BAD_REQUEST);
     }
 
+     */
+
     /*
      * Retrieves the current logged in user from the current session.
      */
     // EKKI NOTA
+    /*
     @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
     public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session){
         User sessionUser = (User) session.getAttribute("LoggedInUser");
@@ -80,6 +84,8 @@ public class loginController {
         errors.add("You must be logged in to visit this page");
         return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
     }
+
+     */
 
     // NÝTT!!!
     @RequestMapping(value = "/loggedIn", method = RequestMethod.GET)
