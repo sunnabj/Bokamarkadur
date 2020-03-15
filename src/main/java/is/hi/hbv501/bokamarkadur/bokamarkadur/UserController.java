@@ -1,11 +1,10 @@
 package is.hi.hbv501.bokamarkadur.bokamarkadur;
 
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Review;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.ReviewService;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Services.UserService;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetAllUsersResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetBookResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.GetUserResponse;
-import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.LoginAndSignUpResponse;
+import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +25,7 @@ import java.util.List;
 public class UserController {
 
     private UserService userService;
+    private ReviewService reviewService;
 
     @Autowired
     public UserController(UserService userService){
@@ -104,6 +104,33 @@ public class UserController {
         userService.save(current);
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
+
+
+
+    @RequestMapping(value ="/writeReview/{id}", method = RequestMethod.POST)
+    public ResponseEntity<AddReviewResponse> writeReview(@PathVariable("id") long id,
+                                                         @Valid @RequestBody Review review, Authentication authentication) {
+
+        User user = userService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid user ID"));
+
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        User current = userService.findByUsername(loggedinUser.getUsername());
+
+        review.setReviewer(current);
+        review.setUser(user);
+        return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+    }
+
+
+    @RequestMapping(value ="/viewreviews/{username}", method = RequestMethod.GET)
+    public ResponseEntity<GetReviewsResponse> viewReviews(@PathVariable("username") String username) {
+        User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        //TODO: Græja villuresponse
+        List<Review> reviews = reviewService.findByUser(user);
+        return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
+    }
+
+
 
 
     /*
