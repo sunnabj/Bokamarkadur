@@ -29,7 +29,7 @@ public class Message {
     public User receiver;
 
     @ManyToOne(targetEntity=Book.class)
-    @JsonIgnoreProperties("messages")
+    @JsonIgnoreProperties({"messages", "user"})
     public Book book;
 
 

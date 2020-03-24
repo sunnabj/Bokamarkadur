@@ -6,7 +6,6 @@ import java.util.List;
 
 public class AddReviewResponse extends GenericResponse {
 
-
     private Review review;
 
     public AddReviewResponse(){}

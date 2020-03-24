@@ -26,6 +26,7 @@ public class User {
     // Automatic generation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     public String info;
 
     @Size(min = 2, message = "Length should be in at least 2 digits")

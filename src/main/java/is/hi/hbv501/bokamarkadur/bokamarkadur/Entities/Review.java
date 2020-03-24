@@ -5,7 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 
 @Entity
+@Table(name ="REVIEWS")
 public class Review {
+
+
+
+
+
 
     @Id
     //Automatic generation of ID values.
@@ -56,6 +62,11 @@ public class Review {
         this.reviewer = reviewer;
         this.user = user;
         this.reviewBody = reviewBody;
+    }
+
+    @Override
+    public String toString() {
+        return this.reviewBody;
     }
 
 }

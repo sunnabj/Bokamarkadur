@@ -109,7 +109,13 @@ public class UserController {
 
     @RequestMapping(value ="/writeReview/{id}", method = RequestMethod.POST)
     public ResponseEntity<AddReviewResponse> writeReview(@PathVariable("id") long id,
-                                                         @Valid @RequestBody Review review, Authentication authentication) {
+                                                         @Valid @RequestBody Review review, BindingResult result,
+                                                         Authentication authentication) {
+
+        if(result.hasErrors()) {
+            System.out.println("Resultið hafði errors");
+            return new ResponseEntity<>(new AddReviewResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
 
         User user = userService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid user ID"));
 
@@ -118,6 +124,10 @@ public class UserController {
 
         review.setReviewer(current);
         review.setUser(user);
+
+        System.out.println("Review-ið er: " + review.toString());
+
+
         return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
     }
 
