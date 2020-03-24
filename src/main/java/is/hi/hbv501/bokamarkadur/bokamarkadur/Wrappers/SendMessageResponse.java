@@ -19,7 +19,6 @@ public class SendMessageResponse extends GenericResponse {
         this(null, msg, errors);
     }
 
-
     public SendMessageResponse(Message message, String msg, List<?> errors) {
         super(msg, errors);
         this.message = message;

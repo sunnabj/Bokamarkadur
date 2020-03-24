@@ -4,10 +4,12 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Repositories;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.Message;
 import is.hi.hbv501.bokamarkadur.bokamarkadur.Entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface MessageRepository extends JpaRepository<Message, Long> {
 
     // JPA repository handles the methods 'save' and 'delete',

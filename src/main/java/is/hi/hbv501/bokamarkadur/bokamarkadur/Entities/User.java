@@ -26,6 +26,7 @@ public class User {
     // Automatic generation of ID values
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     public String info;
 
     @Size(min = 2, message = "Length should be in at least 2 digits")
@@ -67,6 +68,18 @@ public class User {
     @OneToMany(targetEntity=Message.class, mappedBy="sender")
     @JsonIgnoreProperties("sender")
     private List<Message> sentMessages = new ArrayList<>();
+
+
+    @OneToMany(targetEntity=Review.class,mappedBy="user",cascade={CascadeType.ALL},orphanRemoval=true)
+    @JsonIgnoreProperties("user")
+    private List<Review> receivedReviews = new ArrayList<>();
+
+
+    @OneToMany(targetEntity=Review.class,mappedBy="reviewer",cascade={CascadeType.ALL},orphanRemoval=true)
+    @JsonIgnoreProperties("reviewer")
+    private List<Review> writtenReviews = new ArrayList<>();
+
+
 
     public User() {
 
@@ -141,6 +154,14 @@ public class User {
         this.sentMessages = sent;
     }
 
+    public List<Review> getReceivedReviews() {
+        return receivedReviews;
+    }
+
+    public void setReceivedReviews(List<Review> receivedReviews) {
+        this.receivedReviews = receivedReviews;
+    }
+
 
     public User(long id, String name, String username, String password, String retypePassword, String phonenumber, String info,
                 String email, List<Book> books, List<Message> sentMessages, List<Message> receivedMessages) {
@@ -161,7 +182,6 @@ public class User {
     public String toString() {
         return this.username;
     }
-
 
 
 }

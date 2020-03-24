@@ -11,6 +11,7 @@ import is.hi.hbv501.bokamarkadur.bokamarkadur.Wrappers.SendMessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,31 +38,28 @@ public class MessageController {
      * Creates a new message with the text the user writes in the box, with the relevant book
      * as attribute, and the user that added the book as receiver.
      */
-    // Kommenta út tímabundið - þar til laga session
-    /*
     @RequestMapping(value ="/messageBook/{id}", method = RequestMethod.POST)
     public ResponseEntity<SendMessageResponse> messageBook(@PathVariable("id") long id, @Valid @RequestBody Message message,
-                                                           HttpSession session) {
+                                                           Authentication authentication) {
 
         Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(sessionUser.getUsername());
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        User current = userService.findByUsername(loggedinUser.getUsername());
         message.setBook(book);
         message.setSender(current);
         message.setReceiver(book.getUser());
         return new ResponseEntity<>(new SendMessageResponse(messageService.save(message)), HttpStatus.CREATED);
     }
-*/
+
 
     /*
      * Creates and posts a reply to a particular message a user has received.
      */
-    // Kommenta út tímabundið - þar til laga session
-    /*
     @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.POST)
-    public ResponseEntity<SendMessageResponse> sendReply(@PathVariable("id") long id, @Valid @RequestBody Message newMessage, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null) {
+    public ResponseEntity<SendMessageResponse> sendReply(@PathVariable("id") long id, @Valid @RequestBody Message newMessage,
+                                                                Authentication authentication) {
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        if (loggedinUser == null) {
             //return Eitthvað villu /please log in object
         }
         // The message the user is replying to
@@ -72,51 +70,47 @@ public class MessageController {
         newMessage = new Message();
         newMessage.setMessageBody(newMessageBody);
         newMessage.setBook(initialMessage.getBook());
-        User current = userService.findByUsername(sessionUser.getUsername());
+        User current = userService.findByUsername(loggedinUser.getUsername());
         newMessage.setSender(current);
         newMessage.setReceiver(initialMessage.getSender());
         return new ResponseEntity<>(new SendMessageResponse(messageService.save(newMessage)), HttpStatus.CREATED);
     }
 
-     */
+
 
     /*
      * Returns a page with all messages the current logged in user has sent.
      */
-    // Kommenta út tímabundið - þar til skipti út session
-    /*
     //TODO: Error virkni
     @RequestMapping(value = "/mySentMessages", method = RequestMethod.GET)
-    public ResponseEntity<GetMessageResponse> viewSentMessages(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null) {
+    public ResponseEntity<GetMessageResponse> viewSentMessages(Authentication authentication) {
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        if (loggedinUser == null) {
             //Something?
         }
-        User current = userService.findByUsername(sessionUser.getUsername());
+        User current = userService.findByUsername(loggedinUser.getUsername());
         List<Message> sentMessages = messageService.findBySender(current);
         return new ResponseEntity<>(new GetMessageResponse(sentMessages), HttpStatus.OK);
     }
 
-     */
+
 
     /*
      * Returns a page with all messages the current logged in user has received.
      */
-    //Kommenta út tímabundið - þar til skipti út session
-    /*
     //TODO: Error virkni
     @RequestMapping(value = "/myReceivedMessages", method = RequestMethod.GET)
-    public ResponseEntity<GetMessageResponse> viewReceivedMessages(HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if (sessionUser == null) {
+    public ResponseEntity<GetMessageResponse> viewReceivedMessages(Authentication authentication) {
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        if (loggedinUser == null) {
             //Something?
         }
-        User current = userService.findByUsername(sessionUser.getUsername());
+        User current = userService.findByUsername(loggedinUser.getUsername());
         List<Message> receivedMessages = messageService.findByReceiver(current);
         return new ResponseEntity<>(new GetMessageResponse(receivedMessages), HttpStatus.OK);
     }
 
-     */
+
 
 
     /*
