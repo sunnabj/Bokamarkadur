@@ -8,11 +8,6 @@ import javax.persistence.*;
 @Table(name ="REVIEWS")
 public class Review {
 
-
-
-
-
-
     @Id
     //Automatic generation of ID values.
     @GeneratedValue(strategy = GenerationType.IDENTITY)

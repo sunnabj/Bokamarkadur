@@ -28,8 +28,10 @@ public class UserController {
     private ReviewService reviewService;
 
     @Autowired
-    public UserController(UserService userService){
+    public UserController(UserService userService, ReviewService reviewService){
+
         this.userService = userService;
+        this.reviewService = reviewService;
     }
 
     /*
@@ -127,21 +129,17 @@ public class UserController {
 
         System.out.println("Review-ið er: " + review.toString());
 
-
         return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
     }
 
 
-    @RequestMapping(value ="/viewreviews/{username}", method = RequestMethod.GET)
+    @RequestMapping(value ="/viewReviews/{username}", method = RequestMethod.GET)
     public ResponseEntity<GetReviewsResponse> viewReviews(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         //TODO: Græja villuresponse
         List<Review> reviews = reviewService.findByUser(user);
         return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
     }
-
-
-
 
     /*
      * Returns a form where a user can create a new user account.
