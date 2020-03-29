@@ -117,14 +117,6 @@ public class BookController {
 
         User loggedinUser = userService.findByUsername(authentication.getName());
 
-        /*
-        if (sessionUser == null) {
-            List<String> errors = new ArrayList<>();
-            errors.add("You must be logged in to visit this page");
-            return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
-        }
-         */
-
         if (authentication == null || loggedinUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
