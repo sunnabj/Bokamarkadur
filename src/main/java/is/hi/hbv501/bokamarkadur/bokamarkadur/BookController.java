@@ -117,13 +117,40 @@ public class BookController {
 
         User loggedinUser = userService.findByUsername(authentication.getName());
 
-        /*
-        if (sessionUser == null) {
+        if (authentication == null || loggedinUser == null) {
             List<String> errors = new ArrayList<>();
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
-         */
+
+
+
+        //User current = userService.findByUsername(sessionUser.getUsername());
+        //book.setUser(current);
+
+        book.setUser(loggedinUser);
+
+        return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+    }
+
+    /*
+     * Same as above, add book for sale - No image.
+     */
+    @RequestMapping(value ="/addbookforsalenoimage", method = RequestMethod.POST)
+    public ResponseEntity<AddBookResponse> addBookForSaleNoImg(@Valid @ModelAttribute Book book, BindingResult result,
+                                                          Authentication authentication) {
+        if(result.hasErrors()) {
+            return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+
+        book.setImage("Noimage.jpg");
+
+        book.setStatus("For sale");
+        book.setDate(date);
+
+        //User sessionUser = (User) session.getAttribute("LoggedInUser");
+
+        User loggedinUser = userService.findByUsername(authentication.getName());
 
         if (authentication == null || loggedinUser == null) {
             List<String> errors = new ArrayList<>();
@@ -163,6 +190,36 @@ public class BookController {
             e.printStackTrace();
         }
         book.setImage(file.getOriginalFilename());
+
+        book.setStatus("Requested");
+        User loggedinUser = userService.findByUsername(authentication.getName());
+
+
+        if (authentication != null) {
+            if (loggedinUser != null) {
+                book.setUser(loggedinUser);
+                return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
+            }
+
+        }
+
+        List<String> errors = new ArrayList<>();
+        errors.add("You must be logged in to visit this page");
+        return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
+
+    }
+
+    /*
+     * Same as above, request a book - No image.
+     */
+    @RequestMapping(value ="/addrequestbooknoimage", method = RequestMethod.POST)
+    public ResponseEntity<AddBookResponse> addRequestBookNoImg(@Valid @ModelAttribute Book book, BindingResult result,
+                                                          Authentication authentication) {
+        if(result.hasErrors()) {
+            return new ResponseEntity<>(new AddBookResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+
+        book.setImage("Noimage.jpg");
 
         book.setStatus("Requested");
         User loggedinUser = userService.findByUsername(authentication.getName());
