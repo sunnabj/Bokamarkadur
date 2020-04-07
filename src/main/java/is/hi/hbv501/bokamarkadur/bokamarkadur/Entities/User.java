@@ -37,7 +37,7 @@ public class User {
 
 
     @Email(regexp = "^(.+)@(.+)$", message = "Invalid email pattern")
-    private String email;
+    public String email;
 
     @Size(min = 8, message = "Length should be at least 8 digits")
     public String password;

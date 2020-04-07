@@ -107,6 +107,27 @@ public class UserController {
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
 
+    /*
+     * Updates information about the current logged in user.
+     */
+    @RequestMapping(value ="/updateUserProfile", method = RequestMethod.POST)
+    public ResponseEntity<GetUserResponse> updateUserProfile(@Valid @RequestBody User user, BindingResult result,
+                                                          Authentication authentication) {
+        if(result.hasErrors()) {
+            return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
+        }
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        //User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(loggedinUser.getUsername());
+        current.setName(user.name);
+        current.setInfo(user.info);
+        current.setEmail(user.email);
+        current.setPhonenumber(user.phonenumber);
+        current.setUsername(user.username);
+        current.setPassword(user.password);
+        userService.save(current);
+        return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
+    }
 
 
     @RequestMapping(value ="/writeReview/{username}", method = RequestMethod.POST)
