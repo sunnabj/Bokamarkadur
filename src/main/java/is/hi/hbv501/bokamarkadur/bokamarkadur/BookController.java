@@ -224,5 +224,12 @@ public class BookController {
 
     }
 
+    @RequestMapping(value="/getUsersBooks", method = RequestMethod.GET)
+    public ResponseEntity<GetAllBooksResponse> myBooks(String username) {
+        User loggedinUser = userService.findByUsername(username);
+        User current = userService.findByUsername(loggedinUser.getUsername());
+        return new ResponseEntity<>(new GetAllBooksResponse(bookService.findByUser(current)), HttpStatus.OK);
+
+    }
 
 }
