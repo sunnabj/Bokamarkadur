@@ -144,12 +144,16 @@ public class UserController {
             return new ResponseEntity<>(new AddReviewResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
 
-
         User user = userService.findByUsername(username);
 
         User loggedinUser = userService.findByUsername(authentication.getName());
         User current = userService.findByUsername(loggedinUser.getUsername());
+        
+        review.setReviewer(current);
+        review.setUser(user);
 
+        return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+        /*
         if (username == authentication.getName()) {
             List<String> errors = new ArrayList<>();
             errors.add("You cannot review yourself!");
@@ -161,6 +165,8 @@ public class UserController {
 
             return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
         }
+
+         */
 
 
     }
