@@ -180,6 +180,15 @@ public class UserController {
         return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
     }
 
+
+    @RequestMapping(value ="/viewWrittenReviews/{username}", method = RequestMethod.GET)
+    public ResponseEntity<GetReviewsResponse> viewWrittenReviews(@PathVariable("username") String username) {
+        User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        //TODO: Græja villuresponse
+        List<Review> reviews = reviewService.findByReviewer(user);
+        return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
+    }
+
     /*
      * Returns a form where a user can create a new user account.
      */
