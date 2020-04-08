@@ -130,6 +130,10 @@ public class UserController {
     }
 
 
+    /**
+     *
+     * The logged in user writes a review about the user with the username username.
+     */
     @RequestMapping(value ="/writeReview/{username}", method = RequestMethod.POST)
     public ResponseEntity<AddReviewResponse> writeReview(@PathVariable("username") String username,
                                                          @Valid @RequestBody Review review, BindingResult result,
@@ -140,17 +144,25 @@ public class UserController {
             return new ResponseEntity<>(new AddReviewResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
 
+
         User user = userService.findByUsername(username);
 
         User loggedinUser = userService.findByUsername(authentication.getName());
         User current = userService.findByUsername(loggedinUser.getUsername());
 
-        review.setReviewer(current);
-        review.setUser(user);
+        if (username == authentication.getName()) {
+            List<String> errors = new ArrayList<>();
+            errors.add("You cannot review yourself!");
+            return new ResponseEntity<>(new AddReviewResponse(null, errors), HttpStatus.BAD_REQUEST);
+        }
+        else {
+            review.setReviewer(current);
+            review.setUser(user);
 
-        System.out.println("Review-ið er: " + review.toString());
+            return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+        }
 
-        return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+
     }
 
 
