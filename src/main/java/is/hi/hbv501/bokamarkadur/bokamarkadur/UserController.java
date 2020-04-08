@@ -125,8 +125,8 @@ public class UserController {
         current.setPhonenumber(user.phonenumber);
         current.setUsername(user.username);
         current.setPassword(user.password);
-        userService.save(current);
-        return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
+        //userService.save(current);
+        return new ResponseEntity<>(new GetUserResponse(userService.save(current)), HttpStatus.OK);
     }
 
 
@@ -148,7 +148,7 @@ public class UserController {
 
         User loggedinUser = userService.findByUsername(authentication.getName());
         User current = userService.findByUsername(loggedinUser.getUsername());
-        
+
         review.setReviewer(current);
         review.setUser(user);
 
