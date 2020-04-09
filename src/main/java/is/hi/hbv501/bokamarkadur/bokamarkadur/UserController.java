@@ -116,6 +116,7 @@ public class UserController {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
+
         User loggedinUser = userService.findByUsername(authentication.getName());
         //User sessionUser = (User) session.getAttribute("LoggedInUser");
         User current = userService.findByUsername(loggedinUser.getUsername());
