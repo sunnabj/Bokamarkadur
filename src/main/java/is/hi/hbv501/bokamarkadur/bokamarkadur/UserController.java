@@ -124,7 +124,7 @@ public class UserController {
         current.setEmail(user.email);
         current.setPhonenumber(user.phonenumber);
         current.setUsername(user.username);
-        current.setPassword(user.password);
+        if (user.password != null) { current.setPassword(user.password); }
         userService.save(current);
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
