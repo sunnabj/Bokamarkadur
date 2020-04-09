@@ -112,7 +112,7 @@ public class UserController {
      */
     @RequestMapping(value ="/updateUserProfile", method = RequestMethod.POST)
     public ResponseEntity<GetUserResponse> updateUserProfile(@Valid @RequestBody User user, BindingResult result,
-                                                          Authentication authentication) {
+                                                             Authentication authentication) {
         if(result.hasErrors()) {
             return new ResponseEntity<>(new GetUserResponse(user, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
         }
@@ -124,7 +124,27 @@ public class UserController {
         current.setEmail(user.email);
         current.setPhonenumber(user.phonenumber);
         current.setUsername(user.username);
-        if (user.password != null && user.password != "") { current.setPassword(user.password); }
+        if (user.password != null && user.password != "" && !user.password.isEmpty()) {
+            current.setPassword(user.password);
+        }
+        userService.save(current);
+        return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
+    }
+
+    @RequestMapping(value ="/updateUserProfilePasswordOptional", method = RequestMethod.POST)
+    public ResponseEntity<GetUserResponse> updateUserProfilePasswordOptional(@Valid @RequestBody User user,
+                                                             Authentication authentication) {
+        User loggedinUser = userService.findByUsername(authentication.getName());
+        //User sessionUser = (User) session.getAttribute("LoggedInUser");
+        User current = userService.findByUsername(loggedinUser.getUsername());
+        current.setName(user.name);
+        current.setInfo(user.info);
+        current.setEmail(user.email);
+        current.setPhonenumber(user.phonenumber);
+        current.setUsername(user.username);
+        if (user.password != null && user.password != "" && !user.password.isEmpty()) {
+            current.setPassword(user.password);
+        }
         userService.save(current);
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
