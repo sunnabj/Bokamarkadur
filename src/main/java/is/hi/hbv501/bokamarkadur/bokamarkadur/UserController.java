@@ -131,25 +131,6 @@ public class UserController {
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
 
-    @RequestMapping(value ="/updateUserProfilePasswordOptional", method = RequestMethod.POST)
-    public ResponseEntity<GetUserResponse> updateUserProfilePasswordOptional(@Valid @RequestBody User user,
-                                                             Authentication authentication) {
-        User loggedinUser = userService.findByUsername(authentication.getName());
-        //User sessionUser = (User) session.getAttribute("LoggedInUser");
-        User current = userService.findByUsername(loggedinUser.getUsername());
-        current.setName(user.name);
-        current.setInfo(user.info);
-        current.setEmail(user.email);
-        current.setPhonenumber(user.phonenumber);
-        current.setUsername(user.username);
-        if (user.password != null && user.password != "" && !user.password.isEmpty()) {
-            current.setPassword(user.password);
-        }
-        userService.save(current);
-        return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
-    }
-
-
     @RequestMapping(value ="/writeReview/{username}", method = RequestMethod.POST)
     public ResponseEntity<AddReviewResponse> writeReview(@PathVariable("username") String username,
                                                          @Valid @RequestBody Review review, BindingResult result,
