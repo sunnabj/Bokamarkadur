@@ -132,6 +132,11 @@ public class UserController {
         return new ResponseEntity<>(new GetUserResponse(current), HttpStatus.OK);
     }
 
+
+    /**
+     *
+     * The logged in user writes a review about the user with the username username.
+     */
     @RequestMapping(value ="/writeReview/{username}", method = RequestMethod.POST)
     public ResponseEntity<AddReviewResponse> writeReview(@PathVariable("username") String username,
                                                          @Valid @RequestBody Review review, BindingResult result,
@@ -150,9 +155,23 @@ public class UserController {
         review.setReviewer(current);
         review.setUser(user);
 
-        System.out.println("Review-ið er: " + review.toString());
-
         return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+        /*
+        if (username == authentication.getName()) {
+            List<String> errors = new ArrayList<>();
+            errors.add("You cannot review yourself!");
+            return new ResponseEntity<>(new AddReviewResponse(null, errors), HttpStatus.BAD_REQUEST);
+        }
+        else {
+            review.setReviewer(current);
+            review.setUser(user);
+
+            return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
+        }
+
+         */
+
+
     }
 
 
@@ -161,6 +180,15 @@ public class UserController {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         //TODO: Græja villuresponse
         List<Review> reviews = reviewService.findByUser(user);
+        return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value ="/viewWrittenReviews/{username}", method = RequestMethod.GET)
+    public ResponseEntity<GetReviewsResponse> viewWrittenReviews(@PathVariable("username") String username) {
+        User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
+        //TODO: Græja villuresponse
+        List<Review> reviews = reviewService.findByReviewer(user);
         return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
     }
 

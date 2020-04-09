@@ -91,7 +91,7 @@ public class loginController {
     @RequestMapping(value = "/loggedIn", method = RequestMethod.GET)
     public User loggedInGET(Authentication authentication) {
         System.out.println(authentication.getName());
-        return userService.findByUsername(authentication.getName()); //var getName() og rautt
+        return userService.findByUsername(authentication.getName());
     }
 
     /*
