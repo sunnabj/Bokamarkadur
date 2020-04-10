@@ -87,34 +87,34 @@ public class BokamarkadurApplication {
 			// Create a user named Tester with;
 			// 		Username = first
 			// 		Password = 12341234
-			User User1 = new User();
-			User1.setId(2);
-			User1.setEmail("tester@testing.com");
-			User1.setInfo("I'm the best Tester ever!");
-			User1.setName("Booky Sellerson");
-			User1.setPhonenumber("911-BOOK");
-			User1.setPassword("12341234");
-			User1.setUsername("first");
+			User first = new User();
+			first.setId(2);
+			first.setEmail("tester@testing.com");
+			first.setInfo("I'm the best Tester ever!");
+			first.setName("Booky Sellerson");
+			first.setPhonenumber("911-BOOK");
+			first.setPassword("12341234");
+			first.setUsername("first");
 			BCryptPasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
 			String hashedPassword2 = passwordEncoder2.encode(Tester.password);
-			User1.password = hashedPassword;
-			userRepository.save(User1);
+			first.password = hashedPassword;
+			userRepository.save(first);
 
 			// Create a user named Tester with;
 			// 		Username = other
 			// 		Password = 12341234
-			User User2 = new User();
-			User2.setId(2);
-			User2.setEmail("tester@testing.com");
-			User2.setInfo("I'm the best Tester ever!");
-			User2.setName("Booky Sellerson");
-			User2.setPhonenumber("911-BOOK");
-			User2.setPassword("12341234");
-			User2.setUsername("other");
+			User other = new User();
+			other.setId(2);
+			other.setEmail("tester@testing.com");
+			other.setInfo("I'm the best Tester ever!");
+			other.setName("Booky Sellerson");
+			other.setPhonenumber("911-BOOK");
+			other.setPassword("12341234");
+			other.setUsername("other");
 			BCryptPasswordEncoder passwordEncoder3 = new BCryptPasswordEncoder();
-			String hashedPassword3 = passwordEncoder3.encode(User2.password);
-			User2.password = hashedPassword;
-			userRepository.save(User2);
+			String hashedPassword3 = passwordEncoder3.encode(other.password);
+			other.password = hashedPassword;
+			userRepository.save(other);
 
 			Book REI502M = new Book();
 			REI502M.setTitle("Introduction to Data Mining");
@@ -127,7 +127,7 @@ public class BokamarkadurApplication {
 			REI502M.setStatus("For sale");
 			REI502M.setImage("1_REI502M.jpg");
 			REI502M.setDate(randomDate);
-			REI502M.setUser(User1);
+			REI502M.setUser(first);
 			bookRepository.save(REI502M);
 
 			Book REI502M_2 = new Book();
@@ -140,7 +140,7 @@ public class BokamarkadurApplication {
 			REI502M_2.setStatus("For sale");
 			REI502M_2.setImage("2_REI502M_2.jpg");
 			REI502M_2.setDate(randomDate0);
-			REI502M_2.setUser(User1);
+			REI502M_2.setUser(first);
 			bookRepository.save(REI502M_2);
 
 			Book TÖL101G = new Book();
@@ -155,7 +155,7 @@ public class BokamarkadurApplication {
 			//TÖL101G.setImage("3_TÖL101G.jpg");
 			TÖL101G.setImage("3_TÖL101G.png");
 			TÖL101G.setDate(randomDate1);
-			TÖL101G.setUser(User1);
+			TÖL101G.setUser(first);
 			bookRepository.save(TÖL101G);
 
 			Book TÖL104G = new Book();
@@ -168,7 +168,7 @@ public class BokamarkadurApplication {
 			TÖL104G.setStatus("For sale");
 			TÖL104G.setImage("4_TÖL104G.jpg");
 			TÖL104G.setDate(randomDate2);
-			TÖL104G.setUser(User1);
+			TÖL104G.setUser(first);
 			bookRepository.save(TÖL104G);
 
 			Book TOL105G = new Book();
@@ -182,7 +182,7 @@ public class BokamarkadurApplication {
 			TOL105G.setStatus("For sale");
 			TOL105G.setImage("5_TOL105G.jpg");
 			TOL105G.setDate(randomDate3);
-			TOL105G.setUser(User2);
+			TOL105G.setUser(other);
 			bookRepository.save(TOL105G);
 
 			Book TOL303G = new Book();
@@ -196,7 +196,7 @@ public class BokamarkadurApplication {
 			TOL303G.setStatus("For sale");
 			TOL303G.setImage("6_TOL303G.jpg");
 			TOL303G.setDate(randomDate4);
-			TOL303G.setUser(User2);
+			TOL303G.setUser(other);
 			bookRepository.save(TOL303G);
 
 			Book TOL304G = new Book();
@@ -210,7 +210,7 @@ public class BokamarkadurApplication {
 			TOL304G.setStatus("For sale");
 			TOL304G.setImage("7_TOL304G.jpg");
 			TOL304G.setDate(randomDate5);
-			TOL304G.setUser(User2);
+			TOL304G.setUser(other);
 			bookRepository.save(TOL304G);
 
 			Book TOL305G = new Book();
