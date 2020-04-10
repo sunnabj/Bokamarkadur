@@ -68,6 +68,9 @@ public class BokamarkadurApplication {
 			 * application is started.
 			 */
 
+			// Create a user named Tester with;
+			// 		Username = Tester
+			// 		Password = 12345678
 			User Tester = new User();
 			Tester.setId(1);
 			Tester.setEmail("tester@testing.com");
@@ -81,6 +84,38 @@ public class BokamarkadurApplication {
 			Tester.password = hashedPassword;
 			userRepository.save(Tester);
 
+			// Create a user named Tester with;
+			// 		Username = first
+			// 		Password = 12341234
+			User User1 = new User();
+			User1.setId(2);
+			User1.setEmail("tester@testing.com");
+			User1.setInfo("I'm the best Tester ever!");
+			User1.setName("Booky Sellerson");
+			User1.setPhonenumber("911-BOOK");
+			User1.setPassword("12341234");
+			User1.setUsername("first");
+			BCryptPasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
+			String hashedPassword2 = passwordEncoder2.encode(Tester.password);
+			User1.password = hashedPassword;
+			userRepository.save(User1);
+
+			// Create a user named Tester with;
+			// 		Username = other
+			// 		Password = 12341234
+			User User2 = new User();
+			User2.setId(2);
+			User2.setEmail("tester@testing.com");
+			User2.setInfo("I'm the best Tester ever!");
+			User2.setName("Booky Sellerson");
+			User2.setPhonenumber("911-BOOK");
+			User2.setPassword("12341234");
+			User2.setUsername("other");
+			BCryptPasswordEncoder passwordEncoder3 = new BCryptPasswordEncoder();
+			String hashedPassword3 = passwordEncoder3.encode(User2.password);
+			User2.password = hashedPassword;
+			userRepository.save(User2);
+
 			Book REI502M = new Book();
 			REI502M.setTitle("Introduction to Data Mining");
 			REI502M.setAuthor("Tan, Pang-Ning");
@@ -92,7 +127,7 @@ public class BokamarkadurApplication {
 			REI502M.setStatus("For sale");
 			REI502M.setImage("1_REI502M.jpg");
 			REI502M.setDate(randomDate);
-			REI502M.setUser(Tester);
+			REI502M.setUser(User1);
 			bookRepository.save(REI502M);
 
 			Book REI502M_2 = new Book();
@@ -105,7 +140,7 @@ public class BokamarkadurApplication {
 			REI502M_2.setStatus("For sale");
 			REI502M_2.setImage("2_REI502M_2.jpg");
 			REI502M_2.setDate(randomDate0);
-			REI502M_2.setUser(Tester);
+			REI502M_2.setUser(User1);
 			bookRepository.save(REI502M_2);
 
 			Book TÖL101G = new Book();
@@ -120,7 +155,7 @@ public class BokamarkadurApplication {
 			//TÖL101G.setImage("3_TÖL101G.jpg");
 			TÖL101G.setImage("3_TÖL101G.png");
 			TÖL101G.setDate(randomDate1);
-			TÖL101G.setUser(Tester);
+			TÖL101G.setUser(User1);
 			bookRepository.save(TÖL101G);
 
 			Book TÖL104G = new Book();
@@ -133,7 +168,7 @@ public class BokamarkadurApplication {
 			TÖL104G.setStatus("For sale");
 			TÖL104G.setImage("4_TÖL104G.jpg");
 			TÖL104G.setDate(randomDate2);
-			TÖL104G.setUser(Tester);
+			TÖL104G.setUser(User1);
 			bookRepository.save(TÖL104G);
 
 			Book TOL105G = new Book();
@@ -147,7 +182,7 @@ public class BokamarkadurApplication {
 			TOL105G.setStatus("For sale");
 			TOL105G.setImage("5_TOL105G.jpg");
 			TOL105G.setDate(randomDate3);
-			TOL105G.setUser(Tester);
+			TOL105G.setUser(User2);
 			bookRepository.save(TOL105G);
 
 			Book TOL303G = new Book();
@@ -161,7 +196,7 @@ public class BokamarkadurApplication {
 			TOL303G.setStatus("For sale");
 			TOL303G.setImage("6_TOL303G.jpg");
 			TOL303G.setDate(randomDate4);
-			TOL303G.setUser(Tester);
+			TOL303G.setUser(User2);
 			bookRepository.save(TOL303G);
 
 			Book TOL304G = new Book();
@@ -175,7 +210,7 @@ public class BokamarkadurApplication {
 			TOL304G.setStatus("For sale");
 			TOL304G.setImage("7_TOL304G.jpg");
 			TOL304G.setDate(randomDate5);
-			TOL304G.setUser(Tester);
+			TOL304G.setUser(User2);
 			bookRepository.save(TOL304G);
 
 			Book TOL305G = new Book();
