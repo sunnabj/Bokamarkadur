@@ -62,6 +62,9 @@ public class AuthenticationController {
     public ResponseEntity<?> register(@Valid @RequestBody User user) {
         if(userService.findByUsername(user.getUsername()) != null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already taken");
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String hashedPassword = passwordEncoder.encode(user.password);
+        user.password = hashedPassword;
         return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
