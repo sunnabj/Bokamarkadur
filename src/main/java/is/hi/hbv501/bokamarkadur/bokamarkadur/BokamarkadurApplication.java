@@ -84,7 +84,7 @@ public class BokamarkadurApplication {
 			Tester.password = hashedPassword;
 			userRepository.save(Tester);
 
-			// Create a user named Tester with;
+			// Create a user named first with;
 			// 		Username = first
 			// 		Password = 12341234
 			User first = new User();
@@ -97,14 +97,14 @@ public class BokamarkadurApplication {
 			first.setUsername("first");
 			BCryptPasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
 			String hashedPassword2 = passwordEncoder2.encode(Tester.password);
-			first.password = hashedPassword;
+			first.password = hashedPassword2;
 			userRepository.save(first);
 
-			// Create a user named Tester with;
+			// Create a user named other with;
 			// 		Username = other
 			// 		Password = 12341234
 			User other = new User();
-			other.setId(2);
+			other.setId(3);
 			other.setEmail("tester@testing.com");
 			other.setInfo("I'm the best Tester ever!");
 			other.setName("Booky Sellerson");
@@ -113,7 +113,7 @@ public class BokamarkadurApplication {
 			other.setUsername("other");
 			BCryptPasswordEncoder passwordEncoder3 = new BCryptPasswordEncoder();
 			String hashedPassword3 = passwordEncoder3.encode(other.password);
-			other.password = hashedPassword;
+			other.password = hashedPassword3;
 			userRepository.save(other);
 
 			Book REI502M = new Book();
