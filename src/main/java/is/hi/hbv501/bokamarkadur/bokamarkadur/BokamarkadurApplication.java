@@ -89,14 +89,14 @@ public class BokamarkadurApplication {
 			// 		Password = 12341234
 			User first = new User();
 			first.setId(2);
-			first.setEmail("tester@testing.com");
-			first.setInfo("I'm the best Tester ever!");
-			first.setName("Booky Sellerson");
+			first.setEmail("first@first.com");
+			first.setInfo("I am the FIRST one and BEST Bookster!");
+			first.setName("Firsty deBooks");
 			first.setPhonenumber("911-BOOK");
 			first.setPassword("12341234");
 			first.setUsername("first");
 			BCryptPasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
-			String hashedPassword2 = passwordEncoder2.encode(Tester.password);
+			String hashedPassword2 = passwordEncoder2.encode(first.password);
 			first.password = hashedPassword2;
 			userRepository.save(first);
 
@@ -105,9 +105,9 @@ public class BokamarkadurApplication {
 			// 		Password = 12341234
 			User other = new User();
 			other.setId(3);
-			other.setEmail("tester@testing.com");
-			other.setInfo("I'm the best Tester ever!");
-			other.setName("Booky Sellerson");
+			other.setEmail("other@other.com");
+			other.setInfo("I am Other and All, good and worthwhile");
+			other.setName("Mr. Bookman");
 			other.setPhonenumber("911-BOOK");
 			other.setPassword("12341234");
 			other.setUsername("other");
