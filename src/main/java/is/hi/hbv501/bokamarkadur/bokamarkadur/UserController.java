@@ -124,7 +124,7 @@ public class UserController {
         current.setInfo(user.info);
         current.setEmail(user.email);
         current.setPhonenumber(user.phonenumber);
-        current.setUsername(user.username);
+        
         if (user.password != null && user.password != "" && !user.password.isEmpty()) {
             current.setPassword(user.password);
         }
