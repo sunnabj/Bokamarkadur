@@ -16,7 +16,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -156,29 +155,12 @@ public class UserController {
         review.setUser(user);
 
         return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
-        /*
-        if (username == authentication.getName()) {
-            List<String> errors = new ArrayList<>();
-            errors.add("You cannot review yourself!");
-            return new ResponseEntity<>(new AddReviewResponse(null, errors), HttpStatus.BAD_REQUEST);
-        }
-        else {
-            review.setReviewer(current);
-            review.setUser(user);
-
-            return new ResponseEntity<>(new AddReviewResponse(reviewService.save(review)), HttpStatus.CREATED);
-        }
-
-         */
-
-
     }
 
 
     @RequestMapping(value ="/viewReviews/{username}", method = RequestMethod.GET)
     public ResponseEntity<GetReviewsResponse> viewReviews(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        //TODO: Græja villuresponse
         List<Review> reviews = reviewService.findByUser(user);
         return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
     }
@@ -187,45 +169,8 @@ public class UserController {
     @RequestMapping(value ="/viewWrittenReviews/{username}", method = RequestMethod.GET)
     public ResponseEntity<GetReviewsResponse> viewWrittenReviews(@PathVariable("username") String username) {
         User user = userService.findByUsername(username);//.orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
-        //TODO: Græja villuresponse
         List<Review> reviews = reviewService.findByReviewer(user);
         return new ResponseEntity<>(new GetReviewsResponse(reviews), HttpStatus.OK);
     }
-
-    /*
-     * Returns a form where a user can create a new user account.
-     */
-    /*
-    Sleppelsi
-
-    @RequestMapping(value="/newAccount", method = RequestMethod.GET)
-    public String newuserForm(User user, Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "new-account";
-    }
-
-     */
-
-    /*
-     * Returns a form where the logged in user can update his profile
-     * information.
-     */
-    /*
-    Sleppísleppí
-
-    @RequestMapping(value="/updateUserInfo", method = RequestMethod.GET)
-    public String userInfoForm(User user, HttpSession session, Model model) {
-        if ((User) session.getAttribute("LoggedInUser") == null) {
-            return "please-log-in";
-        }
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        return "update-userinfo";
-    }
-
-     */
-
-
 
 }

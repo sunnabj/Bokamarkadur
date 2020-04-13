@@ -29,7 +29,6 @@ import java.util.List;
 @RestController
 public class BookController {
 
-    //private static String uploadedFolder = "/src/main/resources/static/";
     // The folder where images uploaded with added books are stored.
     private static String uploadedFolder = "/static/";
     private static String currentDirectory = System.getProperty("user.dir");
@@ -123,11 +122,6 @@ public class BookController {
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
 
-
-
-        //User current = userService.findByUsername(sessionUser.getUsername());
-        //book.setUser(current);
-
         book.setUser(loggedinUser);
 
         return new ResponseEntity<>(new AddBookResponse(bookService.save(book)), HttpStatus.CREATED);
@@ -148,8 +142,6 @@ public class BookController {
         book.setStatus("For sale");
         book.setDate(date);
 
-        //User sessionUser = (User) session.getAttribute("LoggedInUser");
-
         User loggedinUser = userService.findByUsername(authentication.getName());
 
         if (authentication == null || loggedinUser == null) {
@@ -157,11 +149,6 @@ public class BookController {
             errors.add("You must be logged in to visit this page");
             return new ResponseEntity<>(new AddBookResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
         }
-
-
-
-        //User current = userService.findByUsername(sessionUser.getUsername());
-        //book.setUser(current);
 
         book.setUser(loggedinUser);
 
@@ -263,7 +250,6 @@ public class BookController {
     @RequestMapping(value ="/viewsubjectbooks/{subjects}", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> viewsubjectbooks(@PathVariable("subjects") String subject) {
         List<Book> subjectbooks = bookService.findBySubject(subject);//.orElseThrow(()-> new IllegalArgumentException("Invalid subject"));
-        // TODO: Gera eitthvað villu response
         return new ResponseEntity<>(new GetAllBooksResponse(subjectbooks), HttpStatus.OK);
     }
 
@@ -272,7 +258,6 @@ public class BookController {
      * Returns a page where the logged in user can see all books he has put on the site,
      * both for sale and requested.
      */
-    //TODO: VilluReponse þegar notandi er ekki loggaður inn
     @RequestMapping(value="/myBooks", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> myBooks(Authentication authentication) {
         User loggedinUser = userService.findByUsername(authentication.getName());

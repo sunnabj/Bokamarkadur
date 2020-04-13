@@ -20,6 +20,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+
+/**
+ * Þessi klasi er ekki notaður
+ */
+
 @RestController
 public class MessageController {
 
@@ -81,7 +86,6 @@ public class MessageController {
     /*
      * Returns a page with all messages the current logged in user has sent.
      */
-    //TODO: Error virkni
     @RequestMapping(value = "/mySentMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewSentMessages(Authentication authentication) {
         User loggedinUser = userService.findByUsername(authentication.getName());
@@ -98,7 +102,6 @@ public class MessageController {
     /*
      * Returns a page with all messages the current logged in user has received.
      */
-    //TODO: Error virkni
     @RequestMapping(value = "/myReceivedMessages", method = RequestMethod.GET)
     public ResponseEntity<GetMessageResponse> viewReceivedMessages(Authentication authentication) {
         User loggedinUser = userService.findByUsername(authentication.getName());
@@ -109,65 +112,6 @@ public class MessageController {
         List<Message> receivedMessages = messageService.findByReceiver(current);
         return new ResponseEntity<>(new GetMessageResponse(receivedMessages), HttpStatus.OK);
     }
-
-
-
-
-    /*
-     * Returns a page with a messagebox where a user can send a message to a book owner/requester.
-     */
-    /*
-     * TODO: Spurning með útfærslu - sleppa?
-
-    @RequestMapping(value="/messageBook/{id}", method = RequestMethod.GET)
-    public String sendRequest(@PathVariable("id") long id, Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        if (sessionUser == null) {
-            return "please-log-in";
-        }
-        Book book = bookService.findById(id).orElseThrow(()-> new IllegalArgumentException("Invalid book ID"));
-        model.addAttribute("book", book);
-        User current = userService.findByUsername(sessionUser.getUsername());
-        // A user cannot send message to himself
-        if (current == book.getUser()) {
-            return "notSameUser";
-        }
-        Message message = new Message();
-        model.addAttribute("message", message);
-        return "messageBox";
-    }
-
-     */
-
-    /*
-     * Returns a page with a messagebox where a user can reply to a particular message
-     * he has received.
-     */
-    /* TODO: Spá einnig í þessu eins og með síðasta
-    @RequestMapping(value="/replyMessage/{id}", method = RequestMethod.GET)
-    public String pushReply(@PathVariable("id") long id, Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        if (sessionUser == null) {
-            return "please-log-in";
-        }
-        // The message the user is about to reply to is fetched. It has all relevant information
-        // needed for the new reply message.
-        Message initialMessage = messageService.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid message ID"));
-        User current = userService.findByUsername(sessionUser.getUsername());
-        // A user cannot send messages to himself.
-        if (current == initialMessage.getSender()) {
-            return "notSameUser";
-        }
-        // New empty messages are added to the model -> The messages the user is about to write.
-        Message newMessage = new Message();
-        model.addAttribute("newMessage", newMessage);
-        model.addAttribute("initialMessage", initialMessage);
-        return "replyMessage";
-    }
-
-     */
 
 
 }

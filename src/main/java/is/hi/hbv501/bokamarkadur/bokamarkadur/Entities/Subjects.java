@@ -2,6 +2,7 @@ package is.hi.hbv501.bokamarkadur.bokamarkadur.Entities;
 
 
 // A list of available subjects users can categorize their uploaded books to.
+// EKKI NOTAÐ!
 public enum Subjects {
     /*
      * Each entity class represents a table in the database.

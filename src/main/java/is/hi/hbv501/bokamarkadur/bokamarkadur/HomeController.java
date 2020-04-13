@@ -36,34 +36,12 @@ public class HomeController {
      */
     @RequestMapping(value = "/newest-books", method = RequestMethod.GET)
     public ResponseEntity<GetAllBooksResponse> newestBooks() {
-        List<Book> availableBooks = bookService.findAll();
-        //TODO: Villuresponse?
         return new ResponseEntity<>(new GetAllBooksResponse(bookService.findNewestBooks()), HttpStatus.OK);
     }
 
-    /*
-    * Fall til að sýna available subjects.
-
-    @RequestMapping(value = "/available-subjects", method = RequestMethod.GET)
-    public ResponseEntity<GetSubjectsResponse> availableSubjects() {
-        List<Book> availableBooks = bookService.findAll();
-        ArrayList<Subjects> bookSubjects = new ArrayList<Subjects>();
-        // Go through all books and insert subjects into the bookSubjects array.
-        for (int i = 0; i < availableBooks.size(); i++) {
-            if (!bookSubjects.contains(availableBooks.get(i).getSubjects())) {
-                bookSubjects.add(availableBooks.get(i).getSubjects());
-            }
-        }
-        //TODO: Villuresponse?
-
-        return new ResponseEntity<>(new GetSubjectsResponse(bookSubjects), HttpStatus.OK);
-    }
-
-     */
-
 
     /*
-    * Fall til að sýna available subjects - nema nú eru subjects strengur.
+    * Fall til að sýna available subjects
     */
     @RequestMapping(value = "/available-subjects", method = RequestMethod.GET)
     public ResponseEntity<GetSubjectResponse> availableSubjects() {
@@ -75,50 +53,8 @@ public class HomeController {
                 bookSubjects.add(availableBooks.get(i).getSubject());
             }
         }
-        //TODO: Villuresponse?
 
         return new ResponseEntity<>(new GetSubjectResponse(bookSubjects), HttpStatus.OK);
     }
-
-
-
-
-    /*
-     * Gamla fallið!
-     *
-     * Returns the home (front) page.
-     * Returns the 10 most recently added books to the site.
-     */
-    /*
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String Home(Model model, HttpSession session) {
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        model.addAttribute("loggedIn", sessionUser);
-        model.addAttribute("books", bookService.findNewestBooks());
-        List<Book> availableBooks = bookService.findAll();
-        ArrayList<Subjects> bookSubjects = new ArrayList<Subjects>();
-        ArrayList<Book> subjectBooks = new ArrayList<Book>();
-        // Go through all books and insert subjects into the bookSubjects array.
-        for (int i = 0; i < availableBooks.size(); i++) {
-            if (!bookSubjects.contains(availableBooks.get(i).getSubjects())) {
-                bookSubjects.add(availableBooks.get(i).getSubjects());
-            }
-        }
-        // Go through the subjects and add one book to the subjectBooks array
-        // for each subject
-        for (int j = 0; j < bookSubjects.size(); j++) {
-            for (int i = 0; i < availableBooks.size(); i++) {
-                if (availableBooks.get(i).getSubjects() == bookSubjects.get(j)) {
-                    subjectBooks.add(availableBooks.get(i));
-                    break;
-                }
-            }
-        }
-
-        model.addAttribute("subjectBooks", subjectBooks);
-        return "Home";
-    }
-
-     */
 
 }

@@ -39,107 +39,13 @@ public class loginController {
         this.userService = userService;
     }
 
-    /*
-     * Logs the user in. Activates when the user presses the login button
-     * after having inserted his username and password.
-     * Checks if the username exists and if the password fits, and if so,
-     * the user is logged in and redirected to the frontpage.
-     * If not, the login page is reloaded.
-     * The logged in user is stored in the current session.
-     */
-    // EKKI NOTA
-    /*
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<LoginAndSignUpResponse> loginPOST(@Valid @RequestBody User user, BindingResult result,
-                                                            HttpSession session){
-        if(result.hasErrors()){
-            return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, result.getFieldErrors()),
-                    HttpStatus.BAD_REQUEST);
-        }
-        User exists = userService.login(user);
-        if(exists != null){
-            session.setAttribute("LoggedInUser", user);
-            return new ResponseEntity<>(new LoginAndSignUpResponse(user, "Login successful", null)
-                    , HttpStatus.OK);
-        }
-        List<String> errors = new ArrayList<>();
-        errors.add("Login unsuccessful");
-        return new ResponseEntity<>(new LoginAndSignUpResponse(user, null, errors),HttpStatus.BAD_REQUEST);
-    }
 
-     */
-
-    /*
-     * Retrieves the current logged in user from the current session.
-     */
-    // EKKI NOTA
-    /*
-    @RequestMapping(value = "/loggedin", method = RequestMethod.GET)
-    public ResponseEntity<GetUserResponse> loggedinGET(HttpSession session){
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-        if(sessionUser  != null){
-            return new ResponseEntity<>(new GetUserResponse(sessionUser), HttpStatus.OK);
-        }
-        List<String> errors = new ArrayList<>();
-        errors.add("You must be logged in to visit this page");
-        return new ResponseEntity<>(new GetUserResponse(null, null, errors ), HttpStatus.UNAUTHORIZED);
-    }
-
-     */
-
-    // NÝTT!!!
+    // Skilar notandanum sem er loggaður inn þá stundina.
     @RequestMapping(value = "/loggedIn", method = RequestMethod.GET)
     public User loggedInGET(Authentication authentication) {
         System.out.println(authentication.getName());
         return userService.findByUsername(authentication.getName());
     }
 
-    /*
-     * Logs the current user out.
-     */
-    /*
-    * Spurning með þetta - Má sleppa þessu? Þarf þetta setAttribute?
-     */
-   /*
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ResponseEntity<LoginAndSignUpResponse> logout(BindingResult result) {
-
-        if(result.hasErrors()){
-            return new ResponseEntity<>(new LoginAndSignUpResponse(null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
-        }
-
-        return new ResponseEntity<>(new LoginAndSignUpResponse("Logout successful", null), HttpStatus.OK);
-
-    }
-   */
-
-    /*
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ResponseEntity<LoginAndSignUpResponse> logout(BindingResult result, HttpSession session){
-
-        User sessionUser = (User) session.getAttribute("LoggedInUser");
-
-        if(result.hasErrors()){
-            return new ResponseEntity<>(new LoginAndSignUpResponse(sessionUser, null, result.getFieldErrors()), HttpStatus.BAD_REQUEST);
-        }
-
-        session.setAttribute("LoggedInUser", null);
-        return new ResponseEntity<>(new LoginAndSignUpResponse(sessionUser, "Logout successful", null), HttpStatus.OK);
-    }
-
-     */
-
-    /*
-     * Returns the page with the login form, where a user can sign in.
-     */
-    /*
-    Burt með þetta
-
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginGET(User user){
-        return "login";
-    }
-
-     */
 
 }
